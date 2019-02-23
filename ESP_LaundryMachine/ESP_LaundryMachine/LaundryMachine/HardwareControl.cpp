@@ -50,3 +50,96 @@ HardwareControl::HardwareControl()
   centipede.digitalWrite(OUT_DRAIN, LOW);
   centipede.digitalWrite(OUT_LOCK, LOW);
 }
+
+HardwareControl::SetHeater(bool boolean)
+{
+  if (boolean) centipede.digitalWrite(OUT_HEATER, HIGH);
+  else centipede.digitalWrite(OUT_HEATER, LOW);
+  heater = boolean;
+}
+
+HardwareControl::SetBuzzer(bool boolean)
+{
+  if (boolean) centipede.digitalWrite(OUT_BUZZER, HIGH);
+  else centipede.digitalWrite(OUT_BUZZER, LOW);
+  buzzer = boolean;
+}
+
+HardwareControl::SetSpeed(Speed motorSpeed)
+{
+  switch (motorSpeed)
+  {
+    case HIGHSPEED:
+      centipede.digitalWrite(OUT_SPEED2, LOW);
+      centipede.digitalWrite(OUT_SPEED1, LOW);
+      break;
+
+    case MEDIUMSPEED:
+      centipede.digitalWrite(OUT_SPEED2, LOW);
+      centipede.digitalWrite(OUT_SPEED1, HIGH);
+      break;
+
+    case LOWSPEED:
+      centipede.digitalWrite(OUT_SPEED2, HIGH);
+      centipede.digitalWrite(OUT_SPEED1, LOW);
+      break;
+
+    case OFF:
+      centipede.digitalWrite(OUT_SPEED2, HIGH);
+      centipede.digitalWrite(OUT_SPEED1, HIGH);
+      break;
+    
+    default:
+      break;
+  }
+  speed = motorSpeed
+}
+
+HardwareControl::SetLock(bool boolean)
+{
+  if(boolean) centipede.digitalWrite(OUT_LOCK, HIGH);
+  else centipede.digitalWrite(OUT_LOCK, LOW);
+  lock = boolean;
+}
+
+HardwareControl::SetDrain(bool boolean)
+{
+  if(boolean) centipede.digitalWrite(OUT_DRAIN, HIGH);
+  else centipede.digitalWrite(OUT_DRAIN, LOW);
+  drain = boolean;
+}
+
+HardwareControl::SetSink(bool boolean)
+{
+  if(boolean) centipede.digitalWrite(OUT_SINK, HIGH);
+  else centipede.digitalWrite(OUT_SINK, LOW);
+  sink = boolean;
+}
+
+HardwareControl::SetRotation(Rotation tankRotation)
+{
+  switch (tankRotation)
+  {
+    case CLOCKWISE:
+      centipede.digitalWrite(OUT_MOTOR_RL, LOW);
+      break;
+
+    case CLOCKWISE:
+      centipede.digitalWrite(OUT_MOTOR_RL, HIGH);
+      break;
+    
+    default:
+      break;
+  }
+  rotation = tankRotation;
+}
+
+HardwareControl::GetTemperature()
+{
+  // to be implemented
+}
+
+HardwareControl::GetWaterLevel()
+{
+  // to be implemented
+}
