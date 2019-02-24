@@ -51,21 +51,56 @@ HardwareControl::HardwareControl()
   centipede.digitalWrite(OUT_LOCK, LOW);
 }
 
-HardwareControl::SetHeater(bool boolean)
+bool HardwareControl::Buzzer()
+{
+  return buzzer;
+}
+
+bool HardwareControl::Drain()
+{
+  return drain;
+}
+
+bool HardwareControl::Heater()
+{
+  return heater;
+}
+
+bool HardwareControl::Lock()
+{
+  return lock();
+}
+
+bool HardwareControl::Sink()
+{
+  return sink;
+}
+
+Rotation HardwareControl::CurentRotation()
+{
+  return rotation;
+}
+
+Speed HardwareControl::CurrentSpeed()
+{
+  return speed;
+}
+
+void HardwareControl::SetHeater(bool boolean)
 {
   if (boolean) centipede.digitalWrite(OUT_HEATER, HIGH);
   else centipede.digitalWrite(OUT_HEATER, LOW);
   heater = boolean;
 }
 
-HardwareControl::SetBuzzer(bool boolean)
+void HardwareControl::SetBuzzer(bool boolean)
 {
   if (boolean) centipede.digitalWrite(OUT_BUZZER, HIGH);
   else centipede.digitalWrite(OUT_BUZZER, LOW);
   buzzer = boolean;
 }
 
-HardwareControl::SetSpeed(Speed motorSpeed)
+void HardwareControl::SetSpeed(Speed motorSpeed)
 {
   switch (motorSpeed)
   {
@@ -95,28 +130,28 @@ HardwareControl::SetSpeed(Speed motorSpeed)
   speed = motorSpeed
 }
 
-HardwareControl::SetLock(bool boolean)
+void HardwareControl::SetLock(bool boolean)
 {
   if(boolean) centipede.digitalWrite(OUT_LOCK, HIGH);
   else centipede.digitalWrite(OUT_LOCK, LOW);
   lock = boolean;
 }
 
-HardwareControl::SetDrain(bool boolean)
+void HardwareControl::SetDrain(bool boolean)
 {
   if(boolean) centipede.digitalWrite(OUT_DRAIN, HIGH);
   else centipede.digitalWrite(OUT_DRAIN, LOW);
   drain = boolean;
 }
 
-HardwareControl::SetSink(bool boolean)
+void HardwareControl::SetSink(bool boolean)
 {
   if(boolean) centipede.digitalWrite(OUT_SINK, HIGH);
   else centipede.digitalWrite(OUT_SINK, LOW);
   sink = boolean;
 }
 
-HardwareControl::SetRotation(Rotation tankRotation)
+void HardwareControl::SetRotation(Rotation tankRotation)
 {
   switch (tankRotation)
   {
@@ -134,12 +169,44 @@ HardwareControl::SetRotation(Rotation tankRotation)
   rotation = tankRotation;
 }
 
-HardwareControl::GetTemperature()
+Temp HardwareControl::GetTemperature()
 {
-  // to be implemented
+  int temp[] = {centipede.digitalRead(IN_T2), centipede.digitalRead(IN_T1)};
+  switch (temp[0])
+  {
+    case 0
+      if (temp[1]) return WARM;
+      else return COLD;
+      break;
+
+    case 1
+      if (temp[1]) HOT;
+      else return WARMER;
+      break;
+
+    default:
+      return NULL; 
+      break;
+  }
 }
 
-HardwareControl::GetWaterLevel()
+WaterLevel HardwareControl::GetWaterLevel()
 {
-  // to be implemented
+  int level[] = {centipede.digitalRead(IN_W2), centipede.digitalRead(IN_W1)};
+  switch (level[0])
+  {
+    case 0
+      if (level[1]) return ALMOSTEMPTY;
+      else return EMPTY;
+      break;
+
+    case 1
+      if (level[1]) FULL;
+      else return ALMOSTFULL;
+      break;
+
+    default:
+      return NULL;
+      break;
+  }
 }
