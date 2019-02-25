@@ -7,7 +7,7 @@
 class HardwareControl
 {
   public:
-    // enums
+    // enums hey
     enum Rotation { COUNTERCLOCKWISE, CLOCKWISE };
     enum WaterLevel { EMPTY, ALMOSTEMPTY, ALMOSTFULL, FULL };
     enum Temp { COLD, WARM, WARMER, HOT };
