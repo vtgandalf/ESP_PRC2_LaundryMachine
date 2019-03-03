@@ -76,6 +76,11 @@ bool HardwareControl::Sink()
   return sink;
 }
 
+bool HardwareControl::Keyselect()
+{
+  return keyselect;
+}
+
 Rotation HardwareControl::CurentRotation()
 {
   return rotation;
@@ -169,6 +174,146 @@ void HardwareControl::SetRotation(Rotation tankRotation)
   rotation = tankRotation;
 }
 
+void HardwareControl::SetKeyselect(bool boolean)
+{
+  if(boolean) centipede.digitalWrite(OUT_KEYSELECT, HIGH);
+  else centipede.digitalWrite(OUT_KEYSELECT, LOW);
+  keyselect = bool;
+}
+
+void HardwareControl::SetCoin10Led(int x)
+{
+  switch (x)
+  {
+    case 1:
+      digital.Write(OUT_GROUP2, LOW);
+      digital.Write(OUT_GROUP1, LOW);
+      digital.Write(OUT_DATAC, LOW);
+      digital.Write(OUT_DATAB, LOW);
+      digital.Write(OUT_DATAA, HIGH);
+      break;
+
+    case 2:
+      digital.Write(OUT_GROUP2, LOW);
+      digital.Write(OUT_GROUP1, LOW);
+      digital.Write(OUT_DATAC, LOW);
+      digital.Write(OUT_DATAB, HIGH);
+      digital.Write(OUT_DATAA, LOW);
+      break;
+
+    case 3:
+      digital.Write(OUT_GROUP2, LOW);
+      digital.Write(OUT_GROUP1, LOW);
+      digital.Write(OUT_DATAC, HIGH);
+      digital.Write(OUT_DATAB, LOW);
+      digital.Write(OUT_DATAA, LOW);
+      break;
+
+    default:
+      break;
+  }
+}
+
+void HardwareControl::SetCoin50Led(int x)
+{
+  switch (x)
+  {
+    case 1:
+      digital.Write(OUT_GROUP2, LOW);
+      digital.Write(OUT_GROUP1, HIGH);
+      digital.Write(OUT_DATAC, LOW);
+      digital.Write(OUT_DATAB, LOW);
+      digital.Write(OUT_DATAA, HIGH);
+      break;
+
+    case 2:
+      digital.Write(OUT_GROUP2, LOW);
+      digital.Write(OUT_GROUP1, HIGH);
+      digital.Write(OUT_DATAC, LOW);
+      digital.Write(OUT_DATAB, HIGH);
+      digital.Write(OUT_DATAA, LOW);
+      break;
+
+    case 3:
+      digital.Write(OUT_GROUP2, LOW);
+      digital.Write(OUT_GROUP1, HIGH);
+      digital.Write(OUT_DATAC, HIGH);
+      digital.Write(OUT_DATAB, LOW);
+      digital.Write(OUT_DATAA, LOW);
+      break;
+
+    default:
+      break;
+  }
+}
+
+void HardwareControl::SetCoin200Led(int x)
+{
+  switch (x)
+  {
+    case 1:
+      digital.Write(OUT_GROUP2, HIGH);
+      digital.Write(OUT_GROUP1, LOW);
+      digital.Write(OUT_DATAC, LOW);
+      digital.Write(OUT_DATAB, LOW);
+      digital.Write(OUT_DATAA, HIGH);
+      break;
+
+    case 2:
+      digital.Write(OUT_GROUP2, HIGH);
+      digital.Write(OUT_GROUP1, LOW);
+      digital.Write(OUT_DATAC, LOW);
+      digital.Write(OUT_DATAB, HIGH);
+      digital.Write(OUT_DATAA, LOW);
+      break;
+
+    default:
+      break;
+  }
+}
+
+void HardwareControl::SetSoap2Led()
+{
+  digital.Write(OUT_GROUP2, HIGH);
+  digital.Write(OUT_GROUP1, LOW);
+  digital.Write(OUT_DATAC, HIGH);
+  digital.Write(OUT_DATAB, LOW);
+  digital.Write(OUT_DATAA, LOW);
+}
+
+void HardwareControl::SetProgramLed(int x)
+{
+  switch (x)
+  {
+    case 1:
+      digital.Write(OUT_GROUP2, HIGH);
+      digital.Write(OUT_GROUP1, HIGH);
+      digital.Write(OUT_DATAC, LOW);
+      digital.Write(OUT_DATAB, LOW);
+      digital.Write(OUT_DATAA, HIGH);
+      break;
+
+    case 2:
+      digital.Write(OUT_GROUP2, HIGH);
+      digital.Write(OUT_GROUP1, HIGH);
+      digital.Write(OUT_DATAC, LOW);
+      digital.Write(OUT_DATAB, HIGH);
+      digital.Write(OUT_DATAA, LOW);
+      break;
+
+    case 3:
+      digital.Write(OUT_GROUP2, HIGH);
+      digital.Write(OUT_GROUP1, HIGH);
+      digital.Write(OUT_DATAC, HIGH);
+      digital.Write(OUT_DATAB, LOW);
+      digital.Write(OUT_DATAA, LOW);
+      break;
+
+    default:
+      break;
+  }
+}
+
 Temp HardwareControl::GetTemperature()
 {
   int temp[] = {centipede.digitalRead(IN_T2), centipede.digitalRead(IN_T1)};
@@ -207,6 +352,31 @@ WaterLevel HardwareControl::GetWaterLevel()
 
     default:
       return NULL;
+      break;
+  }
+}
+
+Function HardwareControl::GetButtonsFunction()
+{
+  switch (Keyselect())
+  {
+    case true;
+      if(digitalRead(IN_IN3)&&digitalRead(IN_IN2)&&digitalRead(IN_IN1)) return CLEAR;
+      else if(digitalRead(IN_IN3)&&digitalRead(IN_IN0)) return PROGRAM;
+      else if(digitalRead(IN_IN0)) return START;
+      else if(digital(IN_IN3)) return COIN10;
+      else if(digital(IN_IN2)) return COIN50;
+      else if(digital(IN_IN1)) return COIN200;
+      break;
+  
+    case false:
+      if(digitalRead(IN_IN3)) return DOORLOCK;
+      if(digitalRead(IN_IN2)) return SOAP2;
+      if(digitalRead(IN_IN1)) return SOAP1;
+      if(digitalRead(IN_IN0)) return PRESSURE;
+      break;
+
+    default:
       break;
   }
 }
