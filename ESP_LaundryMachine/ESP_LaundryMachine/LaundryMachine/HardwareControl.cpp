@@ -68,7 +68,7 @@ bool HardwareControl::Heater()
 
 bool HardwareControl::Lock()
 {
-  return lock();
+  return lock;
 }
 
 bool HardwareControl::Sink()
@@ -81,12 +81,12 @@ bool HardwareControl::Keyselect()
   return keyselect;
 }
 
-Rotation HardwareControl::CurentRotation()
+HardwareControl::Rotation HardwareControl::CurentRotation()
 {
   return rotation;
 }
 
-Speed HardwareControl::CurrentSpeed()
+HardwareControl::Speed HardwareControl::CurentSpeed()
 {
   return speed;
 }
@@ -132,7 +132,7 @@ void HardwareControl::SetSpeed(Speed motorSpeed)
     default:
       break;
   }
-  speed = motorSpeed
+  speed = motorSpeed;
 }
 
 void HardwareControl::SetLock(bool boolean)
@@ -164,7 +164,7 @@ void HardwareControl::SetRotation(Rotation tankRotation)
       centipede.digitalWrite(OUT_MOTOR_RL, LOW);
       break;
 
-    case CLOCKWISE:
+    case COUNTERCLOCKWISE:
       centipede.digitalWrite(OUT_MOTOR_RL, HIGH);
       break;
     
@@ -178,7 +178,7 @@ void HardwareControl::SetKeyselect(bool boolean)
 {
   if(boolean) centipede.digitalWrite(OUT_KEYSELECT, HIGH);
   else centipede.digitalWrite(OUT_KEYSELECT, LOW);
-  keyselect = bool;
+  keyselect = boolean;
 }
 
 void HardwareControl::SetCoin10Led(int x)
@@ -186,27 +186,27 @@ void HardwareControl::SetCoin10Led(int x)
   switch (x)
   {
     case 1:
-      digital.Write(OUT_GROUP2, LOW);
-      digital.Write(OUT_GROUP1, LOW);
-      digital.Write(OUT_DATAC, LOW);
-      digital.Write(OUT_DATAB, LOW);
-      digital.Write(OUT_DATAA, HIGH);
+      digitalWrite(OUT_GROUP2, LOW);
+      digitalWrite(OUT_GROUP1, LOW);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, LOW);
+      digitalWrite(OUT_DATAA, HIGH);
       break;
 
     case 2:
-      digital.Write(OUT_GROUP2, LOW);
-      digital.Write(OUT_GROUP1, LOW);
-      digital.Write(OUT_DATAC, LOW);
-      digital.Write(OUT_DATAB, HIGH);
-      digital.Write(OUT_DATAA, LOW);
+      digitalWrite(OUT_GROUP2, LOW);
+      digitalWrite(OUT_GROUP1, LOW);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, HIGH);
+      digitalWrite(OUT_DATAA, LOW);
       break;
 
     case 3:
-      digital.Write(OUT_GROUP2, LOW);
-      digital.Write(OUT_GROUP1, LOW);
-      digital.Write(OUT_DATAC, HIGH);
-      digital.Write(OUT_DATAB, LOW);
-      digital.Write(OUT_DATAA, LOW);
+      digitalWrite(OUT_GROUP2, LOW);
+      digitalWrite(OUT_GROUP1, LOW);
+      digitalWrite(OUT_DATAC, HIGH);
+      digitalWrite(OUT_DATAB, LOW);
+      digitalWrite(OUT_DATAA, LOW);
       break;
 
     default:
@@ -219,27 +219,27 @@ void HardwareControl::SetCoin50Led(int x)
   switch (x)
   {
     case 1:
-      digital.Write(OUT_GROUP2, LOW);
-      digital.Write(OUT_GROUP1, HIGH);
-      digital.Write(OUT_DATAC, LOW);
-      digital.Write(OUT_DATAB, LOW);
-      digital.Write(OUT_DATAA, HIGH);
+      digitalWrite(OUT_GROUP2, LOW);
+      digitalWrite(OUT_GROUP1, HIGH);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, LOW);
+      digitalWrite(OUT_DATAA, HIGH);
       break;
 
     case 2:
-      digital.Write(OUT_GROUP2, LOW);
-      digital.Write(OUT_GROUP1, HIGH);
-      digital.Write(OUT_DATAC, LOW);
-      digital.Write(OUT_DATAB, HIGH);
-      digital.Write(OUT_DATAA, LOW);
+      digitalWrite(OUT_GROUP2, LOW);
+      digitalWrite(OUT_GROUP1, HIGH);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, HIGH);
+      digitalWrite(OUT_DATAA, LOW);
       break;
 
     case 3:
-      digital.Write(OUT_GROUP2, LOW);
-      digital.Write(OUT_GROUP1, HIGH);
-      digital.Write(OUT_DATAC, HIGH);
-      digital.Write(OUT_DATAB, LOW);
-      digital.Write(OUT_DATAA, LOW);
+      digitalWrite(OUT_GROUP2, LOW);
+      digitalWrite(OUT_GROUP1, HIGH);
+      digitalWrite(OUT_DATAC, HIGH);
+      digitalWrite(OUT_DATAB, LOW);
+      digitalWrite(OUT_DATAA, LOW);
       break;
 
     default:
@@ -252,19 +252,19 @@ void HardwareControl::SetCoin200Led(int x)
   switch (x)
   {
     case 1:
-      digital.Write(OUT_GROUP2, HIGH);
-      digital.Write(OUT_GROUP1, LOW);
-      digital.Write(OUT_DATAC, LOW);
-      digital.Write(OUT_DATAB, LOW);
-      digital.Write(OUT_DATAA, HIGH);
+      digitalWrite(OUT_GROUP2, HIGH);
+      digitalWrite(OUT_GROUP1, LOW);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, LOW);
+      digitalWrite(OUT_DATAA, HIGH);
       break;
 
     case 2:
-      digital.Write(OUT_GROUP2, HIGH);
-      digital.Write(OUT_GROUP1, LOW);
-      digital.Write(OUT_DATAC, LOW);
-      digital.Write(OUT_DATAB, HIGH);
-      digital.Write(OUT_DATAA, LOW);
+      digitalWrite(OUT_GROUP2, HIGH);
+      digitalWrite(OUT_GROUP1, LOW);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, HIGH);
+      digitalWrite(OUT_DATAA, LOW);
       break;
 
     default:
@@ -274,11 +274,11 @@ void HardwareControl::SetCoin200Led(int x)
 
 void HardwareControl::SetSoap2Led()
 {
-  digital.Write(OUT_GROUP2, HIGH);
-  digital.Write(OUT_GROUP1, LOW);
-  digital.Write(OUT_DATAC, HIGH);
-  digital.Write(OUT_DATAB, LOW);
-  digital.Write(OUT_DATAA, LOW);
+  digitalWrite(OUT_GROUP2, HIGH);
+  digitalWrite(OUT_GROUP1, LOW);
+  digitalWrite(OUT_DATAC, HIGH);
+  digitalWrite(OUT_DATAB, LOW);
+  digitalWrite(OUT_DATAA, LOW);
 }
 
 void HardwareControl::SetProgramLed(int x)
@@ -286,27 +286,27 @@ void HardwareControl::SetProgramLed(int x)
   switch (x)
   {
     case 1:
-      digital.Write(OUT_GROUP2, HIGH);
-      digital.Write(OUT_GROUP1, HIGH);
-      digital.Write(OUT_DATAC, LOW);
-      digital.Write(OUT_DATAB, LOW);
-      digital.Write(OUT_DATAA, HIGH);
+      digitalWrite(OUT_GROUP2, HIGH);
+      digitalWrite(OUT_GROUP1, HIGH);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, LOW);
+      digitalWrite(OUT_DATAA, HIGH);
       break;
 
     case 2:
-      digital.Write(OUT_GROUP2, HIGH);
-      digital.Write(OUT_GROUP1, HIGH);
-      digital.Write(OUT_DATAC, LOW);
-      digital.Write(OUT_DATAB, HIGH);
-      digital.Write(OUT_DATAA, LOW);
+      digitalWrite(OUT_GROUP2, HIGH);
+      digitalWrite(OUT_GROUP1, HIGH);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, HIGH);
+      digitalWrite(OUT_DATAA, LOW);
       break;
 
     case 3:
-      digital.Write(OUT_GROUP2, HIGH);
-      digital.Write(OUT_GROUP1, HIGH);
-      digital.Write(OUT_DATAC, HIGH);
-      digital.Write(OUT_DATAB, LOW);
-      digital.Write(OUT_DATAA, LOW);
+      digitalWrite(OUT_GROUP2, HIGH);
+      digitalWrite(OUT_GROUP1, HIGH);
+      digitalWrite(OUT_DATAC, HIGH);
+      digitalWrite(OUT_DATAB, LOW);
+      digitalWrite(OUT_DATAA, LOW);
       break;
 
     default:
@@ -314,17 +314,17 @@ void HardwareControl::SetProgramLed(int x)
   }
 }
 
-Temp HardwareControl::GetTemperature()
+HardwareControl::Temp HardwareControl::GetTemperature()
 {
   int temp[] = {centipede.digitalRead(IN_T2), centipede.digitalRead(IN_T1)};
   switch (temp[0])
   {
-    case 0
+    case 0:
       if (temp[1]) return WARM;
       else return COLD;
       break;
 
-    case 1
+    case 1:
       if (temp[1]) HOT;
       else return WARMER;
       break;
@@ -335,17 +335,17 @@ Temp HardwareControl::GetTemperature()
   }
 }
 
-WaterLevel HardwareControl::GetWaterLevel()
+HardwareControl::WaterLevel HardwareControl::GetWaterLevel()
 {
   int level[] = {centipede.digitalRead(IN_W2), centipede.digitalRead(IN_W1)};
   switch (level[0])
   {
-    case 0
+    case 0:
       if (level[1]) return ALMOSTEMPTY;
       else return EMPTY;
       break;
 
-    case 1
+    case 1:
       if (level[1]) FULL;
       else return ALMOSTFULL;
       break;
@@ -356,17 +356,17 @@ WaterLevel HardwareControl::GetWaterLevel()
   }
 }
 
-Function HardwareControl::GetButtonsFunction()
+HardwareControl::Function HardwareControl::GetButtonsFunction()
 {
   switch (Keyselect())
   {
-    case true;
+    case true:
       if(digitalRead(IN_IN3)&&digitalRead(IN_IN2)&&digitalRead(IN_IN1)) return CLEAR;
       else if(digitalRead(IN_IN3)&&digitalRead(IN_IN0)) return PROGRAM;
       else if(digitalRead(IN_IN0)) return START;
-      else if(digital(IN_IN3)) return COIN10;
-      else if(digital(IN_IN2)) return COIN50;
-      else if(digital(IN_IN1)) return COIN200;
+      else if(digitalRead(IN_IN3)) return COIN10;
+      else if(digitalRead(IN_IN2)) return COIN50;
+      else if(digitalRead(IN_IN1)) return COIN200;
       break;
   
     case false:
