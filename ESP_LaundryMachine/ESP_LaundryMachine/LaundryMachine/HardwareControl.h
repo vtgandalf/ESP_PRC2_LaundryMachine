@@ -23,6 +23,7 @@ class HardwareControl
     bool Drain();
     bool Sink();
     bool Keyselect();
+    bool Strobe();
     Rotation CurentRotation();
     // constructor
     HardwareControl();
@@ -44,11 +45,12 @@ class HardwareControl
     void SetSoap2Led();
     void SetProgramLed(int);
     void SetKeyselect(bool);
+    void SetStrobe(bool);
 
   private:
     // private vars to save the last set value of
     // the heater, buzzer, speed, lock, drain,
-    // sink and rotation
+    // sink, rotation and etc.
     bool heater;
     bool buzzer;
     Speed speed;
@@ -56,6 +58,7 @@ class HardwareControl
     bool drain;
     bool sink;
     bool keyselect;
+    bool strobe;
     Rotation rotation;
     // local var for init the centepide lib
     Centipede centipede;

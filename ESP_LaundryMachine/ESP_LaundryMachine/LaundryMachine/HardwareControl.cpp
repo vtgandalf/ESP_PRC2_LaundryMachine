@@ -27,30 +27,31 @@
 
 HardwareControl::HardwareControl()
 {
-  Wire.begin(); // start I2C
+  Wire.begin();           // start I2C
   centipede.initialize(); // set all registers to default
-  for (int i = 0; i <= 15; i++) 
+  for (int i = 0; i <= 15; i++)
   {
     centipede.pinMode(i, OUTPUT);
   }
   centipede.digitalWrite(OUT_GROUP2, LOW);
   centipede.digitalWrite(OUT_GROUP1, LOW);
-  centipede.digitalWrite(OUT_STROBE, LOW);
-  centipede.digitalWrite(OUT_KEYSELECT, HIGH);
-  centipede.digitalWrite(OUT_BUZZER, HIGH);
-  centipede.digitalWrite(OUT_HEATER, HIGH);
-  centipede.digitalWrite(OUT_SPEED2, HIGH);
-  centipede.digitalWrite(OUT_SPEED1, HIGH);
+  SetStrobe(false);       // centipede.digitalWrite(OUT_STROBE, LOW);
+  SetKeyselect(true);     // centipede.digitalWrite(OUT_KEYSELECT, HIGH);
+  SetBuzzer(true);        // centipede.digitalWrite(OUT_BUZZER, HIGH);
+  SetHeater(false);       // centipede.digitalWrite(OUT_HEATER, HIGH);
+  SetSpeed(OFF);          // centipede.digitalWrite(OUT_SPEED2, HIGH);
+                          // centipede.digitalWrite(OUT_SPEED1, HIGH);
   centipede.digitalWrite(OUT_DATAC, LOW);
   centipede.digitalWrite(OUT_DATAB, LOW);
   centipede.digitalWrite(OUT_DATAA, LOW);
-  centipede.digitalWrite(OUT_MOTOR_RL, LOW);
+  SetRotation(CLOCKWISE); // centipede.digitalWrite(OUT_MOTOR_RL, LOW);
   centipede.digitalWrite(OUT_SOAP1, LOW);
-  centipede.digitalWrite(OUT_SINK, LOW);
-  centipede.digitalWrite(OUT_DRAIN, LOW);
-  centipede.digitalWrite(OUT_LOCK, LOW);
+  SetSink(false);         // centipede.digitalWrite(OUT_SINK, LOW);
+  SetDrain(false);        // centipede.digitalWrite(OUT_DRAIN, LOW);
+  SetLock(false);         // centipede.digitalWrite(OUT_LOCK, LOW);
 }
 
+/* PUBLIC PROPERTIES (read only)*/
 bool HardwareControl::Buzzer()
 {
   return buzzer;
@@ -81,6 +82,11 @@ bool HardwareControl::Keyselect()
   return keyselect;
 }
 
+bool HardwareControl::Strobe()
+{
+  return strobe;
+}
+
 HardwareControl::Rotation HardwareControl::CurentRotation()
 {
   return rotation;
@@ -89,6 +95,14 @@ HardwareControl::Rotation HardwareControl::CurentRotation()
 HardwareControl::Speed HardwareControl::CurentSpeed()
 {
   return speed;
+}
+
+/* PUBLIC SETTERS */
+void HardwareControl::SetStrobe(bool boolean)
+{
+  if (boolean) centipede.digitalWrite(OUT_STROBE, HIGH);
+  else centipede.digitalWrite(OUT_STROBE, LOW);
+  strobe = boolean;
 }
 
 void HardwareControl::SetHeater(bool boolean)
@@ -128,7 +142,7 @@ void HardwareControl::SetSpeed(Speed motorSpeed)
       centipede.digitalWrite(OUT_SPEED2, HIGH);
       centipede.digitalWrite(OUT_SPEED1, HIGH);
       break;
-    
+
     default:
       break;
   }
@@ -137,21 +151,21 @@ void HardwareControl::SetSpeed(Speed motorSpeed)
 
 void HardwareControl::SetLock(bool boolean)
 {
-  if(boolean) centipede.digitalWrite(OUT_LOCK, HIGH);
+  if (boolean) centipede.digitalWrite(OUT_LOCK, HIGH);
   else centipede.digitalWrite(OUT_LOCK, LOW);
   lock = boolean;
 }
 
 void HardwareControl::SetDrain(bool boolean)
 {
-  if(boolean) centipede.digitalWrite(OUT_DRAIN, HIGH);
+  if (boolean) centipede.digitalWrite(OUT_DRAIN, HIGH);
   else centipede.digitalWrite(OUT_DRAIN, LOW);
   drain = boolean;
 }
 
 void HardwareControl::SetSink(bool boolean)
 {
-  if(boolean) centipede.digitalWrite(OUT_SINK, HIGH);
+  if (boolean) centipede.digitalWrite(OUT_SINK, HIGH);
   else centipede.digitalWrite(OUT_SINK, LOW);
   sink = boolean;
 }
@@ -167,7 +181,7 @@ void HardwareControl::SetRotation(Rotation tankRotation)
     case COUNTERCLOCKWISE:
       centipede.digitalWrite(OUT_MOTOR_RL, HIGH);
       break;
-    
+
     default:
       break;
   }
@@ -176,7 +190,7 @@ void HardwareControl::SetRotation(Rotation tankRotation)
 
 void HardwareControl::SetKeyselect(bool boolean)
 {
-  if(boolean) centipede.digitalWrite(OUT_KEYSELECT, HIGH);
+  if (boolean) centipede.digitalWrite(OUT_KEYSELECT, HIGH);
   else centipede.digitalWrite(OUT_KEYSELECT, LOW);
   keyselect = boolean;
 }
@@ -314,6 +328,7 @@ void HardwareControl::SetProgramLed(int x)
   }
 }
 
+/* PUBLIC GETTERS */
 HardwareControl::Temp HardwareControl::GetTemperature()
 {
   int temp[] = {centipede.digitalRead(IN_T2), centipede.digitalRead(IN_T1)};
@@ -330,7 +345,7 @@ HardwareControl::Temp HardwareControl::GetTemperature()
       break;
 
     default:
-      return NULL; 
+      return NULL;
       break;
   }
 }
@@ -361,19 +376,19 @@ HardwareControl::Function HardwareControl::GetButtonsFunction()
   switch (Keyselect())
   {
     case true:
-      if(digitalRead(IN_IN3)&&digitalRead(IN_IN2)&&digitalRead(IN_IN1)) return CLEAR;
-      else if(digitalRead(IN_IN3)&&digitalRead(IN_IN0)) return PROGRAM;
-      else if(digitalRead(IN_IN0)) return START;
-      else if(digitalRead(IN_IN3)) return COIN10;
-      else if(digitalRead(IN_IN2)) return COIN50;
-      else if(digitalRead(IN_IN1)) return COIN200;
+      if (digitalRead(IN_IN3) && digitalRead(IN_IN2) && digitalRead(IN_IN1)) return CLEAR;
+      else if (digitalRead(IN_IN3) && digitalRead(IN_IN0)) return PROGRAM;
+      else if (digitalRead(IN_IN0)) return START;
+      else if (digitalRead(IN_IN3)) return COIN10;
+      else if (digitalRead(IN_IN2)) return COIN50;
+      else if (digitalRead(IN_IN1)) return COIN200;
       break;
-  
+
     case false:
-      if(digitalRead(IN_IN3)) return DOORLOCK;
-      if(digitalRead(IN_IN2)) return SOAP2;
-      if(digitalRead(IN_IN1)) return SOAP1;
-      if(digitalRead(IN_IN0)) return PRESSURE;
+      if (digitalRead(IN_IN3)) return DOORLOCK;
+      if (digitalRead(IN_IN2)) return SOAP2;
+      if (digitalRead(IN_IN1)) return SOAP1;
+      if (digitalRead(IN_IN0)) return PRESSURE;
       break;
 
     default:
