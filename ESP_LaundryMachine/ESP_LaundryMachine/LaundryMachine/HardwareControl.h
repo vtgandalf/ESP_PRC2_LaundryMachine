@@ -55,9 +55,9 @@ class HardwareControl
     bool sink;
     bool keyselect;
     bool strobe;
-    bool coins10LedsArray[] = {false, false, false};
-    bool coins50LedsArray[] = {false, false, false};
-    bool coins200LedsArray[] = {false, false};
+    bool coins10LedsArray[3] = {false, false, false};
+    bool coins50LedsArray[3] = {false, false, false};
+    bool coins200LedsArray[2] = {false, false};
     Rotation rotation;
     // local var for init the centepide lib
     Centipede centipede;
