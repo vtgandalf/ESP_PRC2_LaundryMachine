@@ -15,6 +15,7 @@ void idle()
   // to be implemented
 }
 
+// add to external lib
 void programA()
 {
   // to be implemented

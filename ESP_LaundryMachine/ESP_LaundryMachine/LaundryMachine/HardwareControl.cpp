@@ -195,37 +195,32 @@ void HardwareControl::SetKeyselect(bool boolean)
   keyselect = boolean;
 }
 
-void HardwareControl::SetCoin10Led(int x)
+void HardwareControl::SetCoin10Led(int x) // test and change
 {
   switch (x)
   {
     case 1:
-      digitalWrite(OUT_GROUP2, LOW);
-      digitalWrite(OUT_GROUP1, LOW);
-      digitalWrite(OUT_DATAC, LOW);
-      digitalWrite(OUT_DATAB, LOW);
-      digitalWrite(OUT_DATAA, HIGH);
+      coins10LedsArray[0] = true;
+      coins10LedsArray[1] = false;
+      coins10LedsArray[2] = false;
       break;
 
     case 2:
-      digitalWrite(OUT_GROUP2, LOW);
-      digitalWrite(OUT_GROUP1, LOW);
-      digitalWrite(OUT_DATAC, LOW);
-      digitalWrite(OUT_DATAB, HIGH);
-      digitalWrite(OUT_DATAA, LOW);
+      coins10LedsArray[1] = true;
       break;
 
     case 3:
-      digitalWrite(OUT_GROUP2, LOW);
-      digitalWrite(OUT_GROUP1, LOW);
-      digitalWrite(OUT_DATAC, HIGH);
-      digitalWrite(OUT_DATAB, LOW);
-      digitalWrite(OUT_DATAA, LOW);
+    coins10LedsArray[2] = true;
       break;
 
     default:
       break;
   }
+  digitalWrite(OUT_GROUP2, LOW);
+  digitalWrite(OUT_GROUP1, LOW);
+  digitalWrite(OUT_DATAC, coins10LedsArray[2]);
+  digitalWrite(OUT_DATAB, coins10LedsArray[1]);
+  digitalWrite(OUT_DATAA, coins10LedsArray[0]);
 }
 
 void HardwareControl::SetCoin50Led(int x)
@@ -233,32 +228,27 @@ void HardwareControl::SetCoin50Led(int x)
   switch (x)
   {
     case 1:
-      digitalWrite(OUT_GROUP2, LOW);
-      digitalWrite(OUT_GROUP1, HIGH);
-      digitalWrite(OUT_DATAC, LOW);
-      digitalWrite(OUT_DATAB, LOW);
-      digitalWrite(OUT_DATAA, HIGH);
+      coins50LedsArray[0] = true;
+      coins50LedsArray[1] = false;
+      coins50LedsArray[2] = false;
       break;
 
     case 2:
-      digitalWrite(OUT_GROUP2, LOW);
-      digitalWrite(OUT_GROUP1, HIGH);
-      digitalWrite(OUT_DATAC, LOW);
-      digitalWrite(OUT_DATAB, HIGH);
-      digitalWrite(OUT_DATAA, LOW);
+      coins50LedsArray[1] = true;
       break;
 
     case 3:
-      digitalWrite(OUT_GROUP2, LOW);
-      digitalWrite(OUT_GROUP1, HIGH);
-      digitalWrite(OUT_DATAC, HIGH);
-      digitalWrite(OUT_DATAB, LOW);
-      digitalWrite(OUT_DATAA, LOW);
+      coins50LedsArray[2] = true;
       break;
 
     default:
       break;
   }
+  digitalWrite(OUT_GROUP2, LOW);
+  digitalWrite(OUT_GROUP1, HIGH);
+  digitalWrite(OUT_DATAC, coins50LedsArray[2]);
+  digitalWrite(OUT_DATAB, coins50LedsArray[1]);
+  digitalWrite(OUT_DATAA, coins50LedsArray[0]);
 }
 
 void HardwareControl::SetCoin200Led(int x)
@@ -266,24 +256,22 @@ void HardwareControl::SetCoin200Led(int x)
   switch (x)
   {
     case 1:
-      digitalWrite(OUT_GROUP2, HIGH);
-      digitalWrite(OUT_GROUP1, LOW);
-      digitalWrite(OUT_DATAC, LOW);
-      digitalWrite(OUT_DATAB, LOW);
-      digitalWrite(OUT_DATAA, HIGH);
+      coins200LedsArray[0] = true;
+      coins200LedsArray[1] = false;
       break;
 
     case 2:
-      digitalWrite(OUT_GROUP2, HIGH);
-      digitalWrite(OUT_GROUP1, LOW);
-      digitalWrite(OUT_DATAC, LOW);
-      digitalWrite(OUT_DATAB, HIGH);
-      digitalWrite(OUT_DATAA, LOW);
+      coins200LedsArray[1] = true;
       break;
 
     default:
       break;
   }
+  digitalWrite(OUT_GROUP2, HIGH);
+  digitalWrite(OUT_GROUP1, LOW);
+  digitalWrite(OUT_DATAC, LOW);
+  digitalWrite(OUT_DATAB, coins200LedsArray[1]);
+  digitalWrite(OUT_DATAA, coins200LedsArray[0]);
 }
 
 void HardwareControl::SetSoap2Led()

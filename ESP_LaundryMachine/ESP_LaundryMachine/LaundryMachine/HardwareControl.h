@@ -22,8 +22,6 @@ class HardwareControl
     bool Lock();
     bool Drain();
     bool Sink();
-    bool Keyselect();
-    bool Strobe();
     Rotation CurentRotation();
     // constructor
     HardwareControl();
@@ -44,8 +42,6 @@ class HardwareControl
     void SetCoin200Led(int);
     void SetSoap2Led();
     void SetProgramLed(int);
-    void SetKeyselect(bool);
-    void SetStrobe(bool);
 
   private:
     // private vars to save the last set value of
@@ -59,9 +55,18 @@ class HardwareControl
     bool sink;
     bool keyselect;
     bool strobe;
+    bool coins10LedsArray[] = {false, false, false};
+    bool coins50LedsArray[] = {false, false, false};
+    bool coins200LedsArray[] = {false, false};
     Rotation rotation;
     // local var for init the centepide lib
     Centipede centipede;
+    
+    bool Keyselect(); // should be private
+    bool Strobe(); // should be private
+    
+    void SetKeyselect(bool); // should be private
+    void SetStrobe(bool); // should be private
 };
 
 #endif
