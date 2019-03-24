@@ -7,7 +7,7 @@ using namespace sharedNamespace;
 
 class IO
 {
-	protected:
+	public:
 		// getters
     	virtual Function GetButtonsFunction()=0;
     	virtual Temp GetTemperature()=0;

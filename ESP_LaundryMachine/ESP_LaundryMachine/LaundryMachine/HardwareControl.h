@@ -9,13 +9,12 @@
 #include "SharedNamespace.h"
 using namespace sharedNamespace;
 
-class HardwareControl: public ICoin, public ISecurity, public ISoap
+class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
 {
     public:
         HardwareControl();
         virtual Function GetButtonsFunction();
         virtual Temp GetTemperature();
-        
         virtual void SetBuzzer(bool);
         virtual void SetSpeed(Speed);
         virtual void SetDrain(bool);
@@ -25,27 +24,22 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap
         virtual void SetProgramLed(int);
         virtual void SetKeyselect(bool);
         virtual void SetStrobe(bool);
-        
         virtual bool Heater();
         virtual bool Buzzer();
         virtual bool Drain();
         virtual bool Sink();
         virtual bool Keyselect();
         virtual bool Strobe();
-        
         virtual Rotation CurentRotation();
         virtual Speed CurentSpeed();
-
         virtual void SetCoin10Led(int);
         virtual void SetCoin50Led(int);
         virtual void SetCoin200Led(int);
-
         virtual WaterLevel GetWaterLevel();
         virtual void SetHeater(bool);
         virtual void SetLock(bool);
-        virtual bool Lock();  
+        virtual bool Lock();
         
-
     private:
         bool coins10LedsArray[3] = {false, false, false};
         bool coins50LedsArray[3] = {false, false, false};
@@ -60,5 +54,10 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap
         bool keyselect;
         bool strobe;
 };
+
+static ISecurity* isecurityPtr = new HardwareControl();
+static ICoin* icoinPtr = new HardwareControl();
+static ISoap* isoapPtr = new HardwareControl();
+static IO* ioPtr = new HardwareControl();
 
 #endif
