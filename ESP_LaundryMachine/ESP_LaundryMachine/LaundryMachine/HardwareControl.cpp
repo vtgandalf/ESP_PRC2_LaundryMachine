@@ -28,7 +28,7 @@
 HardwareControl::HardwareControl()
 {
   Wire.begin();           // start I2C
-  centipede.initialize(); // set all registers to default
+  centipede.initialize();
   for (int i = 0; i <= 15; i++)
   {
     centipede.pinMode(i, OUTPUT);
@@ -87,12 +87,12 @@ bool HardwareControl::Strobe()
   return strobe;
 }
 
-HardwareControl::Rotation HardwareControl::CurentRotation()
+Rotation HardwareControl::CurentRotation()
 {
   return rotation;
 }
 
-HardwareControl::Speed HardwareControl::CurentSpeed()
+Speed HardwareControl::CurentSpeed()
 {
   return speed;
 }
@@ -317,7 +317,7 @@ void HardwareControl::SetProgramLed(int x)
 }
 
 /* PUBLIC GETTERS */
-HardwareControl::Temp HardwareControl::GetTemperature()
+Temp HardwareControl::GetTemperature()
 {
   int temp[] = {centipede.digitalRead(IN_T2), centipede.digitalRead(IN_T1)};
   switch (temp[0])
@@ -338,7 +338,7 @@ HardwareControl::Temp HardwareControl::GetTemperature()
   }
 }
 
-HardwareControl::WaterLevel HardwareControl::GetWaterLevel()
+WaterLevel HardwareControl::GetWaterLevel()
 {
   int level[] = {centipede.digitalRead(IN_W2), centipede.digitalRead(IN_W1)};
   switch (level[0])
@@ -359,7 +359,7 @@ HardwareControl::WaterLevel HardwareControl::GetWaterLevel()
   }
 }
 
-HardwareControl::Function HardwareControl::GetButtonsFunction()
+Function HardwareControl::GetButtonsFunction()
 {
   switch (Keyselect())
   {
