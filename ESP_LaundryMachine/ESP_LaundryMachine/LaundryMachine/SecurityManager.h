@@ -14,8 +14,6 @@ class SecurityManager
 		
 
 	private:
-		//sharedNamespace::ioPtr = new HardwareControl();
-		//sharedNamespace::isecurityPtr = new HardwareControl();
 		sharedNamespace::Function function;
 		void DoorClosed();
 };

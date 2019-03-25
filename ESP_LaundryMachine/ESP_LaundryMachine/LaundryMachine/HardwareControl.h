@@ -13,6 +13,8 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
 {
     public:
         HardwareControl();
+    
+    protected:
         virtual Function GetButtonsFunction();
         virtual Temp GetTemperature();
         virtual void SetBuzzer(bool);
