@@ -1,7 +1,7 @@
 #ifndef COINHANDLER_H
 #define COINHANDLER_H
 
-#include "ICoin.h"
+#include "HardwareControl.h"
 
 class CoinHandler
 {
@@ -9,15 +9,15 @@ class CoinHandler
         void IndicateMissingCoins();
         void Change();
         bool AreCoinsEnough();
-        void NewCoin();
         void Polling();
 
     private:
-        sharedNmaespace::Function newCoin();
+        sharedNamespace::Function function;
+        void NewCoin();
         int coin10 = 0;
         int coin50 = 0;
         int coin200 = 0;
-        void SetLed(int coinNominal);
+        void SetLed();
 };
 
 #endif

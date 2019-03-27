@@ -283,6 +283,11 @@ void HardwareControl::SetSoap2Led()
   digitalWrite(OUT_DATAA, LOW);
 }
 
+void HardwareControl::SetSoap1Led()
+{
+  digitalWrite(OUT_SOAP1, HIGH);
+}
+
 void HardwareControl::SetProgramLed(int x)
 {
   switch (x)

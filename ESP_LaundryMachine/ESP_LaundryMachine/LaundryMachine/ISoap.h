@@ -7,6 +7,7 @@ class ISoap
 {
 	public:
 		virtual void SetSoap2Led()=0;
+		virtual void SetSoap1Led()=0;
 };
 
 #endif

@@ -1,12 +1,11 @@
 #ifndef SOAPHANDLER_H
 #define SOAPHANDLER_H
 
-#include "ISoap.h"
+#include "HardwareControl.h"
 
 class SoapHandler
 {
     public:
-        bool IsSoapEnough(int soapNr);
         void Polling();
         
     private:
@@ -15,7 +14,7 @@ class SoapHandler
         int soap2 = 0;
         void SetLed();
         void IndicateMissingSoap();
-        int InsertSoap(int soapNr);
+        void InsertSoap();
 };
 
 #endif

@@ -22,6 +22,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         virtual void SetDrain(bool);
         virtual void SetSink(bool);
         virtual void SetRotation(Rotation);
+		virtual void SetSoap1Led();
         virtual void SetSoap2Led();
         virtual void SetProgramLed(int);
         virtual void SetKeyselect(bool);

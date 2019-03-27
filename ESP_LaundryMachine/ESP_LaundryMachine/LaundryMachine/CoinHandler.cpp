@@ -16,90 +16,36 @@ bool CoinHandler::AreCoinsEnough()
     return true;
 }
 
-int CoinHandler::NewCoin()
+void CoinHandler::NewCoin()
 {
     //to be implemented
     function = ioPtr->GetButtonsFunction();
     if(function == COIN10)
     {
-        if(coin10 <3)
-        {
-            coin10++;
-            return 10;
-        }
+        if(coin10 <3) coin10++;
     }
     else if (function == COIN50) 
     {
-        if(coin50 <3)
-        {
-            coin50++;
-            return 50;
-        }
+        if(coin50 <3) coin50++;
+
     }
     else if (function == COIN200) 
     {
-        if(coin200 <3)
-        {
-            coin200++;
-            return 200;
-        }
+        if(coin200 <3) coin200++;
     }
-    return 0;
 }
 
-void CoinHandler::SetLed(int coinNominal)
+void CoinHandler::SetLed()
 {
-    //to be implemented
-    if(coinNomila == 10)
-    {
-        if(coin10 == 1)
-        {
-            //to be implemented
-        }
-        else if(coin10 == 2)
-        {
-            //to be implemented
-        }
-        else if(coin10 == 3)
-        {
-            //to be implemented
-        }
-    }
-    else if(coinNominal == 50)
-    {
-        if(coin50 == 1)
-        {
-            //to be implemented
-        }
-        else if(coin50 == 2)
-        {
-            //to be implemented
-        }
-        else if(coin50 == 3)
-        {
-            //to be implemented
-        }
-    }
-    else if(coinNominal == 200)
-    {
-        if(coin200 == 1)
-        {
-            //to be implemented
-        }
-        else if(coin200 == 2)
-        {
-            //to be implemented
-        }
-        else if(coin200 == 3)
-        {
-            //to be implemented
-        }
-    }
+    icoinPtr->SetCoin10Led(coin10);
+    icoinPtr->SetCoin200Led(coin50);
+    icoinPtr->SetCoin200Led(coin200);
 }
 
 void CoinHandler::Polling()
 {
     //to be implemented
     // for now it is only lights the leds nwhen a button is pressed
-    SetLed( NewCoin()); 
+    NewCoin();
+    SetLed(); 
 }
