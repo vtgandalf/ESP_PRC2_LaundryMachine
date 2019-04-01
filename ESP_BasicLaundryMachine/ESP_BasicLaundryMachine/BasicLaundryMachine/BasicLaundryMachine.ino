@@ -55,10 +55,12 @@ void setup()
   CS.digitalWrite(OUT_SINK, LOW);
   CS.digitalWrite(OUT_DRAIN, LOW);
   CS.digitalWrite(OUT_LOCK, LOW);
+  Serial.begin(9600);
 }
 
 void loop()
 {
+  Serial.write("works");
   CS.digitalWrite(OUT_DRAIN,   CS.digitalRead(IN_IN3));
   CS.digitalWrite(OUT_SINK,    CS.digitalRead(IN_IN2));
   CS.digitalWrite(OUT_SPEED1, !CS.digitalRead(IN_IN1));

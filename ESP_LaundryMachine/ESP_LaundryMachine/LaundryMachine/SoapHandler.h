@@ -9,6 +9,7 @@ class SoapHandler
         void Polling();
         
     private:
+        //ISoap* iptr = (ISoap*)HardwareControl::GetInstance();
         sharedNamespace::Function function;
         int soap1 = 0;
         int soap2 = 0;

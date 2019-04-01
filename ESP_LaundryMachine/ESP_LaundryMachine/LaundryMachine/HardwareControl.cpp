@@ -51,6 +51,18 @@ HardwareControl::HardwareControl()
   SetLock(false);         // centipede.digitalWrite(OUT_LOCK, LOW);
 }
 
+HardwareControl* HardwareControl::instance = 0;
+
+HardwareControl* HardwareControl::GetInstance()
+{
+  if (instance == 0)
+    {
+        instance = new HardwareControl();
+    }
+
+    return instance;
+}
+
 /* PUBLIC PROPERTIES (read only)*/
 bool HardwareControl::Buzzer()
 {

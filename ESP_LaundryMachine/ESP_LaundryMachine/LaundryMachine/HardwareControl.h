@@ -12,6 +12,7 @@ using namespace sharedNamespace;
 class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
 {
     public:
+        static HardwareControl* GetInstance();
         HardwareControl();
     
     protected:
@@ -44,6 +45,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         virtual bool Lock();
         
     private:
+        static HardwareControl* instance;
         bool coins10LedsArray[3] = {false, false, false};
         bool coins50LedsArray[3] = {false, false, false};
         bool coins200LedsArray[2] = {false, false}; 
@@ -58,9 +60,9 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         bool strobe;
 };
 
-static ISecurity* isecurityPtr = new HardwareControl();
-static ICoin* icoinPtr = new HardwareControl();
-static ISoap* isoapPtr = new HardwareControl();
-static IO* ioPtr = new HardwareControl();
+static ISecurity* isecurityPtr = (ISecurity*)HardwareControl::GetInstance();
+static ICoin* icoinPtr = (ICoin*)HardwareControl::GetInstance();
+static ISoap* isoapPtr = (ISoap*)HardwareControl::GetInstance();
+static IO* ioPtr = (IO*)HardwareControl::GetInstance();
 
 #endif

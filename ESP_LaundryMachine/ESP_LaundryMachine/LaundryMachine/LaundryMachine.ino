@@ -2,11 +2,13 @@
 
 void setup()
 {
-  HardwareControl();
+  //Serial.begin(9600);
+  //HardwareControl();
 }
 
 void loop()
 {
+  //Serial.write("hello");
   // to be implemented
 }
 
