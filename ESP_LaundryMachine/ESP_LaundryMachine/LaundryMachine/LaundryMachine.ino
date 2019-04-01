@@ -1,39 +1,17 @@
-#include "HardwareControl.h"
+#include "SoapHandler.h"
+#include "SecurityManager.h"
+#include "CoinHandler.h"
 
 void setup()
 {
   //Serial.begin(9600);
-  //HardwareControl();
+  SoapHandler SH;
+  SecurityManager SM;
+  CoinHandler CH;
 }
 
 void loop()
 {
   //Serial.write("hello");
-  // to be implemented
-}
-
-void idle()
-{
-  // to be implemented
-}
-
-// add to external lib
-void programA()
-{
-  // to be implemented
-}
-
-void programB()
-{
-  // to be implemented
-}
-
-void programC()
-{
-  // to be implemented
-}
-
-void securityFallback()
-{
   // to be implemented
 }

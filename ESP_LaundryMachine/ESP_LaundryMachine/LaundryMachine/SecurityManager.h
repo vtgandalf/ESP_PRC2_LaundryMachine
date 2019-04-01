@@ -14,6 +14,8 @@ class SecurityManager
 		
 
 	private:
+		IO* ioPtr = (IO*)HardwareControl::GetInstance();
+		ISecurity* isecurityPtr = (ISecurity*)HardwareControl::GetInstance();
 		sharedNamespace::Function function;
 		void DoorClosed();
 };

@@ -12,6 +12,8 @@ class CoinHandler
         void Polling();
 
     private:
+        IO* ioPtr = (IO*)HardwareControl::GetInstance();
+        ICoin* icoinPtr = (ICoin*)HardwareControl::GetInstance();
         sharedNamespace::Function function;
         void NewCoin();
         int coin10 = 0;

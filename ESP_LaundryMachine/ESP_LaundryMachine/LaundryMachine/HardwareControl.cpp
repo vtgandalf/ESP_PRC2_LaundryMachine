@@ -27,12 +27,16 @@
 
 HardwareControl::HardwareControl()
 {
+  Serial.begin(9600);
   Wire.begin();           // start I2C
   centipede.initialize();
   for (int i = 0; i <= 15; i++)
   {
     centipede.pinMode(i, OUTPUT);
   }
+  // centipede.portMode(0, 0b0000000000000000); // set all pins on chip 0 to output (0 to 15)
+  // centipede.portMode(0, 0b0000000000000000); // set all pins on chip 1 to output (16 to 31)
+  Serial.write("-centipede has been initalized-");
   centipede.digitalWrite(OUT_GROUP2, LOW);
   centipede.digitalWrite(OUT_GROUP1, LOW);
   SetStrobe(false);       // centipede.digitalWrite(OUT_STROBE, LOW);

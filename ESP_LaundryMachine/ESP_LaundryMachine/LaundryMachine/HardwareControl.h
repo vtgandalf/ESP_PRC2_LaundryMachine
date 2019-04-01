@@ -60,9 +60,4 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         bool strobe;
 };
 
-static ISecurity* isecurityPtr = (ISecurity*)HardwareControl::GetInstance();
-static ICoin* icoinPtr = (ICoin*)HardwareControl::GetInstance();
-static ISoap* isoapPtr = (ISoap*)HardwareControl::GetInstance();
-static IO* ioPtr = (IO*)HardwareControl::GetInstance();
-
 #endif

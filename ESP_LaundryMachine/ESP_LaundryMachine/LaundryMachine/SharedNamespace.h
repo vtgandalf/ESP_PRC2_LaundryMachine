@@ -10,7 +10,7 @@ enum Function { COIN10, COIN50, COIN200, CLEAR, PROGRAM, START, DOORLOCK, SOAP2,
 enum Temp { COLD, WARM, WARMER, HOT };
 enum Speed { OFF, LOWSPEED, MEDIUMSPEED, HIGHSPEED };
 enum Rotation { COUNTERCLOCKWISE, CLOCKWISE };
-static Centipede centipede;
+extern Centipede centipede;
 
 }
 
