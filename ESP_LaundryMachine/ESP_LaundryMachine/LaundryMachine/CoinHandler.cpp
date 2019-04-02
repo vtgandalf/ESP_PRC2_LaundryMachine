@@ -19,18 +19,22 @@ bool CoinHandler::AreCoinsEnough()
 void CoinHandler::NewCoin()
 {
     //to be implemented
+    if(ioPtr->Keyselect()==false)ioPtr->SetKeyselect(true);
     function = ioPtr->GetButtonsFunction();
     if(function == COIN10)
     {
+        Serial.println("coin10+");
         if(coin10 <3) coin10++;
     }
     else if (function == COIN50) 
     {
+        Serial.println("coin50+");
         if(coin50 <3) coin50++;
 
     }
     else if (function == COIN200) 
     {
+        Serial.println("coin200+");
         if(coin200 <3) coin200++;
     }
 }

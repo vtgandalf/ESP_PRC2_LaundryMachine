@@ -13,7 +13,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
 {
     public:
         static HardwareControl* GetInstance();
-        HardwareControl();
+        void HardwareControlSetup();
     
     protected:
         virtual Function GetButtonsFunction();
@@ -23,8 +23,8 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         virtual void SetDrain(bool);
         virtual void SetSink(bool);
         virtual void SetRotation(Rotation);
-		virtual void SetSoap1Led();
-        virtual void SetSoap2Led();
+		virtual void SetSoap1Led(bool);
+        virtual void SetSoap2Led(bool);
         virtual void SetProgramLed(int);
         virtual void SetKeyselect(bool);
         virtual void SetStrobe(bool);

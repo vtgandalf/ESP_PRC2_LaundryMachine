@@ -34,9 +34,15 @@ void SecurityManager::Polling()
 
 void SecurityManager::DoorClosed()
 {
+	if(ioPtr->Keyselect())ioPtr->SetKeyselect(false);
 	function = ioPtr->GetButtonsFunction();
 	if(function == DOORLOCK) 
 	{
-		// to be implemented
+		Serial.println("Lock");
+		isecurityPtr->SetLock(true);
+	}
+	if(function != DOORLOCK) 
+	{
+		isecurityPtr->SetLock(false);
 	}
 }
