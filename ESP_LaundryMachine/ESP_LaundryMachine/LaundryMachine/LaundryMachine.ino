@@ -29,15 +29,15 @@ void loop()
   //HC.SetCoin50Led(0);
   //HC.SetCoin200Led(0);
   //HC.SetProgramLed(0);
-  //HC.SetSoap1Led(false);
+  //HC.SetSoap1Led(true);
   //HC.SetSoap2Led(false);
   //HC.SetSoap2Led();
   //HC.SetLock(true);
   //int test = HC.Keyselect();
   //HC.GetButtonsFunction();
-  //Serial.println(HC.GetButtonsFunction(), DEC);
-  CH.Polling();
-  SM.Polling();
+  Serial.println(HC.GetButtonsFunction(), DEC);
+  //CH.Polling();
+  //SM.Polling();
   SH.Polling();
   //delay(500);
 

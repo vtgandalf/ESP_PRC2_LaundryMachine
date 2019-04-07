@@ -9,10 +9,10 @@ void SoapHandler::IndicateMissingSoap()
 void SoapHandler::SetLed()
 {
     //to be implemented
-    Serial.print("s1: ");
+    /*Serial.print("s1: ");
     Serial.print(soap1);
     Serial.print(" s2: ");
-    Serial.println(soap2);
+    Serial.println(soap2);*/
 
     if(soap1 == 2) isoapPtr->SetSoap2Led(true);
     if(soap2 == 3) isoapPtr->SetSoap1Led(true);
