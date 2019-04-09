@@ -66,7 +66,7 @@ HardwareControl* HardwareControl::GetInstance()
   if (instance == 0)
     {
         instance = new HardwareControl();
-        instance->HardwareControlSetup();
+        //instance->HardwareControlSetup();
     }
 
     return instance;
@@ -403,54 +403,30 @@ Function HardwareControl::GetButtonsFunction()
     case true:
       if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN2) && centipede.digitalRead(IN_IN1))
       {
-        if(Debounce(&HardwareControl::previousStates[0], &HardwareControl::states[0], PRESSED, &HardwareControl::lastDebounceTime[0]))
-        {
-          return CLEAR;
-        }
+        return CLEAR;
       } 
       else if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN0)) 
       {
-        if(Debounce(&HardwareControl::previousStates[1], &HardwareControl::states[1], PRESSED, &HardwareControl::lastDebounceTime[1]))
-        {
-          return PROGRAM;
-        }
+        return PROGRAM;
       }
       else if (centipede.digitalRead(IN_IN0))
       {
-        if(Debounce(&HardwareControl::previousStates[2], &HardwareControl::states[2], PRESSED, &HardwareControl::lastDebounceTime[2]))
-        {
-          return START;
-        }
+        return START;
       } 
       else if (centipede.digitalRead(IN_IN3))
       { 
-        if(Debounce(&HardwareControl::previousStates[3], &HardwareControl::states[3], PRESSED, &HardwareControl::lastDebounceTime[3]))
-        {
-          return COIN10;
-        }
+        return COIN10;
       }
       else if (centipede.digitalRead(IN_IN2)) 
       {
-        if(Debounce(&HardwareControl::previousStates[4], &HardwareControl::states[4], PRESSED, &HardwareControl::lastDebounceTime[4]))
-        {
-          return COIN50;
-        }
+        return COIN50;
       }
       else if (centipede.digitalRead(IN_IN1)) 
       {
-        if(Debounce(&HardwareControl::previousStates[5], &HardwareControl::states[5], PRESSED, &HardwareControl::lastDebounceTime[5]))
-        {
-          return COIN200;
-        }
+        return COIN200;
       }
       else 
       {
-        Debounce(&HardwareControl::previousStates[0], &HardwareControl::states[0], NOTPRESSED, &HardwareControl::lastDebounceTime[0]);
-        Debounce(&HardwareControl::previousStates[1], &HardwareControl::states[1], NOTPRESSED, &HardwareControl::lastDebounceTime[1]);
-        Debounce(&HardwareControl::previousStates[2], &HardwareControl::states[2], NOTPRESSED, &HardwareControl::lastDebounceTime[2]);
-        Debounce(&HardwareControl::previousStates[3], &HardwareControl::states[3], NOTPRESSED, &HardwareControl::lastDebounceTime[3]);
-        Debounce(&HardwareControl::previousStates[4], &HardwareControl::states[4], NOTPRESSED, &HardwareControl::lastDebounceTime[4]);
-        Debounce(&HardwareControl::previousStates[5], &HardwareControl::states[5], NOTPRESSED, &HardwareControl::lastDebounceTime[5]);
         return NOTHING;
       }
       break;
@@ -458,38 +434,22 @@ Function HardwareControl::GetButtonsFunction()
     case false:
       if (centipede.digitalRead(IN_IN3)) 
       {
-        if(Debounce(&HardwareControl::previousStates[6], &HardwareControl::states[6], PRESSED, &HardwareControl::lastDebounceTime[6]))
-        {
-          return DOORLOCK;
-        }
+        return DOORLOCK;
       }
       if (centipede.digitalRead(IN_IN2)) 
       {
-        if(Debounce(&HardwareControl::previousStates[7], &HardwareControl::states[7], PRESSED, &HardwareControl::lastDebounceTime[7]))
-        {
-          return SOAP2;
-        }
+        return SOAP2;
       }
       if (centipede.digitalRead(IN_IN1)) 
       {
-        if(Debounce(&HardwareControl::previousStates[8], &HardwareControl::states[8], PRESSED, &HardwareControl::lastDebounceTime[8]))
-        {
-          return SOAP1;
-        }
+        return SOAP1;
       }
       if (centipede.digitalRead(IN_IN0)) 
       {
-        if(Debounce(&HardwareControl::previousStates[9], &HardwareControl::states[9], PRESSED, &HardwareControl::lastDebounceTime[9]))
-        {
-          return PRESSURE;
-        }
+        return PRESSURE;
       }
       else 
       {
-        Debounce(&HardwareControl::previousStates[6], &HardwareControl::states[6], NOTPRESSED, &HardwareControl::lastDebounceTime[6]);
-        Debounce(&HardwareControl::previousStates[7], &HardwareControl::states[7], NOTPRESSED, &HardwareControl::lastDebounceTime[7]);
-        Debounce(&HardwareControl::previousStates[8], &HardwareControl::states[8], NOTPRESSED, &HardwareControl::lastDebounceTime[8]);
-        Debounce(&HardwareControl::previousStates[9], &HardwareControl::states[9], NOTPRESSED, &HardwareControl::lastDebounceTime[9]);
         return NOTHING;
       }
       break;
@@ -500,10 +460,10 @@ Function HardwareControl::GetButtonsFunction()
   }
 }
 
-bool HardwareControl::Debounce(SwitchStates* previousState, SwitchStates* state, SwitchStates reading, unsigned long* lastDebounceTime)
+Function HardwareControl::Debounce(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
 {
   // standart Debounce
-  bool info = false;
+  Function info = NOTHING;
   if(reading != *previousState)
   {
     *lastDebounceTime = millis();
@@ -514,12 +474,17 @@ bool HardwareControl::Debounce(SwitchStates* previousState, SwitchStates* state,
     if(reading != *state)
     {
       *state = reading;
-      if(*state == PRESSED)
+      if(*state != NOTHING)
       {
-        info = true;
+        info = reading;
       }
     }
   }
   *previousState = reading;
   return info;
+}
+
+Function HardwareControl::GetButtonsFunctionDebounced()
+{
+  return HardwareControl::Debounce(&previousState, &state, HardwareControl::GetButtonsFunction(), &lastDebounceTime);
 }

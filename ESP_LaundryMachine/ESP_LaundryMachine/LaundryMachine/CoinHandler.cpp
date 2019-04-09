@@ -19,7 +19,7 @@ bool CoinHandler::AreCoinsEnough()
 void CoinHandler::NewCoin()
 {
     //to be implemented
-    function = ioPtr->GetButtonsFunction();
+    function = ioPtr->GetButtonsFunctionDebounced();
     if(function == COIN10)
     {
         if(coin10 <3) coin10++;

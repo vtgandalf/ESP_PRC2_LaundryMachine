@@ -15,7 +15,7 @@ void SoapHandler::SetLed()
 
 void SoapHandler::InsertSoap()
 {
-    function = ioPtr->GetButtonsFunction();
+    function = ioPtr->GetButtonsFunctionDebounced();
     if(function == SOAP1)
     {
         if(soap1 <1)

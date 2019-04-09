@@ -2,14 +2,14 @@
 #include "SecurityManager.h"
 #include "CoinHandler.h"
 HardwareControl HC;
+SoapHandler SH;
+SecurityManager SM;
+CoinHandler CH;
 
 void setup()
 {
   //Serial.begin(9600);
   HC.HardwareControlSetup();
-  SoapHandler SH;
-  SecurityManager SM;
-  CoinHandler CH;
   }
 
 void loop()
@@ -20,7 +20,7 @@ void loop()
   //HC.SetSink(true);
   //HC.SetHeater(true);
   //HC.SetStrobe(true);
-  //HC.SetKeyselect(true);
+  //HC.SetKeyselect(false);
   //HC.SetSpeed(HIGHSPEED);
   //HC.SetCoin10Led(0);
   //HC.SetCoin50Led(0);
@@ -32,11 +32,10 @@ void loop()
   //HC.SetLock(true);
   //int test = HC.Keyselect();
   //HC.GetButtonsFunction();
-  Serial.println(HC.Keyselect());
-  Serial.println(HC.GetButtonsFunction(), DEC);
+  //Serial.println(HC.Keyselect());
+  Serial.println(HC.GetButtonsFunctionDebounced(), DEC);
   //CH.Polling();
   //SM.Polling();
-  SH.Polling();
-  //delay(500);
-
+  //SH.Polling();
+  delay(500);
 }

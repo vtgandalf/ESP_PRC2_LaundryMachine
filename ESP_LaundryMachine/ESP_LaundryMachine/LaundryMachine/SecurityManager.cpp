@@ -34,7 +34,7 @@ void SecurityManager::Polling()
 
 void SecurityManager::DoorClosed()
 {
-	function = ioPtr->GetButtonsFunction();
+	function = ioPtr->GetButtonsFunctionDebounced();
 	if(function == DOORLOCK) 
 	{
 		// to be implemented
