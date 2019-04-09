@@ -17,6 +17,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
 
     
     //protected:
+        virtual Function GetButtonsFunction();
         virtual Function GetButtonsFunctionDebounced();
         virtual Temp GetTemperature();
         virtual void SetBuzzer(bool);
@@ -50,12 +51,11 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         Function state = NOTHING;
         unsigned long timerTreshold = 50;
         unsigned long lastDebounceTime = 0;
-        Function GetButtonsFunction();
         Function Debounce(Function*, Function*, Function, unsigned long*);
         static HardwareControl* instance;
-        bool coins10LedsArray[3] = {false, false, false};
-        bool coins50LedsArray[3] = {false, false, false};
-        bool coins200LedsArray[2] = {false, false}; 
+        bool coins10LedsArray[3] = {LOW, LOW, LOW};
+        bool coins50LedsArray[3] = {LOW, LOW, LOW};
+        bool coins200LedsArray[2] = {LOW, LOW}; 
         Rotation rotation;
         bool heater;
         bool buzzer;

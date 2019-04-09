@@ -11,7 +11,6 @@ enum Temp { COLD, WARM, WARMER, HOT };
 enum Speed { OFF, LOWSPEED, MEDIUMSPEED, HIGHSPEED };
 enum Rotation { COUNTERCLOCKWISE, CLOCKWISE };
 extern Centipede centipede;
-
 }
 
 #endif

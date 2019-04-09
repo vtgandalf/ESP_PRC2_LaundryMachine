@@ -34,10 +34,10 @@ void HardwareControl::HardwareControlSetup()
   {
     centipede.pinMode(i, OUTPUT);
   }
-  for (int i = 16; i <= 23; i++)
+  /*for (int i = 16; i <= 23; i++)
   {
     centipede.pinMode(i, INPUT);
-  }
+  }*/
   //centipede.portMode(0, 0b0000000000000000); // set all pins on chip 0 to output (0 to 15)
   //centipede.portMode(1, 0b1111111111111111); // set all pins on chip 1 to output (16 to 31)
   Serial.write("-centipede has been initalized-");
@@ -221,17 +221,17 @@ void HardwareControl::SetCoin10Led(int x) // test and change
   switch (x)
   {
     case 1:
-      coins10LedsArray[0] = true;
-      coins10LedsArray[1] = false;
-      coins10LedsArray[2] = false;
+      coins10LedsArray[0] = HIGH;
+      coins10LedsArray[1] = LOW;
+      coins10LedsArray[2] = LOW;
       break;
 
     case 2:
-      coins10LedsArray[1] = true;
+      coins10LedsArray[1] = HIGH;
       break;
 
     case 3:
-    coins10LedsArray[2] = true;
+    coins10LedsArray[2] = HIGH;
       break;
 
     default:
@@ -249,17 +249,17 @@ void HardwareControl::SetCoin50Led(int x)
   switch (x)
   {
     case 1:
-      coins50LedsArray[0] = true;
-      coins50LedsArray[1] = false;
-      coins50LedsArray[2] = false;
+      coins50LedsArray[0] = HIGH;
+      coins50LedsArray[1] = LOW;
+      coins50LedsArray[2] = LOW;
       break;
 
     case 2:
-      coins50LedsArray[1] = true;
+      coins50LedsArray[1] = HIGH;
       break;
 
     case 3:
-      coins50LedsArray[2] = true;
+      coins50LedsArray[2] = HIGH;
       break;
 
     default:
@@ -277,12 +277,12 @@ void HardwareControl::SetCoin200Led(int x)
   switch (x)
   {
     case 1:
-      coins200LedsArray[0] = true;
-      coins200LedsArray[1] = false;
+      coins200LedsArray[0] = HIGH;
+      coins200LedsArray[1] = LOW;
       break;
 
     case 2:
-      coins200LedsArray[1] = true;
+      coins200LedsArray[1] = HIGH;
       break;
 
     default:
