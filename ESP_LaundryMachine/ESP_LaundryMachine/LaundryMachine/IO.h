@@ -18,7 +18,6 @@ class IO
     	virtual void SetDrain(bool)=0;
     	virtual void SetSink(bool)=0;
     	virtual void SetRotation(Rotation)=0;
-        
     	virtual void SetProgramLed(int)=0;
     	virtual void SetKeyselect(bool)=0;
     	virtual void SetStrobe(bool)=0;

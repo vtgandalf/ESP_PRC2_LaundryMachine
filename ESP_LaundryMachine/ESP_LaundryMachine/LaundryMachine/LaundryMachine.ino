@@ -1,19 +1,16 @@
 #include "SoapHandler.h"
 #include "SecurityManager.h"
 #include "CoinHandler.h"
-#include "HardwareControl.h"
 HardwareControl HC;
-SoapHandler SH;
-SecurityManager SM;
-CoinHandler CH;
 
 void setup()
-{  
-  Serial.begin(9600);
+{
+  //Serial.begin(9600);
   HC.HardwareControlSetup();
-  //CH.HardwareControlSetup();
-  //SM.HardwareControlSetup();
-}
+  SoapHandler SH;
+  SecurityManager SM;
+  CoinHandler CH;
+  }
 
 void loop()
 {
@@ -23,7 +20,7 @@ void loop()
   //HC.SetSink(true);
   //HC.SetHeater(true);
   //HC.SetStrobe(true);
-  HC.SetKeyselect(false);
+  //HC.SetKeyselect(false);
   //HC.SetSpeed(HIGHSPEED);
   //HC.SetCoin10Led(0);
   //HC.SetCoin50Led(0);
@@ -35,18 +32,9 @@ void loop()
   //HC.SetLock(true);
   //int test = HC.Keyselect();
   //HC.GetButtonsFunction();
-<<<<<<< HEAD
   Serial.println(HC.GetButtonsFunction(), DEC);
   //CH.Polling();
   //SM.Polling();
   //SH.Polling();
   delay(500);
-=======
-  //Serial.println(HC.GetButtonsFunction(), DEC);
-  CH.Polling();
-  SM.Polling();
-  SH.Polling();
-  //delay(500);
->>>>>>> parent of 54de856... Debounce
-
 }

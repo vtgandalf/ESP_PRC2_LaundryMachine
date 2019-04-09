@@ -30,22 +30,18 @@ void HardwareControl::HardwareControlSetup()
   Serial.begin(9600);
   Wire.begin();           // start I2C
   centipede.initialize();
-  /*for (int i = 0; i <= 15; i++)
+  for (int i = 0; i <= 15; i++)
   {
     centipede.pinMode(i, OUTPUT);
   }
-  for (int i = 16; i <= 23; i++)
-  {
-    centipede.pinMode(i, INPUT);
-  }*/
-  centipede.portMode(0, 0b0000000000000000); // set all pins on chip 0 to output (0 to 15)
-  centipede.portMode(1, 0b1111111111111111); // set all pins on chip 1 to output (16 to 31)
+  // centipede.portMode(0, 0b0000000000000000); // set all pins on chip 0 to output (0 to 15)
+  // centipede.portMode(0, 0b0000000000000000); // set all pins on chip 1 to output (16 to 31)
   Serial.write("-centipede has been initalized-");
   centipede.digitalWrite(OUT_GROUP2, LOW);
   centipede.digitalWrite(OUT_GROUP1, LOW);
   SetStrobe(false);       // centipede.digitalWrite(OUT_STROBE, LOW);
   SetKeyselect(true);     // centipede.digitalWrite(OUT_KEYSELECT, HIGH);
-  SetBuzzer(false);        // centipede.digitalWrite(OUT_BUZZER, HIGH);
+  SetBuzzer(true);        // centipede.digitalWrite(OUT_BUZZER, HIGH);
   SetHeater(false);       // centipede.digitalWrite(OUT_HEATER, HIGH);
   SetSpeed(OFF);          // centipede.digitalWrite(OUT_SPEED2, HIGH);
                           // centipede.digitalWrite(OUT_SPEED1, HIGH);
@@ -127,14 +123,14 @@ void HardwareControl::SetStrobe(bool boolean)
 
 void HardwareControl::SetHeater(bool boolean)
 {
-  if (!boolean) centipede.digitalWrite(OUT_HEATER, HIGH);
+  if (boolean) centipede.digitalWrite(OUT_HEATER, HIGH);
   else centipede.digitalWrite(OUT_HEATER, LOW);
   heater = boolean;
 }
 
 void HardwareControl::SetBuzzer(bool boolean)
 {
-  if (!boolean) centipede.digitalWrite(OUT_BUZZER, HIGH);
+  if (boolean) centipede.digitalWrite(OUT_BUZZER, HIGH);
   else centipede.digitalWrite(OUT_BUZZER, LOW);
   buzzer = boolean;
 }
@@ -219,12 +215,6 @@ void HardwareControl::SetCoin10Led(int x) // test and change
 {
   switch (x)
   {
-    case 0:
-      coins10LedsArray[0] = false;
-      coins10LedsArray[1] = false;
-      coins10LedsArray[2] = false;
-      break;
-
     case 1:
       coins10LedsArray[0] = true;
       coins10LedsArray[1] = false;
@@ -232,37 +222,27 @@ void HardwareControl::SetCoin10Led(int x) // test and change
       break;
 
     case 2:
-      coins10LedsArray[0] = true;
       coins10LedsArray[1] = true;
-      coins10LedsArray[2] = false;
       break;
 
     case 3:
-      coins10LedsArray[0] = true;
-      coins10LedsArray[1] = true;
-      coins10LedsArray[2] = true;
+    coins10LedsArray[2] = true;
       break;
 
     default:
       break;
   }
-  centipede.digitalWrite(OUT_GROUP2, LOW);
-  centipede.digitalWrite(OUT_GROUP1, LOW);
-  centipede.digitalWrite(OUT_DATAC, coins10LedsArray[2]);
-  centipede.digitalWrite(OUT_DATAB, coins10LedsArray[1]);
-  centipede.digitalWrite(OUT_DATAA, coins10LedsArray[0]);
+  digitalWrite(OUT_GROUP2, LOW);
+  digitalWrite(OUT_GROUP1, LOW);
+  digitalWrite(OUT_DATAC, coins10LedsArray[2]);
+  digitalWrite(OUT_DATAB, coins10LedsArray[1]);
+  digitalWrite(OUT_DATAA, coins10LedsArray[0]);
 }
 
 void HardwareControl::SetCoin50Led(int x)
 {
   switch (x)
   {
-    case 0:
-      coins50LedsArray[0] = false;
-      coins50LedsArray[1] = false;
-      coins50LedsArray[2] = false;
-      break;
-
     case 1:
       coins50LedsArray[0] = true;
       coins50LedsArray[1] = false;
@@ -270,99 +250,86 @@ void HardwareControl::SetCoin50Led(int x)
       break;
 
     case 2:
-      coins50LedsArray[0] = true;
       coins50LedsArray[1] = true;
-      coins50LedsArray[2] = false;
       break;
 
     case 3:
-      coins50LedsArray[0] = true;
-      coins50LedsArray[1] = true;
       coins50LedsArray[2] = true;
       break;
 
     default:
       break;
   }
-  centipede.digitalWrite(OUT_GROUP2, LOW);
-  centipede.digitalWrite(OUT_GROUP1, HIGH);
-  centipede.digitalWrite(OUT_DATAC, coins50LedsArray[2]);
-  centipede.digitalWrite(OUT_DATAB, coins50LedsArray[1]);
-  centipede.digitalWrite(OUT_DATAA, coins50LedsArray[0]);
+  digitalWrite(OUT_GROUP2, LOW);
+  digitalWrite(OUT_GROUP1, HIGH);
+  digitalWrite(OUT_DATAC, coins50LedsArray[2]);
+  digitalWrite(OUT_DATAB, coins50LedsArray[1]);
+  digitalWrite(OUT_DATAA, coins50LedsArray[0]);
 }
 
 void HardwareControl::SetCoin200Led(int x)
 {
   switch (x)
   {
-    case 0:
-      coins200LedsArray[0] = false;
-      coins200LedsArray[1] = false;
-      break;
     case 1:
       coins200LedsArray[0] = true;
       coins200LedsArray[1] = false;
       break;
 
     case 2:
-      coins200LedsArray[0] = true;
       coins200LedsArray[1] = true;
       break;
 
     default:
       break;
   }
-  centipede.digitalWrite(OUT_GROUP2, HIGH);
-  centipede.digitalWrite(OUT_GROUP1, LOW);
-  centipede.digitalWrite(OUT_DATAC, LOW);
-  centipede.digitalWrite(OUT_DATAB, coins200LedsArray[1]);
-  centipede.digitalWrite(OUT_DATAA, coins200LedsArray[0]);
+  digitalWrite(OUT_GROUP2, HIGH);
+  digitalWrite(OUT_GROUP1, LOW);
+  digitalWrite(OUT_DATAC, LOW);
+  digitalWrite(OUT_DATAB, coins200LedsArray[1]);
+  digitalWrite(OUT_DATAA, coins200LedsArray[0]);
 }
 
-void HardwareControl::SetSoap2Led(bool boolean)
+void HardwareControl::SetSoap2Led()
 {
-  centipede.digitalWrite(OUT_GROUP2, HIGH);
-  centipede.digitalWrite(OUT_GROUP1, LOW);
-  if(boolean)centipede.digitalWrite(OUT_DATAC, HIGH);
-  else centipede.digitalWrite(OUT_DATAC, LOW);
-  centipede.digitalWrite(OUT_DATAB, LOW);
-  centipede.digitalWrite(OUT_DATAA, LOW);
+  digitalWrite(OUT_GROUP2, HIGH);
+  digitalWrite(OUT_GROUP1, LOW);
+  digitalWrite(OUT_DATAC, HIGH);
+  digitalWrite(OUT_DATAB, LOW);
+  digitalWrite(OUT_DATAA, LOW);
 }
 
-void HardwareControl::SetSoap1Led(bool boolean)
+void HardwareControl::SetSoap1Led()
 {
-  if(boolean)centipede.digitalWrite(OUT_SOAP1, HIGH);
-  else centipede.digitalWrite(OUT_SOAP1, LOW);
+  digitalWrite(OUT_SOAP1, HIGH);
 }
 
 void HardwareControl::SetProgramLed(int x)
 {
-  centipede.digitalWrite(OUT_GROUP2, HIGH);
-  centipede.digitalWrite(OUT_GROUP1, HIGH);
   switch (x)
   {
-    case 0:
-      centipede.digitalWrite(OUT_DATAC, LOW);
-      centipede.digitalWrite(OUT_DATAB, LOW);
-      centipede.digitalWrite(OUT_DATAA, LOW);
-      break;
-
     case 1:
-      centipede.digitalWrite(OUT_DATAC, LOW);
-      centipede.digitalWrite(OUT_DATAB, LOW);
-      centipede.digitalWrite(OUT_DATAA, HIGH);
+      digitalWrite(OUT_GROUP2, HIGH);
+      digitalWrite(OUT_GROUP1, HIGH);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, LOW);
+      digitalWrite(OUT_DATAA, HIGH);
       break;
 
     case 2:
-      centipede.digitalWrite(OUT_DATAC, LOW);
-      centipede.digitalWrite(OUT_DATAB, HIGH);
-      centipede.digitalWrite(OUT_DATAA, LOW);
+      digitalWrite(OUT_GROUP2, HIGH);
+      digitalWrite(OUT_GROUP1, HIGH);
+      digitalWrite(OUT_DATAC, LOW);
+      digitalWrite(OUT_DATAB, HIGH);
+      digitalWrite(OUT_DATAA, LOW);
       break;
 
     case 3:
-      centipede.digitalWrite(OUT_DATAC, HIGH);
-      centipede.digitalWrite(OUT_DATAB, LOW);
-      centipede.digitalWrite(OUT_DATAA, LOW);
+      digitalWrite(OUT_GROUP2, HIGH);
+      digitalWrite(OUT_GROUP1, HIGH);
+      digitalWrite(OUT_DATAC, HIGH);
+      digitalWrite(OUT_DATAB, LOW);
+      digitalWrite(OUT_DATAA, LOW);
       break;
 
     default:
@@ -419,121 +386,22 @@ Function HardwareControl::GetButtonsFunction()
   switch (Keyselect())
   {
     case true:
-<<<<<<< HEAD
-      if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN2) && centipede.digitalRead(IN_IN1)) 
-      {
-        Serial.println("clear");
-        return CLEAR;
-      }
-      else if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN0)) 
-      {
-        Serial.println("program");
-        return PROGRAM;
-      }
-      else if (centipede.digitalRead(IN_IN0)) 
-      {
-        Serial.println("start");
-        return START;
-      }
-      else if (centipede.digitalRead(IN_IN3)) 
-      {
-        Serial.println("coin10");
-        return COIN10;
-      }
-      else if (centipede.digitalRead(IN_IN2)) 
-      {
-        Serial.println("coin50");
-        return COIN50;
-      }
-      else if (centipede.digitalRead(IN_IN1)) 
-      {
-        Serial.println("coin200");
-        return COIN200;
-      }
-      else 
-      {
-        return NOTHING;
-      }
+      if (digitalRead(IN_IN3) && digitalRead(IN_IN2) && digitalRead(IN_IN1)) return CLEAR;
+      else if (digitalRead(IN_IN3) && digitalRead(IN_IN0)) return PROGRAM;
+      else if (digitalRead(IN_IN0)) return START;
+      else if (digitalRead(IN_IN3)) return COIN10;
+      else if (digitalRead(IN_IN2)) return COIN50;
+      else if (digitalRead(IN_IN1)) return COIN200;
       break;
 
     case false:
-      if (centipede.digitalRead(IN_IN3)) 
-      {
-        Serial.println("doorlock");
-        return DOORLOCK;
-      }
-      if (centipede.digitalRead(IN_IN2)) 
-      {
-        Serial.println("soap2");
-        return SOAP2;
-      }
-      if (centipede.digitalRead(IN_IN1)) 
-      {
-        Serial.println("soap1");
-        return SOAP1;
-      }
-      if (centipede.digitalRead(IN_IN0)) 
-      {
-        Serial.println("pressure");
-        return PRESSURE;
-      }
-      else 
-      {
-        return NOTHING;
-      }
-=======
-      if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN2) && centipede.digitalRead(IN_IN1)) return CLEAR;
-      else if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN0)) return PROGRAM;
-      else if (centipede.digitalRead(IN_IN0)) return START;
-      else if (centipede.digitalRead(IN_IN3)) return COIN10;
-      else if (centipede.digitalRead(IN_IN2)) return COIN50;
-      else if (centipede.digitalRead(IN_IN1)) return COIN200;
-      else return NOTHING;
-      break;
-
-    case false:
-      if (centipede.digitalRead(IN_IN3)) return DOORLOCK;
-      if (centipede.digitalRead(IN_IN2)) return SOAP2;
-      if (centipede.digitalRead(IN_IN1)) return SOAP1;
-      if (centipede.digitalRead(IN_IN0)) return PRESSURE;
-      else return NOTHING;
->>>>>>> parent of 54de856... Debounce
+      if (digitalRead(IN_IN3)) return DOORLOCK;
+      if (digitalRead(IN_IN2)) return SOAP2;
+      if (digitalRead(IN_IN1)) return SOAP1;
+      if (digitalRead(IN_IN0)) return PRESSURE;
       break;
 
     default:
-      return NOTHING;
       break;
   }
 }
-<<<<<<< HEAD
-
-Function HardwareControl::DebounceFunction(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
-{
-  // standart Debounce
-  Function info = NOTHING;
-  if(reading != *previousState)
-  {
-    *lastDebounceTime = millis();
-  }
-
-  if((millis() - *lastDebounceTime) > timerTreshold)
-  {
-    if(reading != *state)
-    {
-      *state = reading;
-      if(*state != NOTHING)
-      {
-        info = reading;
-      }
-    }
-  }
-  *previousState = reading;
-  return info;
-}
-
-Function HardwareControl::GetButtonsFunctionDebounced()
-{
-  return HardwareControl::DebounceFunction(&previousState, &state, GetButtonsFunction(), &lastDebounceTime);
-}
-=======
->>>>>>> parent of 54de856... Debounce
