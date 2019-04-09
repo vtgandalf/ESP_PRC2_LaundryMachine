@@ -34,6 +34,10 @@ void HardwareControl::HardwareControlSetup()
   {
     centipede.pinMode(i, OUTPUT);
   }
+  for (int i = 16; i <= 23; i++)
+  {
+    centipede.pinMode(i, INPUT);
+  }
   // centipede.portMode(0, 0b0000000000000000); // set all pins on chip 0 to output (0 to 15)
   // centipede.portMode(0, 0b0000000000000000); // set all pins on chip 1 to output (16 to 31)
   Serial.write("-centipede has been initalized-");
@@ -41,7 +45,7 @@ void HardwareControl::HardwareControlSetup()
   centipede.digitalWrite(OUT_GROUP1, LOW);
   SetStrobe(false);       // centipede.digitalWrite(OUT_STROBE, LOW);
   SetKeyselect(true);     // centipede.digitalWrite(OUT_KEYSELECT, HIGH);
-  SetBuzzer(true);        // centipede.digitalWrite(OUT_BUZZER, HIGH);
+  SetBuzzer(false);        // centipede.digitalWrite(OUT_BUZZER, HIGH);
   SetHeater(false);       // centipede.digitalWrite(OUT_HEATER, HIGH);
   SetSpeed(OFF);          // centipede.digitalWrite(OUT_SPEED2, HIGH);
                           // centipede.digitalWrite(OUT_SPEED1, HIGH);
@@ -62,6 +66,7 @@ HardwareControl* HardwareControl::GetInstance()
   if (instance == 0)
     {
         instance = new HardwareControl();
+        instance->HardwareControlSetup();
     }
 
     return instance;
@@ -123,14 +128,14 @@ void HardwareControl::SetStrobe(bool boolean)
 
 void HardwareControl::SetHeater(bool boolean)
 {
-  if (boolean) centipede.digitalWrite(OUT_HEATER, HIGH);
+  if (!boolean) centipede.digitalWrite(OUT_HEATER, HIGH);
   else centipede.digitalWrite(OUT_HEATER, LOW);
   heater = boolean;
 }
 
 void HardwareControl::SetBuzzer(bool boolean)
 {
-  if (boolean) centipede.digitalWrite(OUT_BUZZER, HIGH);
+  if (!boolean) centipede.digitalWrite(OUT_BUZZER, HIGH);
   else centipede.digitalWrite(OUT_BUZZER, LOW);
   buzzer = boolean;
 }
@@ -290,18 +295,29 @@ void HardwareControl::SetCoin200Led(int x)
   digitalWrite(OUT_DATAA, coins200LedsArray[0]);
 }
 
-void HardwareControl::SetSoap2Led()
+void HardwareControl::SetSoap2Led(bool boolean)
 {
-  digitalWrite(OUT_GROUP2, HIGH);
-  digitalWrite(OUT_GROUP1, LOW);
-  digitalWrite(OUT_DATAC, HIGH);
-  digitalWrite(OUT_DATAB, LOW);
-  digitalWrite(OUT_DATAA, LOW);
+  if (boolean) {
+    digitalWrite(OUT_GROUP2, HIGH);
+    digitalWrite(OUT_GROUP1, LOW);
+    digitalWrite(OUT_DATAC, HIGH);
+    digitalWrite(OUT_DATAB, LOW);
+    digitalWrite(OUT_DATAA, LOW);
+  }
+  else
+  {
+    digitalWrite(OUT_GROUP2, HIGH);
+    digitalWrite(OUT_GROUP1, LOW);
+    digitalWrite(OUT_DATAC, LOW);
+    digitalWrite(OUT_DATAB, LOW);
+    digitalWrite(OUT_DATAA, LOW);
+  }
 }
 
-void HardwareControl::SetSoap1Led()
+void HardwareControl::SetSoap1Led(bool boolean)
 {
-  digitalWrite(OUT_SOAP1, HIGH);
+  if(boolean)digitalWrite(OUT_SOAP1, HIGH);
+  else digitalWrite(OUT_SOAP1, LOW);
 }
 
 void HardwareControl::SetProgramLed(int x)
@@ -392,6 +408,7 @@ Function HardwareControl::GetButtonsFunction()
       else if (digitalRead(IN_IN3)) return COIN10;
       else if (digitalRead(IN_IN2)) return COIN50;
       else if (digitalRead(IN_IN1)) return COIN200;
+      else return NOTHING;
       break;
 
     case false:
@@ -399,9 +416,11 @@ Function HardwareControl::GetButtonsFunction()
       if (digitalRead(IN_IN2)) return SOAP2;
       if (digitalRead(IN_IN1)) return SOAP1;
       if (digitalRead(IN_IN0)) return PRESSURE;
+      else return NOTHING;
       break;
 
     default:
+      return NOTHING;
       break;
   }
 }
