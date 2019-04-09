@@ -25,8 +25,6 @@
 #define IN_IN1          22
 #define IN_IN0          23
 
-unsigned long timerTreshold = 50;
-
 void HardwareControl::HardwareControlSetup()
 {
   Serial.begin(9600);
@@ -212,7 +210,7 @@ void HardwareControl::SetRotation(Rotation tankRotation)
 
 void HardwareControl::SetKeyselect(bool boolean)
 {
-  if (!boolean) centipede.digitalWrite(OUT_KEYSELECT, HIGH);
+  if (boolean) centipede.digitalWrite(OUT_KEYSELECT, HIGH);
   else centipede.digitalWrite(OUT_KEYSELECT, LOW);
   keyselect = boolean;
 }
@@ -421,6 +419,7 @@ Function HardwareControl::GetButtonsFunction()
   switch (Keyselect())
   {
     case true:
+<<<<<<< HEAD
       if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN2) && centipede.digitalRead(IN_IN1)) 
       {
         Serial.println("clear");
@@ -482,6 +481,23 @@ Function HardwareControl::GetButtonsFunction()
       {
         return NOTHING;
       }
+=======
+      if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN2) && centipede.digitalRead(IN_IN1)) return CLEAR;
+      else if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN0)) return PROGRAM;
+      else if (centipede.digitalRead(IN_IN0)) return START;
+      else if (centipede.digitalRead(IN_IN3)) return COIN10;
+      else if (centipede.digitalRead(IN_IN2)) return COIN50;
+      else if (centipede.digitalRead(IN_IN1)) return COIN200;
+      else return NOTHING;
+      break;
+
+    case false:
+      if (centipede.digitalRead(IN_IN3)) return DOORLOCK;
+      if (centipede.digitalRead(IN_IN2)) return SOAP2;
+      if (centipede.digitalRead(IN_IN1)) return SOAP1;
+      if (centipede.digitalRead(IN_IN0)) return PRESSURE;
+      else return NOTHING;
+>>>>>>> parent of 54de856... Debounce
       break;
 
     default:
@@ -489,6 +505,7 @@ Function HardwareControl::GetButtonsFunction()
       break;
   }
 }
+<<<<<<< HEAD
 
 Function HardwareControl::DebounceFunction(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
 {
@@ -518,3 +535,5 @@ Function HardwareControl::GetButtonsFunctionDebounced()
 {
   return HardwareControl::DebounceFunction(&previousState, &state, GetButtonsFunction(), &lastDebounceTime);
 }
+=======
+>>>>>>> parent of 54de856... Debounce

@@ -15,12 +15,16 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         static HardwareControl* GetInstance();
         void HardwareControlSetup();
     
+<<<<<<< HEAD
     //protected:
         unsigned long lastDebounceTime = 0;
         Function previousState = NOTHING;
         Function state = NOTHING;
         Function DebounceFunction(Function*, Function*, Function, unsigned long*);
         Function GetButtonsFunctionDebounced();
+=======
+    protected:
+>>>>>>> parent of 54de856... Debounce
         virtual Function GetButtonsFunction();
         virtual Temp GetTemperature();
         virtual void SetBuzzer(bool);
