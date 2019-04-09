@@ -23,7 +23,7 @@ void loop()
   //HC.SetSink(true);
   //HC.SetHeater(true);
   //HC.SetStrobe(true);
-  //HC.SetKeyselect(true);
+  HC.SetKeyselect(false);
   //HC.SetSpeed(HIGHSPEED);
   //HC.SetCoin10Led(0);
   //HC.SetCoin50Led(0);
@@ -38,7 +38,7 @@ void loop()
   Serial.println(HC.GetButtonsFunction(), DEC);
   //CH.Polling();
   //SM.Polling();
-  SH.Polling();
-  //delay(500);
+  //SH.Polling();
+  delay(500);
 
 }

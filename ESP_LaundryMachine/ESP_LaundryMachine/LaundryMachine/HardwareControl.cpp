@@ -32,16 +32,16 @@ void HardwareControl::HardwareControlSetup()
   Serial.begin(9600);
   Wire.begin();           // start I2C
   centipede.initialize();
-  for (int i = 0; i <= 15; i++)
+  /*for (int i = 0; i <= 15; i++)
   {
     centipede.pinMode(i, OUTPUT);
   }
   for (int i = 16; i <= 23; i++)
   {
     centipede.pinMode(i, INPUT);
-  }
-  //centipede.portMode(0, 0b0000000000000000); // set all pins on chip 0 to output (0 to 15)
-  //centipede.portMode(1, 0b1111111111111111); // set all pins on chip 1 to output (16 to 31)
+  }*/
+  centipede.portMode(0, 0b0000000000000000); // set all pins on chip 0 to output (0 to 15)
+  centipede.portMode(1, 0b1111111111111111); // set all pins on chip 1 to output (16 to 31)
   Serial.write("-centipede has been initalized-");
   centipede.digitalWrite(OUT_GROUP2, LOW);
   centipede.digitalWrite(OUT_GROUP1, LOW);
@@ -415,61 +415,44 @@ WaterLevel HardwareControl::GetWaterLevel()
   }
 }
 
+
 Function HardwareControl::GetButtonsFunction()
 {
   switch (Keyselect())
   {
     case true:
-      if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN2) && centipede.digitalRead(IN_IN1))
+      if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN2) && centipede.digitalRead(IN_IN1)) 
       {
-        if(Debounce(&HardwareControl::previousStates[0], &HardwareControl::states[0], PRESSED, &HardwareControl::lastDebounceTime[0]))
-        {
-          return CLEAR;
-        }
-      } 
+        Serial.println("clear");
+        return CLEAR;
+      }
       else if (centipede.digitalRead(IN_IN3) && centipede.digitalRead(IN_IN0)) 
       {
-        if(Debounce(&HardwareControl::previousStates[1], &HardwareControl::states[1], PRESSED, &HardwareControl::lastDebounceTime[1]))
-        {
-          return PROGRAM;
-        }
+        Serial.println("program");
+        return PROGRAM;
       }
-      else if (centipede.digitalRead(IN_IN0))
+      else if (centipede.digitalRead(IN_IN0)) 
       {
-        if(Debounce(&HardwareControl::previousStates[2], &HardwareControl::states[2], PRESSED, &HardwareControl::lastDebounceTime[2]))
-        {
-          return START;
-        }
-      } 
-      else if (centipede.digitalRead(IN_IN3))
-      { 
-        if(Debounce(&HardwareControl::previousStates[3], &HardwareControl::states[3], PRESSED, &HardwareControl::lastDebounceTime[3]))
-        {
-          return COIN10;
-        }
+        Serial.println("start");
+        return START;
+      }
+      else if (centipede.digitalRead(IN_IN3)) 
+      {
+        Serial.println("coin10");
+        return COIN10;
       }
       else if (centipede.digitalRead(IN_IN2)) 
       {
-        if(Debounce(&HardwareControl::previousStates[4], &HardwareControl::states[4], PRESSED, &HardwareControl::lastDebounceTime[4]))
-        {
-          return COIN50;
-        }
+        Serial.println("coin50");
+        return COIN50;
       }
       else if (centipede.digitalRead(IN_IN1)) 
       {
-        if(Debounce(&HardwareControl::previousStates[5], &HardwareControl::states[5], PRESSED, &HardwareControl::lastDebounceTime[5]))
-        {
-          return COIN200;
-        }
+        Serial.println("coin200");
+        return COIN200;
       }
       else 
       {
-        Debounce(&HardwareControl::previousStates[0], &HardwareControl::states[0], NOTPRESSED, &HardwareControl::lastDebounceTime[0]);
-        Debounce(&HardwareControl::previousStates[1], &HardwareControl::states[1], NOTPRESSED, &HardwareControl::lastDebounceTime[1]);
-        Debounce(&HardwareControl::previousStates[2], &HardwareControl::states[2], NOTPRESSED, &HardwareControl::lastDebounceTime[2]);
-        Debounce(&HardwareControl::previousStates[3], &HardwareControl::states[3], NOTPRESSED, &HardwareControl::lastDebounceTime[3]);
-        Debounce(&HardwareControl::previousStates[4], &HardwareControl::states[4], NOTPRESSED, &HardwareControl::lastDebounceTime[4]);
-        Debounce(&HardwareControl::previousStates[5], &HardwareControl::states[5], NOTPRESSED, &HardwareControl::lastDebounceTime[5]);
         return NOTHING;
       }
       break;
@@ -477,38 +460,26 @@ Function HardwareControl::GetButtonsFunction()
     case false:
       if (centipede.digitalRead(IN_IN3)) 
       {
-        if(Debounce(&HardwareControl::previousStates[6], &HardwareControl::states[6], PRESSED, &HardwareControl::lastDebounceTime[6]))
-        {
-          return DOORLOCK;
-        }
+        Serial.println("doorlock");
+        return DOORLOCK;
       }
       if (centipede.digitalRead(IN_IN2)) 
       {
-        if(Debounce(&HardwareControl::previousStates[7], &HardwareControl::states[7], PRESSED, &HardwareControl::lastDebounceTime[7]))
-        {
-          return SOAP2;
-        }
+        Serial.println("soap2");
+        return SOAP2;
       }
       if (centipede.digitalRead(IN_IN1)) 
       {
-        if(Debounce(&HardwareControl::previousStates[8], &HardwareControl::states[8], PRESSED, &HardwareControl::lastDebounceTime[8]))
-        {
-          return SOAP1;
-        }
+        Serial.println("soap1");
+        return SOAP1;
       }
       if (centipede.digitalRead(IN_IN0)) 
       {
-        if(Debounce(&HardwareControl::previousStates[9], &HardwareControl::states[9], PRESSED, &HardwareControl::lastDebounceTime[9]))
-        {
-          return PRESSURE;
-        }
+        Serial.println("pressure");
+        return PRESSURE;
       }
       else 
       {
-        Debounce(&HardwareControl::previousStates[6], &HardwareControl::states[6], NOTPRESSED, &HardwareControl::lastDebounceTime[6]);
-        Debounce(&HardwareControl::previousStates[7], &HardwareControl::states[7], NOTPRESSED, &HardwareControl::lastDebounceTime[7]);
-        Debounce(&HardwareControl::previousStates[8], &HardwareControl::states[8], NOTPRESSED, &HardwareControl::lastDebounceTime[8]);
-        Debounce(&HardwareControl::previousStates[9], &HardwareControl::states[9], NOTPRESSED, &HardwareControl::lastDebounceTime[9]);
         return NOTHING;
       }
       break;
@@ -519,10 +490,10 @@ Function HardwareControl::GetButtonsFunction()
   }
 }
 
-bool HardwareControl::Debounce(SwitchStates* previousState, SwitchStates* state, SwitchStates reading, unsigned long* lastDebounceTime)
+Function HardwareControl::DebounceFunction(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
 {
   // standart Debounce
-  bool info = false;
+  Function info = NOTHING;
   if(reading != *previousState)
   {
     *lastDebounceTime = millis();
@@ -533,12 +504,17 @@ bool HardwareControl::Debounce(SwitchStates* previousState, SwitchStates* state,
     if(reading != *state)
     {
       *state = reading;
-      if(*state == PRESSED)
+      if(*state != NOTHING)
       {
-        info = true;
+        info = reading;
       }
     }
   }
   *previousState = reading;
   return info;
+}
+
+Function HardwareControl::GetButtonsFunctionDebounced()
+{
+  return HardwareControl::DebounceFunction(&previousState, &state, GetButtonsFunction(), &lastDebounceTime);
 }
