@@ -2,6 +2,7 @@
 #define SOAPHANDLER_H
 
 #include "HardwareControl.h"
+#include "InputManager.h"
 
 class SoapHandler
 {
@@ -12,6 +13,7 @@ class SoapHandler
         bool soap1LedHasBeenSetUp = true;
         bool soap2LedHasBeenSetUp = true;
         IO* ioPtr = (IO*)HardwareControl::GetInstance();
+        InputManager* ioManager = (InputManager*)InputManager::GetInstance();
         ISoap* isoapPtr = (ISoap*)HardwareControl::GetInstance();
         sharedNamespace::Function function;
         int soap1 = 0;

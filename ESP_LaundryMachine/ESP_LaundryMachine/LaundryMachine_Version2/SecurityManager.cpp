@@ -36,8 +36,8 @@ void SecurityManager::Polling()
 void SecurityManager::DoorClosed()
 {
 	//Serial.println("SecurityManager::DoorClosed");
-	ioPtr->SetKeyselect(false);
-	function = ioPtr->GetButtonsFunctionDebounced();
+	/*ioPtr->SetKeyselect(false);
+	function = ioPtr->GetButtonsFunction();
 	if(function!=NOTHING) 
 	{
 		Serial.print("SecurityManager::GetButtonsFunctionDebounced::");
@@ -51,5 +51,5 @@ void SecurityManager::DoorClosed()
 			isecurityPtr->SetLock(true);
 			doorHasBeenLocked = true;
 		}
-	}
+	}*/
 }

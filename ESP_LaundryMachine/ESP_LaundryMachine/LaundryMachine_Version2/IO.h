@@ -9,7 +9,7 @@ class IO
 {
 	public:
 		// getters
-    	virtual Function GetButtonsFunctionDebounced()=0;
+    	//virtual Function GetButtonsFunctionDebounced()=0;
     	virtual Function GetButtonsFunction()=0;
     	virtual Temp GetTemperature()=0;
     	// setters

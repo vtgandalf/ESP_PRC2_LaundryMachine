@@ -70,7 +70,6 @@ HardwareControl* HardwareControl::GetInstance()
         instance = new HardwareControl();
         //instance->HardwareControlSetup();
     }
-
     return instance;
 }
 
@@ -462,7 +461,7 @@ Function HardwareControl::GetButtonsFunction()
   }
 }
 
-Function HardwareControl::Debounce(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
+/*Function HardwareControl::Debounce(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
 {
   // standart Debounce
   Function info = NOTHING;
@@ -489,4 +488,4 @@ Function HardwareControl::Debounce(Function* previousState, Function* state, Fun
 Function HardwareControl::GetButtonsFunctionDebounced()
 {
   return HardwareControl::Debounce(&previousState, &state, HardwareControl::GetButtonsFunction(), &lastDebounceTime);
-}
+}*/

@@ -1,6 +1,17 @@
 #include "InputManager.h"
 
-void InputManager::Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
+InputManager* InputManager::instance = 0;
+
+InputManager* InputManager::GetInstance()
+{
+  if (instance == 0)
+    {
+      instance = new InputManager();
+    }
+    return instance;
+}
+
+void InputManager::Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime, functiontype method)
 {
   if(reading != *previousState)
   {
@@ -14,6 +25,7 @@ void InputManager::Debouncing(Function* previousState, Function* state, Function
       *state = reading;
       if(*state != NOTHING)
       {
+        method;
         Serial.println(reading);
       }
     }
@@ -23,22 +35,24 @@ void InputManager::Debouncing(Function* previousState, Function* state, Function
 
 void InputManager::ReadButtons()
 {
-  ioPtr->SetKeyselect(true);
-  functionButtons = ioPtr->GetButtonsFunction();
+  Serial.println(functionButtons);
 }
 
 void InputManager::ReadSwitches()
 {
-  ioPtr->SetKeyselect(false);
-  functionSwitches = ioPtr->GetButtonsFunction();
+  Serial.println(functionSwitches);
 }
 
 void InputManager::GetInput()
 {
-  ReadButtons();
-  Debouncing(&previousStateButtons, &stateButtons, functionButtons, &lastDebounceTimeButtons);
-  ReadSwitches();
-  Debouncing(&previousStateSwitches, &stateSwitches, functionSwitches, &lastDebounceTimeSwitches);
+  ioPtr->SetKeyselect(true);
+  functionButtons = ioPtr->GetButtonsFunction();
+  functiontype x = &InputManager::ReadButtons;
+  Debouncing(&previousStateButtons, &stateButtons, functionButtons, &lastDebounceTimeButtons, x); 
+  ioPtr->SetKeyselect(false);
+  functionSwitches = ioPtr->GetButtonsFunction();
+  functiontype y = &InputManager::ReadSwitches;
+  Debouncing(&previousStateSwitches, &stateSwitches, functionSwitches, &lastDebounceTimeSwitches, y);
 }
 
 void InputManager::Polling()

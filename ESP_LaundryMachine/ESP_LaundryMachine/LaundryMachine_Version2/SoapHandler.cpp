@@ -10,7 +10,7 @@ void SoapHandler::SetLed()
 {
     //Serial.println("SoapHandler::SetLed");
     //to be implemented
-    if(soap1 == 2) 
+    /*if(soap1 == 2) 
     {
         if(!soap1LedHasBeenSetUp)
         {
@@ -27,14 +27,14 @@ void SoapHandler::SetLed()
             soap2LedHasBeenSetUp = true;
             Serial.println("SetSoap1Led");
         }
-    }
+    }*/
 }
 
 void SoapHandler::InsertSoap()
 {
     //Serial.println("SoapHandler::InsertSoap");
-    ioPtr->SetKeyselect(false);
-    function = ioPtr->GetButtonsFunctionDebounced();
+    /*ioPtr->SetKeyselect(false);
+    function = ioPtr->GetButtonsFunction();
     if(function!=NOTHING) 
     {
         Serial.print("SoapHandler::GetButtonsFunctionDebounced::");
@@ -65,7 +65,7 @@ void SoapHandler::InsertSoap()
             Serial.print("soap2: ");
             Serial.println(soap2);
         }
-    } 
+    }*/
 }
 
 void SoapHandler::Polling()

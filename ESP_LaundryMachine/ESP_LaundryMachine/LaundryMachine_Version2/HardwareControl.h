@@ -18,7 +18,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
     
     //protected:
         virtual Function GetButtonsFunction();
-        virtual Function GetButtonsFunctionDebounced();
+        //virtual Function GetButtonsFunctionDebounced();
         virtual Temp GetTemperature();
         virtual void SetBuzzer(bool);
         virtual void SetSpeed(Speed);
@@ -47,11 +47,11 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         virtual bool Lock();
         
     private:
-        Function previousState = NOTHING;
-        Function state = NOTHING;
-        unsigned long timerTreshold = 50;
-        unsigned long lastDebounceTime = 0;
-        Function Debounce(Function*, Function*, Function, unsigned long*);
+        //Function previousState = NOTHING;
+        //Function state = NOTHING;
+        //unsigned long timerTreshold = 50;
+        //unsigned long lastDebounceTime = 0;
+        //Function Debounce(Function*, Function*, Function, unsigned long*);
         static HardwareControl* instance;
         bool coins10LedsArray[3] = {LOW, LOW, LOW};
         bool coins50LedsArray[3] = {LOW, LOW, LOW};

@@ -18,8 +18,8 @@ bool CoinHandler::AreCoinsEnough()
 
 void CoinHandler::NewCoin()
 {
-    ioPtr->SetKeyselect(true);
-    function = ioPtr->GetButtonsFunctionDebounced();
+    /*ioPtr->SetKeyselect(true);
+    function = ioPtr->GetButtonsFunction();
     if(function!= NOTHING) 
     {
         Serial.print("CoinHandler::GetButtonsFunctionDebounced::");
@@ -51,12 +51,12 @@ void CoinHandler::NewCoin()
             coin200LedHasBeenSet = false;
             Serial.println("coin200++");
         }
-    }
+    }*/
 }
 
 void CoinHandler::SetLed()
 {
-    if(!coin10LedHasBeenSet)
+    /*if(!coin10LedHasBeenSet)
     {
         icoinPtr->SetCoin10Led(coin10);
         coin10LedHasBeenSet = true;
@@ -70,7 +70,7 @@ void CoinHandler::SetLed()
     {
         icoinPtr->SetCoin200Led(coin200);
         coin200LedHasBeenSet = true;
-    }
+    }*/
 }
 
 void CoinHandler::Polling()

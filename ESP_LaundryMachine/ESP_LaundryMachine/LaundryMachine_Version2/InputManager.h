@@ -8,13 +8,17 @@ using namespace sharedNamespace;
 class InputManager
 {
     public:
+        typedef void (InputManager::*functiontype)();
+        static InputManager* GetInstance();
         void Polling();
 
+
     private:
+        static InputManager* instance;
         void GetInput();
         void ReadButtons();
         void ReadSwitches();
-        void Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime);
+        void Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime, functiontype);
         Function previousStateButtons;
         Function previousStateSwitches;
         Function stateButtons;

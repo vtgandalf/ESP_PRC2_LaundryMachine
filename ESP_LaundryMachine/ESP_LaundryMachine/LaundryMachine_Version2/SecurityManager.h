@@ -2,6 +2,7 @@
 #define SECURITYMANAGER_H
 
 #include "HardwareControl.h"
+#include "InputManager.h"
 
 class SecurityManager
 {
@@ -16,6 +17,7 @@ class SecurityManager
 	private:
 		bool doorHasBeenLocked = false;
 		IO* ioPtr = (IO*)HardwareControl::GetInstance();
+        InputManager* ioManager = (InputManager*)InputManager::GetInstance();
 		ISecurity* isecurityPtr = (ISecurity*)HardwareControl::GetInstance();
 		sharedNamespace::Function function;
 		void DoorClosed();
