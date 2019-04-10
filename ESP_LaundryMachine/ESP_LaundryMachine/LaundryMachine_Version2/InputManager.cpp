@@ -11,7 +11,7 @@ InputManager* InputManager::GetInstance()
     return instance;
 }
 
-void InputManager::Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime, functiontype method)
+void InputManager::Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
 {
   if(reading != *previousState)
   {
@@ -25,8 +25,8 @@ void InputManager::Debouncing(Function* previousState, Function* state, Function
       *state = reading;
       if(*state != NOTHING)
       {
-        method;
-        Serial.println(reading);
+        ioPtr->SetGlobalFunction(reading);
+        //Serial.println(functionGlobal);
       }
     }
   }
@@ -47,12 +47,10 @@ void InputManager::GetInput()
 {
   ioPtr->SetKeyselect(true);
   functionButtons = ioPtr->GetButtonsFunction();
-  functiontype x = &InputManager::ReadButtons;
-  Debouncing(&previousStateButtons, &stateButtons, functionButtons, &lastDebounceTimeButtons, x); 
+  Debouncing(&previousStateButtons, &stateButtons, functionButtons, &lastDebounceTimeButtons); 
   ioPtr->SetKeyselect(false);
   functionSwitches = ioPtr->GetButtonsFunction();
-  functiontype y = &InputManager::ReadSwitches;
-  Debouncing(&previousStateSwitches, &stateSwitches, functionSwitches, &lastDebounceTimeSwitches, y);
+  Debouncing(&previousStateSwitches, &stateSwitches, functionSwitches, &lastDebounceTimeSwitches);
 }
 
 void InputManager::Polling()

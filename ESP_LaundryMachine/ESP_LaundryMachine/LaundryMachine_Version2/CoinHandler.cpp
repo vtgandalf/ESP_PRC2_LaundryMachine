@@ -24,13 +24,15 @@ void CoinHandler::NewCoin()
     {
         Serial.print("CoinHandler::GetButtonsFunctionDebounced::");
         Serial.println(function);
-    }
+    }*/
+    function = ioPtr->GetGlobalFunction();
     if(function == COIN10)
     {
         if(coin10 <3) 
         {
             coin10++;
             coin10LedHasBeenSet = false;
+            ioPtr->SetGlobalFunction(NOTHING);
             Serial.println("coin10++");
         }
     }
@@ -40,6 +42,7 @@ void CoinHandler::NewCoin()
         {
             coin50++;
             coin50LedHasBeenSet = false;
+            ioPtr->SetGlobalFunction(NOTHING);
             Serial.println("coin50++");
         }
     }
@@ -49,14 +52,15 @@ void CoinHandler::NewCoin()
         {
             coin200++;
             coin200LedHasBeenSet = false;
+            ioPtr->SetGlobalFunction(NOTHING);
             Serial.println("coin200++");
         }
-    }*/
+    }
 }
 
 void CoinHandler::SetLed()
 {
-    /*if(!coin10LedHasBeenSet)
+    if(!coin10LedHasBeenSet)
     {
         icoinPtr->SetCoin10Led(coin10);
         coin10LedHasBeenSet = true;
@@ -70,7 +74,7 @@ void CoinHandler::SetLed()
     {
         icoinPtr->SetCoin200Led(coin200);
         coin200LedHasBeenSet = true;
-    }*/
+    }
 }
 
 void CoinHandler::Polling()

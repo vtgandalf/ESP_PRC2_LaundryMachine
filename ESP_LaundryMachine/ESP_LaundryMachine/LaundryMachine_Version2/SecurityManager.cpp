@@ -42,14 +42,15 @@ void SecurityManager::DoorClosed()
 	{
 		Serial.print("SecurityManager::GetButtonsFunctionDebounced::");
 		Serial.println(function);
-	}
-	if(function == DOORLOCK) 
+	}*/
+	if(ioPtr->GetGlobalFunction() == DOORLOCK) 
 	{
-		//Serial.println("lock the door");
+		Serial.println("lock the door");
 		if(!doorHasBeenLocked)
 		{
+			ioPtr->SetGlobalFunction(NOTHING);
 			isecurityPtr->SetLock(true);
 			doorHasBeenLocked = true;
 		}
-	}*/
+	}
 }

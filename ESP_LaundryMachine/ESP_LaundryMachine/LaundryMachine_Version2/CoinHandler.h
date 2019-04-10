@@ -2,7 +2,6 @@
 #define COINHANDLER_H
 
 #include "HardwareControl.h"
-#include "InputManager.h"
 
 class CoinHandler
 {
@@ -17,7 +16,6 @@ class CoinHandler
         bool coin50LedHasBeenSet = true;
         bool coin200LedHasBeenSet = true;
         IO* ioPtr = (IO*)HardwareControl::GetInstance();
-        InputManager* ioManager = (InputManager*)InputManager::GetInstance();
         ICoin* icoinPtr = (ICoin*)HardwareControl::GetInstance();
         sharedNamespace::Function function;
         void NewCoin();

@@ -489,3 +489,12 @@ Function HardwareControl::GetButtonsFunctionDebounced()
 {
   return HardwareControl::Debounce(&previousState, &state, HardwareControl::GetButtonsFunction(), &lastDebounceTime);
 }*/
+
+Function HardwareControl::GetGlobalFunction()
+{
+  return globalFunction;
+}
+void HardwareControl::SetGlobalFunction(Function f)
+{
+  globalFunction = f;
+}

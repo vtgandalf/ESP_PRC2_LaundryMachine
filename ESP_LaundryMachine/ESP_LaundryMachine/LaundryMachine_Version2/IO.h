@@ -10,6 +10,7 @@ class IO
 	public:
 		// getters
     	//virtual Function GetButtonsFunctionDebounced()=0;
+		virtual Function GetGlobalFunction()=0;
     	virtual Function GetButtonsFunction()=0;
     	virtual Temp GetTemperature()=0;
     	// setters
@@ -29,6 +30,7 @@ class IO
     	virtual bool Sink()=0;
     	virtual bool Keyselect()=0;
     	virtual bool Strobe()=0;
+		virtual void SetGlobalFunction(Function)=0;
     	
     	virtual Rotation CurentRotation()=0;
     	virtual Speed CurentSpeed()=0;

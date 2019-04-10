@@ -10,7 +10,7 @@ void SoapHandler::SetLed()
 {
     //Serial.println("SoapHandler::SetLed");
     //to be implemented
-    /*if(soap1 == 2) 
+    if(soap1 == 2) 
     {
         if(!soap1LedHasBeenSetUp)
         {
@@ -27,7 +27,7 @@ void SoapHandler::SetLed()
             soap2LedHasBeenSetUp = true;
             Serial.println("SetSoap1Led");
         }
-    }*/
+    }
 }
 
 void SoapHandler::InsertSoap()
@@ -35,11 +35,13 @@ void SoapHandler::InsertSoap()
     //Serial.println("SoapHandler::InsertSoap");
     /*ioPtr->SetKeyselect(false);
     function = ioPtr->GetButtonsFunction();
-    if(function!=NOTHING) 
+    if(functionGlobal!=NOTHING) 
     {
         Serial.print("SoapHandler::GetButtonsFunctionDebounced::");
 	    Serial.println(function);
-    }
+    }*/
+    function = ioPtr->GetGlobalFunction();
+
     if(function == SOAP1)
     {
         if(soap1 <2)
@@ -49,6 +51,7 @@ void SoapHandler::InsertSoap()
             //Serial.println(soap1);
             soap1++;
             soap1LedHasBeenSetUp = false;
+            ioPtr->SetGlobalFunction(NOTHING);
             Serial.print("soap1: ");
             Serial.println(soap1);
         }
@@ -61,11 +64,12 @@ void SoapHandler::InsertSoap()
             //Serial.print("soap2: ");
             //Serial.println(soap2);
             soap2++;
-            soap2LedHasBeenSetUp = false;
+            soap2LedHasBeenSetUp = false;            
+            ioPtr->SetGlobalFunction(NOTHING);
             Serial.print("soap2: ");
             Serial.println(soap2);
         }
-    }*/
+    }
 }
 
 void SoapHandler::Polling()

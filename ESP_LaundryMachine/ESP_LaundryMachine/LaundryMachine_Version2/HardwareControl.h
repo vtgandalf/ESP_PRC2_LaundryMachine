@@ -45,6 +45,8 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         virtual void SetHeater(bool);
         virtual void SetLock(bool);
         virtual bool Lock();
+        virtual Function GetGlobalFunction();
+        virtual void SetGlobalFunction(Function);
         
     private:
         //Function previousState = NOTHING;
@@ -65,6 +67,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         bool sink;
         bool keyselect;
         bool strobe;
+        Function globalFunction;
 };
 
 #endif
