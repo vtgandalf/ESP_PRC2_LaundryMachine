@@ -18,13 +18,6 @@ bool CoinHandler::AreCoinsEnough()
 
 void CoinHandler::NewCoin()
 {
-    /*ioPtr->SetKeyselect(true);
-    function = ioPtr->GetButtonsFunction();
-    if(function!= NOTHING) 
-    {
-        Serial.print("CoinHandler::GetButtonsFunctionDebounced::");
-        Serial.println(function);
-    }*/
     function = ioPtr->GetGlobalFunction();
     if(function == COIN10)
     {

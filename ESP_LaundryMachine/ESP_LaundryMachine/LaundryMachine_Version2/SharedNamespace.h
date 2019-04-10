@@ -1,3 +1,6 @@
+/* This namespace contains all the shared enumeration
+types + a global static instance of the Centpede 
+library */
 #ifndef ENUMS_H
 #define ENUMS_H
 

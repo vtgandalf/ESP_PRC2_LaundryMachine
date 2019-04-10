@@ -43,22 +43,21 @@ void HardwareControl::HardwareControlSetup()
   Serial.write("-centipede has been initalized-");
   centipede.digitalWrite(OUT_GROUP2, LOW);
   centipede.digitalWrite(OUT_GROUP1, LOW);
-  SetStrobe(false);       // centipede.digitalWrite(OUT_STROBE, LOW);
-  SetKeyselect(true);     // centipede.digitalWrite(OUT_KEYSELECT, HIGH);
-  SetBuzzer(false);        // centipede.digitalWrite(OUT_BUZZER, HIGH);
-  SetHeater(false);       // centipede.digitalWrite(OUT_HEATER, HIGH);
-  SetSpeed(OFF);          // centipede.digitalWrite(OUT_SPEED2, HIGH);
-                          // centipede.digitalWrite(OUT_SPEED1, HIGH);
+  SetStrobe(false);
+  SetKeyselect(true);
+  SetBuzzer(false);
+  SetHeater(false);
+  SetSpeed(OFF);
   centipede.digitalWrite(OUT_DATAC, LOW);
   centipede.digitalWrite(OUT_DATAB, LOW);
   centipede.digitalWrite(OUT_DATAA, LOW);
   SetSoap1Led(false);
   SetSoap2Led(false);
-  SetRotation(CLOCKWISE); // centipede.digitalWrite(OUT_MOTOR_RL, LOW);
+  SetRotation(CLOCKWISE);
   centipede.digitalWrite(OUT_SOAP1, LOW);
-  SetSink(false);         // centipede.digitalWrite(OUT_SINK, LOW);
-  SetDrain(false);        // centipede.digitalWrite(OUT_DRAIN, LOW);
-  SetLock(false);         // centipede.digitalWrite(OUT_LOCK, LOW);
+  SetSink(false);
+  SetDrain(false);
+  SetLock(false);
 }
 
 HardwareControl* HardwareControl::instance = 0;
@@ -68,12 +67,10 @@ HardwareControl* HardwareControl::GetInstance()
   if (instance == 0)
     {
         instance = new HardwareControl();
-        //instance->HardwareControlSetup();
     }
     return instance;
 }
 
-/* PUBLIC PROPERTIES (read only)*/
 bool HardwareControl::Buzzer()
 {
   return buzzer;
@@ -119,7 +116,6 @@ Speed HardwareControl::CurentSpeed()
   return speed;
 }
 
-/* PUBLIC SETTERS */
 void HardwareControl::SetStrobe(bool boolean)
 {
   if (boolean) centipede.digitalWrite(OUT_STROBE, HIGH);
@@ -217,7 +213,7 @@ void HardwareControl::SetKeyselect(bool boolean)
   keyselect = boolean;
 }
 
-void HardwareControl::SetCoin10Led(int x) // test and change
+void HardwareControl::SetCoin10Led(int x)
 {
   switch (x)
   {
@@ -460,35 +456,6 @@ Function HardwareControl::GetButtonsFunction()
       break;
   }
 }
-
-/*Function HardwareControl::Debounce(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
-{
-  // standart Debounce
-  Function info = NOTHING;
-  if(reading != *previousState)
-  {
-    *lastDebounceTime = millis();
-  }
-
-  if((millis() - *lastDebounceTime) > timerTreshold)
-  {
-    if(reading != *state)
-    {
-      *state = reading;
-      if(*state != NOTHING)
-      {
-        info = reading;
-      }
-    }
-  }
-  *previousState = reading;
-  return info;
-}
-
-Function HardwareControl::GetButtonsFunctionDebounced()
-{
-  return HardwareControl::Debounce(&previousState, &state, HardwareControl::GetButtonsFunction(), &lastDebounceTime);
-}*/
 
 Function HardwareControl::GetGlobalFunction()
 {
