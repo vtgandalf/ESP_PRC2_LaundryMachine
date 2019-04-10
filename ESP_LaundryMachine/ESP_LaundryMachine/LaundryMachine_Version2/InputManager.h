@@ -8,7 +8,6 @@ using namespace sharedNamespace;
 class InputManager
 {
     public:
-        static Function functionGlobal;
         typedef void (*functiontype)();
         static InputManager* GetInstance();
         void Polling();

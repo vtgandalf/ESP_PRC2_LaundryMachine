@@ -67,7 +67,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         bool sink;
         bool keyselect;
         bool strobe;
-        Function globalFunction;
+        Function globalFunction = NOTHING;
 };
 
 #endif
