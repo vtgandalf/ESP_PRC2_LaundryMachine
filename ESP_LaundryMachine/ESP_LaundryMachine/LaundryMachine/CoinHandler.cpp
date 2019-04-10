@@ -18,30 +18,59 @@ bool CoinHandler::AreCoinsEnough()
 
 void CoinHandler::NewCoin()
 {
-    //ioPtr->SetKeyselect(true);
+    ioPtr->SetKeyselect(true);
     function = ioPtr->GetButtonsFunctionDebounced();
+    if(function!= NOTHING) 
+    {
+        Serial.print("CoinHandler::GetButtonsFunctionDebounced::");
+        Serial.println(function);
+    }
     if(function == COIN10)
     {
-        Serial.println("coin10++");
-        if(coin10 <3) coin10++;
+        if(coin10 <3) 
+        {
+            coin10++;
+            coin10LedHasBeenSet = false;
+            Serial.println("coin10++");
+        }
     }
     else if (function == COIN50) 
     {
-        Serial.println("coin50++");
-        if(coin50 <3) coin50++;
+        if(coin50 <3) 
+        {
+            coin50++;
+            coin50LedHasBeenSet = false;
+            Serial.println("coin50++");
+        }
     }
     else if (function == COIN200) 
     {
-        Serial.println("coin200++");
-        if(coin200 <3) coin200++;
+        if(coin200 <2) 
+        {
+            coin200++;
+            coin200LedHasBeenSet = false;
+            Serial.println("coin200++");
+        }
     }
 }
 
 void CoinHandler::SetLed()
 {
-    icoinPtr->SetCoin10Led(coin10);
-    icoinPtr->SetCoin200Led(coin50);
-    icoinPtr->SetCoin200Led(coin200);
+    if(!coin10LedHasBeenSet)
+    {
+        icoinPtr->SetCoin10Led(coin10);
+        coin10LedHasBeenSet = true;
+    }
+    if(!coin50LedHasBeenSet)
+    {
+        icoinPtr->SetCoin50Led(coin50);
+        coin50LedHasBeenSet = true;
+    }
+    if(!coin200LedHasBeenSet)
+    {
+        icoinPtr->SetCoin200Led(coin200);
+        coin200LedHasBeenSet = true;
+    }
 }
 
 void CoinHandler::Polling()

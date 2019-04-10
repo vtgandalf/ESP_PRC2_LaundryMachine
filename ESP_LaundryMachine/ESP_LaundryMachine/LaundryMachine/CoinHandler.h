@@ -12,6 +12,9 @@ class CoinHandler
         void Polling();
 
     private:
+        bool coin10LedHasBeenSet = true;
+        bool coin50LedHasBeenSet = true;
+        bool coin200LedHasBeenSet = true;
         IO* ioPtr = (IO*)HardwareControl::GetInstance();
         ICoin* icoinPtr = (ICoin*)HardwareControl::GetInstance();
         sharedNamespace::Function function;

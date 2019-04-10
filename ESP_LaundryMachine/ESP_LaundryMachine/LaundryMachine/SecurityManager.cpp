@@ -27,17 +27,29 @@ void SecurityManager::SafeMode()
 // contains everything that has to be checked regularly
 void SecurityManager::Polling()
 {
+	//Serial.println("SecurityManager");
 	// to be implemented
 	DoorClosed();
-	if(IsPressureOn()) SafeMode();
+	if(!IsPressureOn()) SafeMode();
 }
 
 void SecurityManager::DoorClosed()
 {
-	//ioPtr->SetKeyselect(false);
+	//Serial.println("SecurityManager::DoorClosed");
+	ioPtr->SetKeyselect(false);
 	function = ioPtr->GetButtonsFunctionDebounced();
+	if(function!=NOTHING) 
+	{
+		Serial.print("SecurityManager::GetButtonsFunctionDebounced::");
+		Serial.println(function);
+	}
 	if(function == DOORLOCK) 
 	{
-		isecurityPtr->SetLock(true);
+		//Serial.println("lock the door");
+		if(!doorHasBeenLocked)
+		{
+			isecurityPtr->SetLock(true);
+			doorHasBeenLocked = true;
+		}
 	}
 }

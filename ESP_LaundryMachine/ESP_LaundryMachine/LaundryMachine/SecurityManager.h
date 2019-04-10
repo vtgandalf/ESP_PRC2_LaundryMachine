@@ -14,6 +14,7 @@ class SecurityManager
 		
 
 	private:
+		bool doorHasBeenLocked = false;
 		IO* ioPtr = (IO*)HardwareControl::GetInstance();
 		ISecurity* isecurityPtr = (ISecurity*)HardwareControl::GetInstance();
 		sharedNamespace::Function function;

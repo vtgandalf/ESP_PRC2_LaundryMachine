@@ -52,6 +52,8 @@ void HardwareControl::HardwareControlSetup()
   centipede.digitalWrite(OUT_DATAC, LOW);
   centipede.digitalWrite(OUT_DATAB, LOW);
   centipede.digitalWrite(OUT_DATAA, LOW);
+  SetSoap1Led(false);
+  SetSoap2Led(false);
   SetRotation(CLOCKWISE); // centipede.digitalWrite(OUT_MOTOR_RL, LOW);
   centipede.digitalWrite(OUT_SOAP1, LOW);
   SetSink(false);         // centipede.digitalWrite(OUT_SINK, LOW);
@@ -237,11 +239,11 @@ void HardwareControl::SetCoin10Led(int x) // test and change
     default:
       break;
   }
-  digitalWrite(OUT_GROUP2, LOW);
-  digitalWrite(OUT_GROUP1, LOW);
-  digitalWrite(OUT_DATAC, coins10LedsArray[2]);
-  digitalWrite(OUT_DATAB, coins10LedsArray[1]);
-  digitalWrite(OUT_DATAA, coins10LedsArray[0]);
+  centipede.digitalWrite(OUT_GROUP2, LOW);
+  centipede.digitalWrite(OUT_GROUP1, LOW);
+  centipede.digitalWrite(OUT_DATAC, coins10LedsArray[2]);
+  centipede.digitalWrite(OUT_DATAB, coins10LedsArray[1]);
+  centipede.digitalWrite(OUT_DATAA, coins10LedsArray[0]);
 }
 
 void HardwareControl::SetCoin50Led(int x)
@@ -265,11 +267,11 @@ void HardwareControl::SetCoin50Led(int x)
     default:
       break;
   }
-  digitalWrite(OUT_GROUP2, LOW);
-  digitalWrite(OUT_GROUP1, HIGH);
-  digitalWrite(OUT_DATAC, coins50LedsArray[2]);
-  digitalWrite(OUT_DATAB, coins50LedsArray[1]);
-  digitalWrite(OUT_DATAA, coins50LedsArray[0]);
+  centipede.digitalWrite(OUT_GROUP2, LOW);
+  centipede.digitalWrite(OUT_GROUP1, HIGH);
+  centipede.digitalWrite(OUT_DATAC, coins50LedsArray[2]);
+  centipede.digitalWrite(OUT_DATAB, coins50LedsArray[1]);
+  centipede.digitalWrite(OUT_DATAA, coins50LedsArray[0]);
 }
 
 void HardwareControl::SetCoin200Led(int x)
@@ -288,36 +290,36 @@ void HardwareControl::SetCoin200Led(int x)
     default:
       break;
   }
-  digitalWrite(OUT_GROUP2, HIGH);
-  digitalWrite(OUT_GROUP1, LOW);
-  digitalWrite(OUT_DATAC, LOW);
-  digitalWrite(OUT_DATAB, coins200LedsArray[1]);
-  digitalWrite(OUT_DATAA, coins200LedsArray[0]);
+  centipede.digitalWrite(OUT_GROUP2, HIGH);
+  centipede.digitalWrite(OUT_GROUP1, LOW);
+  centipede.digitalWrite(OUT_DATAC, LOW);
+  centipede.digitalWrite(OUT_DATAB, coins200LedsArray[1]);
+  centipede.digitalWrite(OUT_DATAA, coins200LedsArray[0]);
 }
 
 void HardwareControl::SetSoap2Led(bool boolean)
 {
   if (boolean) {
-    digitalWrite(OUT_GROUP2, HIGH);
-    digitalWrite(OUT_GROUP1, LOW);
-    digitalWrite(OUT_DATAC, HIGH);
-    digitalWrite(OUT_DATAB, LOW);
-    digitalWrite(OUT_DATAA, LOW);
+    centipede.digitalWrite(OUT_GROUP2, HIGH);
+    centipede.digitalWrite(OUT_GROUP1, LOW);
+    centipede.digitalWrite(OUT_DATAC, HIGH);
+    centipede.digitalWrite(OUT_DATAB, LOW);
+    centipede.digitalWrite(OUT_DATAA, LOW);
   }
   else
   {
-    digitalWrite(OUT_GROUP2, HIGH);
-    digitalWrite(OUT_GROUP1, LOW);
-    digitalWrite(OUT_DATAC, LOW);
-    digitalWrite(OUT_DATAB, LOW);
-    digitalWrite(OUT_DATAA, LOW);
+    centipede.digitalWrite(OUT_GROUP2, HIGH);
+    centipede.digitalWrite(OUT_GROUP1, LOW);
+    centipede.digitalWrite(OUT_DATAC, LOW);
+    centipede.digitalWrite(OUT_DATAB, LOW);
+    centipede.digitalWrite(OUT_DATAA, LOW);
   }
 }
 
 void HardwareControl::SetSoap1Led(bool boolean)
 {
-  if(boolean)digitalWrite(OUT_SOAP1, HIGH);
-  else digitalWrite(OUT_SOAP1, LOW);
+  if(boolean) centipede.digitalWrite(OUT_SOAP1, HIGH);
+  else centipede.digitalWrite(OUT_SOAP1, LOW);
 }
 
 void HardwareControl::SetProgramLed(int x)
@@ -325,27 +327,27 @@ void HardwareControl::SetProgramLed(int x)
   switch (x)
   {
     case 1:
-      digitalWrite(OUT_GROUP2, HIGH);
-      digitalWrite(OUT_GROUP1, HIGH);
-      digitalWrite(OUT_DATAC, LOW);
-      digitalWrite(OUT_DATAB, LOW);
-      digitalWrite(OUT_DATAA, HIGH);
+      centipede.digitalWrite(OUT_GROUP2, HIGH);
+      centipede.digitalWrite(OUT_GROUP1, HIGH);
+      centipede.digitalWrite(OUT_DATAC, LOW);
+      centipede.digitalWrite(OUT_DATAB, LOW);
+      centipede.digitalWrite(OUT_DATAA, HIGH);
       break;
 
     case 2:
-      digitalWrite(OUT_GROUP2, HIGH);
-      digitalWrite(OUT_GROUP1, HIGH);
-      digitalWrite(OUT_DATAC, LOW);
-      digitalWrite(OUT_DATAB, HIGH);
-      digitalWrite(OUT_DATAA, LOW);
+      centipede.digitalWrite(OUT_GROUP2, HIGH);
+      centipede.digitalWrite(OUT_GROUP1, HIGH);
+      centipede.digitalWrite(OUT_DATAC, LOW);
+      centipede.digitalWrite(OUT_DATAB, HIGH);
+      centipede.digitalWrite(OUT_DATAA, LOW);
       break;
 
     case 3:
-      digitalWrite(OUT_GROUP2, HIGH);
-      digitalWrite(OUT_GROUP1, HIGH);
-      digitalWrite(OUT_DATAC, HIGH);
-      digitalWrite(OUT_DATAB, LOW);
-      digitalWrite(OUT_DATAA, LOW);
+      centipede.digitalWrite(OUT_GROUP2, HIGH);
+      centipede.digitalWrite(OUT_GROUP1, HIGH);
+      centipede.digitalWrite(OUT_DATAC, HIGH);
+      centipede.digitalWrite(OUT_DATAB, LOW);
+      centipede.digitalWrite(OUT_DATAA, LOW);
       break;
 
     default:
@@ -438,11 +440,11 @@ Function HardwareControl::GetButtonsFunction()
       }
       if (centipede.digitalRead(IN_IN2)) 
       {
-        return SOAP2;
+        return SOAP1;
       }
       if (centipede.digitalRead(IN_IN1)) 
       {
-        return SOAP1;
+        return SOAP2;
       }
       if (centipede.digitalRead(IN_IN0)) 
       {

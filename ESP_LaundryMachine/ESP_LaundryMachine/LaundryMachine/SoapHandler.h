@@ -9,6 +9,8 @@ class SoapHandler
         void Polling();
         
     private:
+        bool soap1LedHasBeenSetUp = true;
+        bool soap2LedHasBeenSetUp = true;
         IO* ioPtr = (IO*)HardwareControl::GetInstance();
         ISoap* isoapPtr = (ISoap*)HardwareControl::GetInstance();
         sharedNamespace::Function function;

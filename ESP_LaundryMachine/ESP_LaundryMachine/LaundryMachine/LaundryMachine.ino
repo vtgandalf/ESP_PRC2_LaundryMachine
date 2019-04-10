@@ -10,7 +10,6 @@ void setup()
 {
   //Serial.begin(9600);
   HC.HardwareControlSetup();
-  HC.SetCoin10Led(2);
   }
 
 void loop()
@@ -23,7 +22,7 @@ void loop()
   //HC.SetStrobe(true);
   //HC.SetKeyselect(false);
   //HC.SetSpeed(HIGHSPEED);
-  //HC.SetCoin10Led(2);
+  //HC.SetCoin10Led(1);
   //HC.SetCoin50Led(1);
   //HC.SetCoin200Led(1);
   //HC.SetProgramLed(2);
@@ -36,8 +35,10 @@ void loop()
   //Serial.println(HC.GetButtonsFunctionDebounced(),DEC);
   //HC.SetKeyselect(true);
   //CH.Polling();
-  HC.SetKeyselect(false);
+  //delay(100);
+  //HC.SetKeyselect(false);
   SM.Polling();
-  //SH.Polling();
+  delay(100);
+  SH.Polling();
   delay(100);
 }
