@@ -8,6 +8,12 @@ using namespace sharedNamespace;
 class IO
 {
 	public:
+
+		virtual byte GetRawInputByte()=0;
+		virtual void SetGlobalInputByte(byte)=0;
+		virtual byte GetGlobalInputByte()=0;
+
+
 		/* GETTERS */
 		/* Method that gets the value stored in
 		the private var "globalFunction" in

@@ -51,6 +51,43 @@ void CoinHandler::NewCoin()
     }
 }
 
+void CoinHandler::NewCoinByte()
+{
+    bool actionHasBeenTaken = false;
+    byte temp = ioPtr->GetGlobalInputByte();
+    if((temp | bitMaskCoin10) == temp)
+    {
+        if(coin10 <3) 
+        {
+            coin10++;
+            coin10LedHasBeenSet = false;
+            actionHasBeenTaken = true;
+            Serial.println("coin10++");
+        }
+    }
+    else if ((temp | bitMaskCoin50) == temp) 
+    {
+        if(coin50 <3) 
+        {
+            coin50++;
+            coin50LedHasBeenSet = false;
+            actionHasBeenTaken = true;
+            Serial.println("coin50++");
+        }
+    }
+    else if ((temp | bitMaskCoin200) == temp) 
+    {
+        if(coin200 <2) 
+        {
+            coin200++;
+            coin200LedHasBeenSet = false;
+            actionHasBeenTaken = true;
+            Serial.println("coin200++");
+        }
+    }
+    if(actionHasBeenTaken) ioPtr->SetGlobalInputByte(0x00);
+}
+
 void CoinHandler::SetLed()
 {
     if(!coin10LedHasBeenSet)
@@ -74,6 +111,7 @@ void CoinHandler::Polling()
 {
     //to be implemented
     // for now it is only lights the leds nwhen a button is pressed
-    NewCoin();
+    //NewCoin();
+    NewCoinByte();
     SetLed(); 
 }

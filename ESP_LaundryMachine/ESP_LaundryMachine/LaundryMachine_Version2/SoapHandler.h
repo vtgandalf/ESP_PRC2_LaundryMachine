@@ -6,6 +6,9 @@
 class SoapHandler
 {
     public:
+        byte bitMaskSoap2 = 0x04;
+        byte bitMaskSoap1 = 0x02;
+        void InsertSoapByte();
         /* Method that handles all the essential
         proccesses for this object that have to 
         be ran during the main loop of the arduino

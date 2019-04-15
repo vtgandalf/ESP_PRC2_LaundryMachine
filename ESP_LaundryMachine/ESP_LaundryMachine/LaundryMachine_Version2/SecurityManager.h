@@ -6,6 +6,9 @@
 class SecurityManager
 {
 	public:
+        byte bitMaskDoorlock = 0x08;
+		void DoorClosedByte();
+
 		/* Method that checkes wheter or not
 		the laundry machine is connected
 		to the water system 
