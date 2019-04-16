@@ -468,3 +468,26 @@ void HardwareControl::SetGlobalFunction(Function f)
 {
   globalFunction = f;
 }
+
+byte HardwareControl::GetRawInputByte()
+{
+  // reading the buttons and storring their data 
+  // into the reading byte
+  byte temp = 0x00;
+  temp |= centipede.digitalRead(IN_IN0);
+  temp |= centipede.digitalRead(IN_IN1) << 1;
+  temp |= centipede.digitalRead(IN_IN2) << 2;
+  temp |= centipede.digitalRead(IN_IN3) << 3;
+  temp |= Keyselect() << 4;
+  return temp;
+}
+
+void HardwareControl::SetGlobalInputByte(byte data)
+{
+  inputReadings = data;
+}
+
+byte HardwareControl::GetGlobalInputByte()
+{
+  return inputReadings;
+}

@@ -8,6 +8,17 @@ using namespace sharedNamespace;
 class InputManager
 {
     public:
+        // bytes and bitmasks
+        
+        byte bitMaskClear = 0x1E;
+        byte bitMaskProgram = 0x19;
+        byte bitMaskStart = 0x11;
+        byte bitMaskPressure = 0x01;
+        byte bitMaskKeyselect = 0x10;
+        byte previousByteState;
+        byte byteState;
+        unsigned long lastDebounceTime;
+
         /* Method that handles all the essential
         proccesses for this object that have to 
         be ran during the main loop of the arduino
@@ -32,6 +43,8 @@ class InputManager
             - reading - the raw input
             - lastDebounceTime - the last time and action was recorded */
         void Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime);
+        void DebouncingByte(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime);
+
         // vars required for Debouncing()
         Function previousStateButtons;
         Function previousStateSwitches;

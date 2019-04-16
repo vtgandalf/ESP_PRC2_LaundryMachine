@@ -72,10 +72,58 @@ void SoapHandler::InsertSoap()
     }
 }
 
+void SoapHandler::InsertSoapByte()
+{
+    //Serial.println("SoapHandler::InsertSoap");
+    /*ioPtr->SetKeyselect(false);
+    function = ioPtr->GetButtonsFunction();
+    if(functionGlobal!=NOTHING) 
+    {
+        Serial.print("SoapHandler::GetButtonsFunctionDebounced::");
+	    Serial.println(function);
+    }*/
+    bool actionHasBeenTaken = false;
+    byte temp = ioPtr->GetGlobalInputByte();
+
+    if((temp | bitMaskSoap1) == temp)
+    {
+        actionHasBeenTaken = true;
+        if(soap1 <2)
+        {
+            //Serial.println("soap1++");
+            //Serial.print("soap1: ");
+            //Serial.println(soap1);
+            soap1++;
+            soap1LedHasBeenSetUp = false;
+            Serial.print("soap1: ");
+            Serial.println(soap1);
+        }
+    }
+    else if ((temp | bitMaskSoap2) == temp) 
+    {
+        actionHasBeenTaken = true;
+        if(soap2 <3)
+        {
+            //Serial.println("soap2++");
+            //Serial.print("soap2: ");
+            //Serial.println(soap2);
+            soap2++;
+            soap2LedHasBeenSetUp = false;            
+            Serial.print("soap2: ");
+            Serial.println(soap2);
+        }
+    }
+    if (actionHasBeenTaken)
+    {
+        ioPtr->SetGlobalInputByte(0x00);
+    }
+}
+
 void SoapHandler::Polling()
 {
     //Serial.println("SoapHandler");
     //to be implemented
-    InsertSoap();
+    //InsertSoap();
+    InsertSoapByte();
     SetLed();
 }

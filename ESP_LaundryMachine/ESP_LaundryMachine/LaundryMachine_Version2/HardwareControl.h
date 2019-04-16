@@ -55,6 +55,11 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         virtual Rotation CurentRotation();
         virtual Speed CurentSpeed();
 
+        virtual byte GetRawInputByte();
+        virtual void SetGlobalInputByte(byte);
+        virtual byte GetGlobalInputByte();
+
+
         /* IMPLEMENTATION OF ICOIN */
         virtual void SetCoin10Led(int);
         virtual void SetCoin50Led(int);
@@ -102,6 +107,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         properly reading and debouncing the multiplexed
         buttons and switches */
         Function globalFunction = NOTHING;
+        byte inputReadings = 0x00;
 };
 
 #endif
