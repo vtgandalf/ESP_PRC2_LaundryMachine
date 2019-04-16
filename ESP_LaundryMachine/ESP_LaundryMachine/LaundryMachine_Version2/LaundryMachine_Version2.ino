@@ -16,8 +16,10 @@ void setup()
 
 void loop()
 {
+  //HC.SetKeyselect(false);
+  //Serial.println(HC.GetGlobalInputByte(), BIN);
   IM.Polling();
-  SH.Polling();
+  //SH.Polling();
   CH.Polling();
   SM.Polling();
 }

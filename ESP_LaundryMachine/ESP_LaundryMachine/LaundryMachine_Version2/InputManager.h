@@ -15,9 +15,12 @@ class InputManager
         byte bitMaskStart = 0x11;
         byte bitMaskPressure = 0x01;
         byte bitMaskKeyselect = 0x10;
-        byte previousByteState;
-        byte byteState;
-        unsigned long lastDebounceTime;
+        byte previousByteStateButtons;
+        byte byteStateButtons;
+        byte previousByteStateSwitches;
+        byte byteStateSwitches;
+        unsigned long lastDebounceTimeByteButtons;
+        unsigned long lastDebounceTimeByteSwitches;
 
         /* Method that handles all the essential
         proccesses for this object that have to 
@@ -43,7 +46,7 @@ class InputManager
             - reading - the raw input
             - lastDebounceTime - the last time and action was recorded */
         void Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime);
-        void DebouncingByte(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime);
+        void DebouncingByte(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime, int x);
 
         // vars required for Debouncing()
         Function previousStateButtons;

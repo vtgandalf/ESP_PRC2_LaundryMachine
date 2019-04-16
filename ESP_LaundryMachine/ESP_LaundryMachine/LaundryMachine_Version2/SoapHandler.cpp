@@ -14,7 +14,7 @@ void SoapHandler::SetLed()
     {
         if(!soap1LedHasBeenSetUp)
         {
-            isoapPtr->SetSoap2Led(true);
+            isoapPtr->SetSoap1Led(true);
             soap1LedHasBeenSetUp = true;
             Serial.println("SetSoap2Led");
         }
@@ -23,7 +23,7 @@ void SoapHandler::SetLed()
     {
         if(!soap2LedHasBeenSetUp)
         {
-            isoapPtr->SetSoap1Led(true);
+            isoapPtr->SetSoap2Led(true);
             soap2LedHasBeenSetUp = true;
             Serial.println("SetSoap1Led");
         }

@@ -85,7 +85,11 @@ void CoinHandler::NewCoinByte()
             Serial.println("coin200++");
         }
     }
-    if(actionHasBeenTaken) ioPtr->SetGlobalInputByte(0x00);
+    if(actionHasBeenTaken)
+    {
+        Serial.println("action");
+        ioPtr->SetGlobalInputByte(0x00);
+    } 
 }
 
 void CoinHandler::SetLed()

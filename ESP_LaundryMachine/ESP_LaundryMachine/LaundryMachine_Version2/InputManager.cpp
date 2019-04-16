@@ -21,7 +21,7 @@ void InputManager::Debouncing(Function* previousState, Function* state, Function
   *previousState = reading;
 }
 
-void InputManager::DebouncingByte(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime)
+void InputManager::DebouncingByte(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime, int x)
 {
   if(reading != *previousByteState)
   {
@@ -33,10 +33,23 @@ void InputManager::DebouncingByte(byte* previousByteState, byte* byteState, byte
     if(reading != *byteState)
     {
       *byteState = reading;
-      if((*byteState != 0x00)&(*byteState != bitMaskKeyselect))
+      if(x == 0)
       {
-        ioPtr->SetGlobalInputByte(reading);
+        if(*byteState != 0x00)
+        {
+          Serial.println(reading, BIN);
+          ioPtr->SetGlobalInputByte(reading);
+        }
       }
+      if(x == 1)
+      {
+        if(*byteState != bitMaskKeyselect)
+        {
+          Serial.println(reading, BIN);
+          ioPtr->SetGlobalInputByte(reading);
+        }
+      }
+      
     }
   }
   *previousByteState = reading;
@@ -52,9 +65,9 @@ void InputManager::GetInput()
   Debouncing(&previousStateSwitches, &stateSwitches, functionSwitches, &lastDebounceTimeSwitches);*/
   // byte
   ioPtr->SetKeyselect(true);
-  DebouncingByte(&previousByteState, &byteState, ioPtr->GetRawInputByte(), &lastDebounceTime);
+  DebouncingByte(&previousByteStateButtons, &byteStateButtons, ioPtr->GetRawInputByte(), &lastDebounceTimeByteButtons, 1);
   ioPtr->SetKeyselect(false);
-  DebouncingByte(&previousByteState, &byteState, ioPtr->GetRawInputByte(), &lastDebounceTime);
+  DebouncingByte(&previousByteStateSwitches, &byteStateSwitches, ioPtr->GetRawInputByte(), &lastDebounceTimeByteSwitches, 0);
 }
 
 void InputManager::Polling()

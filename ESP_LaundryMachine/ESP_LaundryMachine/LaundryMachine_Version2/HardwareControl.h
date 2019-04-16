@@ -32,7 +32,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         void HardwareControlSetup();
 
     
-    protected:
+    //protected:
         /* IMPLEMENTATION OF IO */
         virtual Function GetGlobalFunction();
         virtual void SetGlobalFunction(Function);
