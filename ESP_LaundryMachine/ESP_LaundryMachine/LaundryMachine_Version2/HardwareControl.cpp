@@ -53,6 +53,9 @@ void HardwareControl::HardwareControlSetup()
   centipede.digitalWrite(OUT_DATAA, LOW);
   SetSoap1Led(false);
   SetSoap2Led(false);
+  //SetCoin10Led(0);
+  //SetCoin50Led(0);
+  //SetCoin200Led(0);
   SetRotation(CLOCKWISE);
   centipede.digitalWrite(OUT_SOAP1, LOW);
   SetSink(false);

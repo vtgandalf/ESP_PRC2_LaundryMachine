@@ -27,7 +27,7 @@ void SecurityManager::SafeMode()
 // contains everything that has to be checked regularly
 void SecurityManager::Polling()
 {
-	//Serial.println("SecurityManager");
+	Serial.println(isecurityPtr->Lock());
 	// to be implemented
 	DoorClosed();
 	if(!IsPressureOn()) SafeMode();
@@ -45,9 +45,9 @@ void SecurityManager::DoorClosed()
 	}*/
 	if(ioPtr->GetGlobalFunction() == DOORLOCK) 
 	{
-		Serial.println("lock the door");
 		if(!doorHasBeenLocked)
 		{
+			Serial.println("lock the door");
 			ioPtr->SetGlobalFunction(NOTHING);
 			isecurityPtr->SetLock(true);
 			doorHasBeenLocked = true;
