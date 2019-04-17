@@ -85,8 +85,9 @@ void SoapHandler::InsertSoapByte()
     bool actionHasBeenTaken = false;
     byte temp = ioPtr->GetGlobalInputByte();
 
-    if((temp | bitMaskSoap1) == temp)
+    if(((temp | bitMaskSoap1) == temp)&((temp | bitMaskKeyselect) != temp))
     {
+        Serial.println((temp | bitMaskSoap1), BIN);        
         actionHasBeenTaken = true;
         if(soap1 <2)
         {
@@ -99,7 +100,7 @@ void SoapHandler::InsertSoapByte()
             Serial.println(soap1);
         }
     }
-    else if ((temp | bitMaskSoap2) == temp) 
+    else if (((temp | bitMaskSoap2) == temp)&((temp | bitMaskKeyselect) != temp)) 
     {
         actionHasBeenTaken = true;
         if(soap2 <3)

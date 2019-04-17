@@ -41,26 +41,25 @@ void HardwareControl::HardwareControlSetup()
   //centipede.portMode(0, 0b0000000000000000); // set all pins on chip 0 to output (0 to 15)
   //centipede.portMode(1, 0b1111111111111111); // set all pins on chip 1 to output (16 to 31)
   Serial.write("-centipede has been initalized-");
-  centipede.digitalWrite(OUT_GROUP2, LOW);
-  centipede.digitalWrite(OUT_GROUP1, LOW);
+  //centipede.digitalWrite(OUT_GROUP2, LOW);
+  //centipede.digitalWrite(OUT_GROUP1, LOW);
   SetStrobe(false);
   SetKeyselect(true);
   SetBuzzer(false);
   SetHeater(false);
   SetSpeed(OFF);
-  centipede.digitalWrite(OUT_DATAC, LOW);
-  centipede.digitalWrite(OUT_DATAB, LOW);
-  centipede.digitalWrite(OUT_DATAA, LOW);
+  //centipede.digitalWrite(OUT_DATAC, LOW);
+  //centipede.digitalWrite(OUT_DATAB, LOW);
+  //centipede.digitalWrite(OUT_DATAA, LOW);
   SetSoap1Led(false);
   SetSoap2Led(false);
-  //SetCoin10Led(0);
-  //SetCoin50Led(0);
-  //SetCoin200Led(0);
   SetRotation(CLOCKWISE);
-  centipede.digitalWrite(OUT_SOAP1, LOW);
   SetSink(false);
   SetDrain(false);
   SetLock(false);
+  SetCoin10Led(0);
+  SetCoin50Led(0);
+  SetCoin200Led(0);
 }
 
 HardwareControl* HardwareControl::instance = 0;
@@ -220,6 +219,12 @@ void HardwareControl::SetCoin10Led(int x)
 {
   switch (x)
   {
+    case 0:
+      coins10LedsArray[0] = LOW;
+      coins10LedsArray[1] = LOW;
+      coins10LedsArray[2] = LOW;
+      break;
+      
     case 1:
       coins10LedsArray[0] = HIGH;
       coins10LedsArray[1] = LOW;
@@ -248,6 +253,12 @@ void HardwareControl::SetCoin50Led(int x)
 {
   switch (x)
   {
+    case 0:
+      coins50LedsArray[0] = LOW;
+      coins50LedsArray[1] = LOW;
+      coins50LedsArray[2] = LOW;
+      break;
+
     case 1:
       coins50LedsArray[0] = HIGH;
       coins50LedsArray[1] = LOW;
@@ -276,6 +287,11 @@ void HardwareControl::SetCoin200Led(int x)
 {
   switch (x)
   {
+    case 0:
+      coins200LedsArray[0] = LOW;
+      coins200LedsArray[1] = LOW;
+      break;
+      
     case 1:
       coins200LedsArray[0] = HIGH;
       coins200LedsArray[1] = LOW;
@@ -290,34 +306,39 @@ void HardwareControl::SetCoin200Led(int x)
   }
   centipede.digitalWrite(OUT_GROUP2, HIGH);
   centipede.digitalWrite(OUT_GROUP1, LOW);
-  centipede.digitalWrite(OUT_DATAC, LOW);
+  centipede.digitalWrite(OUT_DATAC, soap2);
   centipede.digitalWrite(OUT_DATAB, coins200LedsArray[1]);
   centipede.digitalWrite(OUT_DATAA, coins200LedsArray[0]);
 }
 
 void HardwareControl::SetSoap2Led(bool boolean)
 {
-  if (boolean) {
-    centipede.digitalWrite(OUT_GROUP2, HIGH);
-    centipede.digitalWrite(OUT_GROUP1, LOW);
-    centipede.digitalWrite(OUT_DATAC, HIGH);
-    centipede.digitalWrite(OUT_DATAB, LOW);
-    centipede.digitalWrite(OUT_DATAA, LOW);
+  if (boolean) 
+  {
+    soap2 = HIGH;
   }
   else
   {
-    centipede.digitalWrite(OUT_GROUP2, HIGH);
-    centipede.digitalWrite(OUT_GROUP1, LOW);
-    centipede.digitalWrite(OUT_DATAC, LOW);
-    centipede.digitalWrite(OUT_DATAB, LOW);
-    centipede.digitalWrite(OUT_DATAA, LOW);
+    soap2 = LOW;
   }
+  centipede.digitalWrite(OUT_GROUP2, HIGH);
+    centipede.digitalWrite(OUT_GROUP1, LOW);
+    centipede.digitalWrite(OUT_DATAC, soap2);
+    centipede.digitalWrite(OUT_DATAB, coins200LedsArray[1]);
+    centipede.digitalWrite(OUT_DATAA, coins200LedsArray[0]);
 }
 
 void HardwareControl::SetSoap1Led(bool boolean)
 {
-  if(boolean) centipede.digitalWrite(OUT_SOAP1, HIGH);
-  else centipede.digitalWrite(OUT_SOAP1, LOW);
+  if(boolean) 
+  {
+    soap1 = HIGH;
+  }
+  else 
+  {
+    soap1 = LOW;
+  }
+  centipede.digitalWrite(OUT_SOAP1, soap1);
 }
 
 void HardwareControl::SetProgramLed(int x)

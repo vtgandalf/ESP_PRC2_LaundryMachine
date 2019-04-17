@@ -8,19 +8,6 @@ using namespace sharedNamespace;
 class InputManager
 {
     public:
-        // bytes and bitmasks
-        
-        byte bitMaskClear = 0x1E;
-        byte bitMaskProgram = 0x19;
-        byte bitMaskStart = 0x11;
-        byte bitMaskPressure = 0x01;
-        byte bitMaskKeyselect = 0x10;
-        byte previousByteStateButtons;
-        byte byteStateButtons;
-        byte previousByteStateSwitches;
-        byte byteStateSwitches;
-        unsigned long lastDebounceTimeByteButtons;
-        unsigned long lastDebounceTimeByteSwitches;
 
         /* Method that handles all the essential
         proccesses for this object that have to 
@@ -60,6 +47,14 @@ class InputManager
         unsigned long timerTreshold = 20;
         // accessing the library through the IO interface
         IO* ioPtr = (IO*)HardwareControl::GetInstance();
+
+
+        byte previousByteStateButtons;
+        byte byteStateButtons;
+        byte previousByteStateSwitches;
+        byte byteStateSwitches;
+        unsigned long lastDebounceTimeByteButtons;
+        unsigned long lastDebounceTimeByteSwitches;
 };
 
 #endif

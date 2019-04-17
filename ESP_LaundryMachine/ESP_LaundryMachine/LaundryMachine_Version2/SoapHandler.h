@@ -3,12 +3,11 @@
 
 #include "HardwareControl.h"
 
+using namespace sharedNamespace;
+
 class SoapHandler
 {
     public:
-        byte bitMaskSoap2 = 0x04;
-        byte bitMaskSoap1 = 0x02;
-        void InsertSoapByte();
         /* Method that handles all the essential
         proccesses for this object that have to 
         be ran during the main loop of the arduino
@@ -44,6 +43,8 @@ class SoapHandler
         /* Method that handles the incrementing of
         the local variables on input */
         void InsertSoap();
+
+        void InsertSoapByte();
 };
 
 #endif

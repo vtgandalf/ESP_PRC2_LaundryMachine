@@ -3,12 +3,12 @@
 
 #include "HardwareControl.h"
 
+using namespace sharedNamespace;
+
 class SecurityManager
 {
 	public:
-        byte bitMaskDoorlock = 0x08;
-		void DoorClosedByte();
-
+		
 		/* Method that checkes wheter or not
 		the laundry machine is connected
 		to the water system 
@@ -56,6 +56,8 @@ class SecurityManager
 		/* Checks if the door has been closed
 		disclamer: for not it just locks it */
 		void DoorClosed();
+
+		void DoorClosedByte();
 };
 
 #endif

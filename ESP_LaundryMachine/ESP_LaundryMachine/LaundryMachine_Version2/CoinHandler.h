@@ -3,6 +3,8 @@
 
 #include "HardwareControl.h"
 
+using namespace sharedNamespace;
+
 class CoinHandler
 {
     public:
@@ -27,9 +29,6 @@ class CoinHandler
         void Polling();
 
     private:
-        byte bitMaskCoin10 = 0x18;
-        byte bitMaskCoin50 = 0x14;
-        byte bitMaskCoin200 = 0x12;
         void NewCoinByte();
         /* Booleans that indicate wheter or not an led has
         been already lit up after the last command. Those

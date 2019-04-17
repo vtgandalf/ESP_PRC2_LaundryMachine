@@ -30,6 +30,7 @@ void InputManager::DebouncingByte(byte* previousByteState, byte* byteState, byte
 
   if((millis() - *lastDebounceTime) > timerTreshold)
   {
+    //if((reading != *byteState)&((*byteState | *previousByteState) != *byteState))
     if(reading != *byteState)
     {
       *byteState = reading;
@@ -37,7 +38,7 @@ void InputManager::DebouncingByte(byte* previousByteState, byte* byteState, byte
       {
         if(*byteState != 0x00)
         {
-          Serial.println(reading, BIN);
+          //Serial.println(reading, BIN);
           ioPtr->SetGlobalInputByte(reading);
         }
       }
@@ -45,7 +46,7 @@ void InputManager::DebouncingByte(byte* previousByteState, byte* byteState, byte
       {
         if(*byteState != bitMaskKeyselect)
         {
-          Serial.println(reading, BIN);
+          //Serial.println(reading, BIN);
           ioPtr->SetGlobalInputByte(reading);
         }
       }

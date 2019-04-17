@@ -81,6 +81,8 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         /* Arrays that contain the information
         for the leds so whenever an led is set
         the rest keep their previous state */
+        bool soap2 = LOW;
+        bool soap1 = LOW;
         bool coins10LedsArray[3] = {LOW, LOW, LOW};
         bool coins50LedsArray[3] = {LOW, LOW, LOW};
         bool coins200LedsArray[2] = {LOW, LOW}; 

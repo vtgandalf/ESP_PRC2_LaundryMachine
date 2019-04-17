@@ -12,6 +12,9 @@ void setup()
 {
   //Serial.begin(9600);
   HC.HardwareControlSetup();
+  //HC.SetCoin10Led(0);
+  //HC.SetCoin50Led(0);
+  //HC.SetCoin200Led(0);
 }
 
 void loop()
@@ -19,7 +22,7 @@ void loop()
   //HC.SetKeyselect(false);
   //Serial.println(HC.GetGlobalInputByte(), BIN);
   IM.Polling();
-  //SH.Polling();
+  SH.Polling();
   CH.Polling();
   SM.Polling();
 }

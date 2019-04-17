@@ -58,15 +58,6 @@ void SecurityManager::DoorClosed()
 
 void SecurityManager::DoorClosedByte()
 {
-	//Serial.println("SecurityManager::DoorClosed");
-	/*ioPtr->SetKeyselect(false);
-	function = ioPtr->GetButtonsFunction();
-	if(function!=NOTHING) 
-	{
-		Serial.print("SecurityManager::GetButtonsFunctionDebounced::");
-		Serial.println(function);
-	}*/
-
 	bool actionHasBeenTaken = false;
 	byte temp = ioPtr->GetGlobalInputByte();
 	if((temp | bitMaskDoorlock) == temp) 
