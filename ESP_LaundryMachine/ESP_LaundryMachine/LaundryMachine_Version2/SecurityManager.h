@@ -49,15 +49,9 @@ class SecurityManager
 		// accessing the library through the interfaces
 		IO* ioPtr = (IO*)HardwareControl::GetInstance();
 		ISecurity* isecurityPtr = (ISecurity*)HardwareControl::GetInstance();
-		/* This is a function(enum from sharedNamespace) 
-        container for storing the last function which has
-        been reccorded of the buttons*/
-		sharedNamespace::Function function;
 		/* Checks if the door has been closed
-		disclamer: for not it just locks it */
+		disclamer: for now it just locks it */
 		void DoorClosed();
-
-		void DoorClosedByte();
 		/* This method indicates which compartments
 		are not yet closed through the corresponding
 		leds */

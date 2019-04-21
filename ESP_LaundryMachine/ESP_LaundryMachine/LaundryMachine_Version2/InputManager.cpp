@@ -1,27 +1,6 @@
 #include "InputManager.h"
 
-void InputManager::Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime)
-{
-  if(reading != *previousState)
-  {
-    *lastDebounceTime = millis();
-  }
-
-  if((millis() - *lastDebounceTime) > timerTreshold)
-  {
-    if(reading != *state)
-    {
-      *state = reading;
-      if(*state != NOTHING)
-      {
-        ioPtr->SetGlobalFunction(reading);
-      }
-    }
-  }
-  *previousState = reading;
-}
-
-void InputManager::DebouncingByte(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime, int x)
+void InputManager::Debouncing(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime, int x)
 {
   if(reading != *previousByteState)
   {
@@ -58,17 +37,10 @@ void InputManager::DebouncingByte(byte* previousByteState, byte* byteState, byte
 
 void InputManager::GetInput()
 {
-  /*ioPtr->SetKeyselect(true);
-  functionButtons = ioPtr->GetButtonsFunction();
-  Debouncing(&previousStateButtons, &stateButtons, functionButtons, &lastDebounceTimeButtons); 
-  ioPtr->SetKeyselect(false);
-  functionSwitches = ioPtr->GetButtonsFunction();
-  Debouncing(&previousStateSwitches, &stateSwitches, functionSwitches, &lastDebounceTimeSwitches);*/
-  // byte
   ioPtr->SetKeyselect(true);
-  DebouncingByte(&previousByteStateButtons, &byteStateButtons, ioPtr->GetRawInputByte(), &lastDebounceTimeByteButtons, 1);
+  Debouncing(&previousByteStateButtons, &byteStateButtons, ioPtr->GetRawInputByte(), &lastDebounceTimeByteButtons, ioPtr->Keyselect());
   ioPtr->SetKeyselect(false);
-  DebouncingByte(&previousByteStateSwitches, &byteStateSwitches, ioPtr->GetRawInputByte(), &lastDebounceTimeByteSwitches, 0);
+  Debouncing(&previousByteStateSwitches, &byteStateSwitches, ioPtr->GetRawInputByte(), &lastDebounceTimeByteSwitches, ioPtr->Keyselect());
 }
 
 void InputManager::Polling()

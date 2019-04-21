@@ -46,56 +46,6 @@ void SoapHandler::SetLed()
 
 void SoapHandler::InsertSoap()
 {
-    //Serial.println("SoapHandler::InsertSoap");
-    /*ioPtr->SetKeyselect(false);
-    function = ioPtr->GetButtonsFunction();
-    if(functionGlobal!=NOTHING) 
-    {
-        Serial.print("SoapHandler::GetButtonsFunctionDebounced::");
-	    Serial.println(function);
-    }*/
-    function = ioPtr->GetGlobalFunction();
-
-    if(function == SOAP1)
-    {
-        if(soap1 <2)
-        {
-            //Serial.println("soap1++");
-            //Serial.print("soap1: ");
-            //Serial.println(soap1);
-            soap1++;
-            soap1LedHasBeenSetUp = false;
-            ioPtr->SetGlobalFunction(NOTHING);
-            Serial.print("soap1: ");
-            Serial.println(soap1);
-        }
-    }
-    else if (function == SOAP2) 
-    {
-        if(soap2 <3)
-        {
-            //Serial.println("soap2++");
-            //Serial.print("soap2: ");
-            //Serial.println(soap2);
-            soap2++;
-            soap2LedHasBeenSetUp = false;            
-            ioPtr->SetGlobalFunction(NOTHING);
-            Serial.print("soap2: ");
-            Serial.println(soap2);
-        }
-    }
-}
-
-void SoapHandler::InsertSoapByte()
-{
-    //Serial.println("SoapHandler::InsertSoap");
-    /*ioPtr->SetKeyselect(false);
-    function = ioPtr->GetButtonsFunction();
-    if(functionGlobal!=NOTHING) 
-    {
-        Serial.print("SoapHandler::GetButtonsFunctionDebounced::");
-	    Serial.println(function);
-    }*/
     bool actionHasBeenTaken = false;
     byte temp = ioPtr->GetGlobalInputByte();
 
@@ -138,7 +88,6 @@ void SoapHandler::Polling()
 {
     //Serial.println("SoapHandler");
     //to be implemented
-    //InsertSoap();
-    InsertSoapByte();
+    InsertSoap();
     SetLed();
 }

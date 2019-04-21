@@ -34,10 +34,6 @@ class SoapHandler
         // accessing the library through interfaces
         IO* ioPtr = (IO*)HardwareControl::GetInstance();
         ISoap* isoapPtr = (ISoap*)HardwareControl::GetInstance();
-        /* This is a function(enum from sharedNamespace) 
-        container for storing the last function which has
-        been reccorded of the buttons*/
-        sharedNamespace::Function function;
         // vars storing the inserted soap
         int soap1 = 0;
         int soap2 = 0;
@@ -52,8 +48,6 @@ class SoapHandler
         /* Method that handles the incrementing of
         the local variables on input */
         void InsertSoap();
-
-        void InsertSoapByte();
 };
 
 #endif

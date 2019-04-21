@@ -28,7 +28,6 @@ class CoinHandler
 
     private:
         // IN DEV
-        void NewCoinByte();
         void Clear();
         // END
 
@@ -44,10 +43,6 @@ class CoinHandler
         allows us to only have access to the functions we need */
         IO* ioPtr = (IO*)HardwareControl::GetInstance();
         ICoin* icoinPtr = (ICoin*)HardwareControl::GetInstance();
-        /* This is a function(enum from sharedNamespace) 
-        container for storing the last function which has
-        been reccorded of the buttons*/
-        sharedNamespace::Function function;
         // Method for incrementing the coin counters
         void NewCoin();
         // Coin counters

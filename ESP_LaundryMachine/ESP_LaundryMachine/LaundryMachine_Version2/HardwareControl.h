@@ -34,9 +34,6 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
     
     //protected:
         /* IMPLEMENTATION OF IO */
-        virtual Function GetGlobalFunction();
-        virtual void SetGlobalFunction(Function);
-        virtual Function GetButtonsFunction();
         virtual Temp GetTemperature();
         virtual void SetBuzzer(bool);
         virtual void SetSpeed(Speed);
@@ -105,10 +102,9 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         // var for the strobe state
         bool strobe;
         /* This variable stores the last reccorded
-        function from the input. It is crutial for 
+        and debounced input. It is crutial for 
         properly reading and debouncing the multiplexed
         buttons and switches */
-        Function globalFunction = NOTHING;
         byte inputReadings = 0x00;
 };
 

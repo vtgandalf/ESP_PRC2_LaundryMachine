@@ -31,30 +31,23 @@ class InputManager
             - previous state - the previous recorded state
             - state - the curent recoded state
             - reading - the raw input
-            - lastDebounceTime - the last time and action was recorded */
-        void Debouncing(Function* previousState, Function* state, Function reading, unsigned long* lastDebounceTime);
-        void DebouncingByte(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime, int x);
+            - lastDebounceTime - the last time and action was recorded 
+            - x - keyselect*/
+        void Debouncing(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime, int x);
 
         // vars required for Debouncing()
-        Function previousStateButtons;
-        Function previousStateSwitches;
-        Function stateButtons;
-        Function stateSwitches;
-        Function functionSwitches;
-        Function functionButtons;
-        unsigned long lastDebounceTimeButtons;
-        unsigned long lastDebounceTimeSwitches;
-        unsigned long timerTreshold = 20;
-        // accessing the library through the IO interface
-        IO* ioPtr = (IO*)HardwareControl::GetInstance();
-
-
+        
         byte previousByteStateButtons;
         byte byteStateButtons;
         byte previousByteStateSwitches;
         byte byteStateSwitches;
         unsigned long lastDebounceTimeByteButtons;
         unsigned long lastDebounceTimeByteSwitches;
+        unsigned long timerTreshold = 20;
+        // accessing the library through the IO interface
+        IO* ioPtr = (IO*)HardwareControl::GetInstance();
+
+
 };
 
 #endif

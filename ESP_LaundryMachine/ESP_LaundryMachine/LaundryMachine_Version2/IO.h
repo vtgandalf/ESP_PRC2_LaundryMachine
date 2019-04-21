@@ -8,23 +8,16 @@ using namespace sharedNamespace;
 class IO
 {
 	public:
-
-		virtual byte GetRawInputByte()=0;
-		virtual void SetGlobalInputByte(byte)=0;
-		virtual byte GetGlobalInputByte()=0;
-
-
 		/* GETTERS */
+		/* Method that returns the raw readings from
+		the multiplexed input pins + keyselect
+		output: byte */
+		virtual byte GetRawInputByte()=0;
 		/* Method that gets the value stored in
-		the private var "globalFunction" in
+		the private var HardwareControl::inputReadings in
 		HardwareControl.h 
-		output: of type sharedNamespace::Function*/
-		virtual Function GetGlobalFunction()=0;
-		/* Method that returns the raw reading 
-		of the multiplexed buttons and switches,
-		which later needs to get filtered out
-		output: of type sharedNamespace::Function */
-    	virtual Function GetButtonsFunction()=0;
+		output: byte*/
+		virtual byte GetGlobalInputByte()=0;
 		/* Method that returns the Temperature 
 		of the water in the laundry machine
 		output: of type sharedNamespace::Temp */
@@ -62,9 +55,10 @@ class IO
     	virtual void SetKeyselect(bool)=0;
     	virtual void SetStrobe(bool)=0;
 		/* Method that sets the value of
-		the private var "globalFunction" in
+		the private var HardwareControl::inputReadings in
 		HardwareControl.h */
-		virtual void SetGlobalFunction(Function)=0;
+		virtual void SetGlobalInputByte(byte)=0;
+		
     	
 		/* Fields */
     	virtual bool Heater()=0;	// Returns the heater state

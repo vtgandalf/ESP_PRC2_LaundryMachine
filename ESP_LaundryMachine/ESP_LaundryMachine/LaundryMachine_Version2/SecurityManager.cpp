@@ -39,34 +39,11 @@ void SecurityManager::Polling()
 {
 	Serial.println(isecurityPtr->Lock());
 	// to be implemented
-	//DoorClosed();
-	DoorClosedByte();
+	DoorClosed();
 	if(!IsPressureOn()) SafeMode();
 }
 
 void SecurityManager::DoorClosed()
-{
-	//Serial.println("SecurityManager::DoorClosed");
-	/*ioPtr->SetKeyselect(false);
-	function = ioPtr->GetButtonsFunction();
-	if(function!=NOTHING) 
-	{
-		Serial.print("SecurityManager::GetButtonsFunctionDebounced::");
-		Serial.println(function);
-	}*/
-	if(ioPtr->GetGlobalFunction() == DOORLOCK) 
-	{
-		if(!doorHasBeenLocked)
-		{
-			Serial.println("lock the door");
-			ioPtr->SetGlobalFunction(NOTHING);
-			isecurityPtr->SetLock(true);
-			doorHasBeenLocked = true;
-		}
-	}
-}
-
-void SecurityManager::DoorClosedByte()
 {
 	bool actionHasBeenTaken = false;
 	byte temp = ioPtr->GetGlobalInputByte();
