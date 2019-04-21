@@ -58,6 +58,10 @@ class SecurityManager
 		void DoorClosed();
 
 		void DoorClosedByte();
+		/* This method indicates which compartments
+		are not yet closed through the corresponding
+		leds */
+		void IndicateCompartments();
 };
 
 #endif

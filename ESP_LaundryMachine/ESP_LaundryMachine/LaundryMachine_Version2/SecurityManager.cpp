@@ -6,6 +6,11 @@ bool SecurityManager::IsPressureOn()
 	return true;
 }
 
+void SecurityManager::IndicateCompartments()
+{
+	// to be implemented
+}
+
 bool SecurityManager::IsWaterLevelSafe()
 {
 	// to be implemented
@@ -14,8 +19,13 @@ bool SecurityManager::IsWaterLevelSafe()
 
 bool SecurityManager::IsEverythingClosed()
 {
-	// to be implemented
-	return true;
+	bool returnVal;
+	returnVal = doorHasBeenLocked;
+	if(!returnVal)
+	{
+		IndicateCompartments();
+	}
+	return returnVal;
 }
 
 void SecurityManager::SafeMode()

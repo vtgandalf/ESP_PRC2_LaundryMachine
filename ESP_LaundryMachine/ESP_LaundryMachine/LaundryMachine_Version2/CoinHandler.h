@@ -8,19 +8,17 @@ using namespace sharedNamespace;
 class CoinHandler
 {
     public:
-        /* Method that controlls the coin leds
-        showing that some amount of them is missing */
-        void IndicateMissingCoins();
-
         // Method that handles the change
         void Change();
 
         /* Method that shows wether or not the coins are
         enoug
+        input:
+            - the required amount
         output: 
             - true - coins are enough
             - false - coins are not enough */
-        bool AreCoinsEnough();
+        bool AreCoinsEnough(int);
 
         /* Method that handles all the essential
         proccesses for this object that have to 
@@ -29,7 +27,11 @@ class CoinHandler
         void Polling();
 
     private:
+        // IN DEV
         void NewCoinByte();
+        void Clear();
+        // END
+
         /* Booleans that indicate wheter or not an led has
         been already lit up after the last command. Those
         are neccessary since without them we do keep turning
@@ -55,6 +57,9 @@ class CoinHandler
         /* This method sets the leds according
         to the local coin variables */
         void SetLed();
+        /* Method that controlls the coin leds
+        showing that some amount of them is missing */
+        void IndicateMissingCoins();
 };
 
 #endif

@@ -13,6 +13,15 @@ class SoapHandler
         be ran during the main loop of the arduino
         program */
         void Polling();
+         /* Method that shows wether or not the soap units are
+        enoug
+        input:
+            - the required amount for soap1
+            - the required amount for soap2
+        output: 
+            - true - soap is enough
+            - false - soap is not enough */
+        bool IsSoapEnough(int, int);
         
     private:
         /* Booleans that indicate wheter or not an led has

@@ -5,6 +5,20 @@ void SoapHandler::IndicateMissingSoap()
     //to be implemented iteration 2
 }
 
+bool SoapHandler::IsSoapEnough(int soap1Required, int soap2Required)
+{
+    bool returnVal;
+    if((soap1 < soap1Required)|(soap2 < soap2Required))
+    {
+        returnVal = false;
+        IndicateMissingSoap();
+    }
+    else
+    {
+        returnVal = true;
+    }
+    return returnVal;
+}
 
 void SoapHandler::SetLed()
 {
