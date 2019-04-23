@@ -1,8 +1,28 @@
 #include "CoinHandler.h"
 
-void CoinHandler::IndicateMissingCoins()
+void CoinHandler::IndicateMissingCoins(int value)
 {
-    //to be implemented iteration 2
+    int temp = value;
+    int coin10counter;
+    int coin50counter;
+    int coin200counter;
+    coin200counter = temp/200;
+    temp = temp - coin200counter*200;
+    coin50counter = temp/50;
+    temp = temp - coin50counter*50;
+    coin10counter = temp/10;
+    temp = temp - coin10counter*10;
+    for(int i = 0; i < 3; i++)
+    {
+        icoinPtr->SetCoin10Led(coin10counter);
+        icoinPtr->SetCoin50Led(coin50counter);
+        icoinPtr->SetCoin200Led(coin200counter);
+        delay(250);
+        icoinPtr->SetCoin10Led(0);
+        icoinPtr->SetCoin50Led(0);
+        icoinPtr->SetCoin200Led(0);
+        delay(300);
+    }
 }
 
 void CoinHandler::Change()
@@ -17,7 +37,7 @@ bool CoinHandler::AreCoinsEnough(int value)
     if((temp-value)<0)
     {
         returnVal = false;
-        IndicateMissingCoins();
+        IndicateMissingCoins(value);
     }
     else
     {
@@ -32,7 +52,7 @@ void CoinHandler::NewCoin()
 {
     bool actionHasBeenTaken = false;
     byte temp = ioPtr->GetGlobalInputByte();
-    if((temp | bitMaskCoin10) == temp)
+    if(((temp | bitMaskCoin10) == temp) && ((temp | bitMaskProgram) != temp))
     {
         if(coin10 <3) 
         {
@@ -74,6 +94,7 @@ void CoinHandler::Clear()
     byte temp = ioPtr->GetGlobalInputByte();
     if((temp | bitMaskClear) == temp)
     {
+        Serial.println("Clear");
         coin10LedHasBeenSet = false;
         coin50LedHasBeenSet = false;
         coin200LedHasBeenSet = false;

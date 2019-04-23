@@ -1,8 +1,22 @@
 #include "SoapHandler.h"
 
-void SoapHandler::IndicateMissingSoap()
+void SoapHandler::IndicateMissingSoap(int soap1Required, int soap2Required)
 {
-    //to be implemented iteration 2
+    for(int i = 0; i < (soap1Required-soap1); i++)
+    {
+        isoapPtr->SetSoap1Led(true);
+        delay(250);
+        isoapPtr->SetSoap1Led(false);
+        delay(250);
+    }
+    for(int i = 0; i < (soap2Required-soap2); i++)
+    {
+        isoapPtr->SetSoap2Led(true);
+        delay(250);
+        isoapPtr->SetSoap2Led(false);
+        delay(250);
+    }
+    
 }
 
 bool SoapHandler::IsSoapEnough(int soap1Required, int soap2Required)
@@ -11,7 +25,7 @@ bool SoapHandler::IsSoapEnough(int soap1Required, int soap2Required)
     if((soap1 < soap1Required)|(soap2 < soap2Required))
     {
         returnVal = false;
-        IndicateMissingSoap();
+        IndicateMissingSoap(soap1Required, soap2Required);
     }
     else
     {

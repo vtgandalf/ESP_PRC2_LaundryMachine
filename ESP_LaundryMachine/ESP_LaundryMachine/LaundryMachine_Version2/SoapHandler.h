@@ -44,7 +44,7 @@ class SoapHandler
         /* Method that controls an led to show that 
         there is more soap required in order to start
         the selected program */
-        void IndicateMissingSoap();
+        void IndicateMissingSoap(int, int);
         /* Method that handles the incrementing of
         the local variables on input */
         void InsertSoap();

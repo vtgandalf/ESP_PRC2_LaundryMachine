@@ -232,11 +232,14 @@ void HardwareControl::SetCoin10Led(int x)
       break;
 
     case 2:
+      coins10LedsArray[0] = HIGH;
       coins10LedsArray[1] = HIGH;
       break;
 
     case 3:
-    coins10LedsArray[2] = HIGH;
+      coins10LedsArray[0] = HIGH;
+      coins10LedsArray[1] = HIGH;
+      coins10LedsArray[2] = HIGH;
       break;
 
     default:
@@ -247,6 +250,7 @@ void HardwareControl::SetCoin10Led(int x)
   centipede.digitalWrite(OUT_DATAC, coins10LedsArray[2]);
   centipede.digitalWrite(OUT_DATAB, coins10LedsArray[1]);
   centipede.digitalWrite(OUT_DATAA, coins10LedsArray[0]);
+  delay(100);
 }
 
 void HardwareControl::SetCoin50Led(int x)
@@ -266,10 +270,13 @@ void HardwareControl::SetCoin50Led(int x)
       break;
 
     case 2:
+      coins50LedsArray[0] = HIGH;
       coins50LedsArray[1] = HIGH;
       break;
 
     case 3:
+      coins50LedsArray[0] = HIGH;
+      coins50LedsArray[1] = HIGH;
       coins50LedsArray[2] = HIGH;
       break;
 
@@ -281,6 +288,7 @@ void HardwareControl::SetCoin50Led(int x)
   centipede.digitalWrite(OUT_DATAC, coins50LedsArray[2]);
   centipede.digitalWrite(OUT_DATAB, coins50LedsArray[1]);
   centipede.digitalWrite(OUT_DATAA, coins50LedsArray[0]);
+  delay(100);
 }
 
 void HardwareControl::SetCoin200Led(int x)
@@ -298,6 +306,7 @@ void HardwareControl::SetCoin200Led(int x)
       break;
 
     case 2:
+      coins200LedsArray[0] = HIGH;
       coins200LedsArray[1] = HIGH;
       break;
 

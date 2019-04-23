@@ -54,7 +54,7 @@ class CoinHandler
         void SetLed();
         /* Method that controlls the coin leds
         showing that some amount of them is missing */
-        void IndicateMissingCoins();
+        void IndicateMissingCoins(int value);
 };
 
 #endif

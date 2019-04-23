@@ -2,13 +2,29 @@
 
 bool SecurityManager::IsPressureOn()
 {
-	// to be implemented
-	return true;
+	bool response = false;
+	byte temp = ioPtr->GetRawInputByte();
+	if (((temp | bitMaskPressure) == temp) && ((temp | bitMaskKeyselect) != temp))
+	{
+		response = true;
+	}
+	return response;
 }
 
 void SecurityManager::IndicateCompartments()
 {
-	// to be implemented
+	isecurityPtr->SetLock(true);
+	delay(250);
+	isecurityPtr->SetLock(false);
+	delay(250);
+	isecurityPtr->SetLock(true);
+	delay(250);
+	isecurityPtr->SetLock(false);
+	delay(250);
+	isecurityPtr->SetLock(true);
+	delay(250);
+	isecurityPtr->SetLock(false);
+	delay(250);
 }
 
 bool SecurityManager::IsWaterLevelSafe()
@@ -21,7 +37,7 @@ bool SecurityManager::IsEverythingClosed()
 {
 	bool returnVal;
 	returnVal = doorHasBeenLocked;
-	if(!returnVal)
+	if (!returnVal)
 	{
 		IndicateCompartments();
 	}
@@ -37,26 +53,28 @@ void SecurityManager::SafeMode()
 // contains everything that has to be checked regularly
 void SecurityManager::Polling()
 {
-	Serial.println(isecurityPtr->Lock());
+	//Serial.println(isecurityPtr->Lock());
 	// to be implemented
 	DoorClosed();
-	if(!IsPressureOn()) SafeMode();
+	if (!IsPressureOn())
+		SafeMode();
 }
 
 void SecurityManager::DoorClosed()
 {
 	bool actionHasBeenTaken = false;
 	byte temp = ioPtr->GetGlobalInputByte();
-	if((temp | bitMaskDoorlock) == temp) 
+	if (((temp | bitMaskDoorlock) == temp) & ((temp | bitMaskKeyselect) != temp))
 	{
 		actionHasBeenTaken = true;
 		Serial.println("lock the door");
-		if(!doorHasBeenLocked)
+		if (!doorHasBeenLocked)
 		{
 			isecurityPtr->SetLock(true);
 			doorHasBeenLocked = true;
 		}
 	}
 
-	if(actionHasBeenTaken) ioPtr->SetGlobalInputByte(0x00);
+	if (actionHasBeenTaken)
+		ioPtr->SetGlobalInputByte(0x00);
 }
