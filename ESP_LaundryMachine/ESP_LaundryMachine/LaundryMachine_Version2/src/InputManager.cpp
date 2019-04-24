@@ -1,35 +1,34 @@
 #include "../lib/InputManager.h"
 
-void InputManager::Debouncing(byte* previousByteState, byte* byteState, byte reading, unsigned long* lastDebounceTime, int x)
+void InputManager::Debouncing(byte *previousByteState, byte *byteState, byte reading, unsigned long *lastDebounceTime, int x)
 {
-  if(reading != *previousByteState)
+  if (reading != *previousByteState)
   {
     *lastDebounceTime = millis();
   }
 
-  if((millis() - *lastDebounceTime) > timerTreshold)
+  if ((millis() - *lastDebounceTime) > timerTreshold)
   {
     //if((reading != *byteState)&((*byteState | *previousByteState) != *byteState))
-    if(reading != *byteState)
+    if (reading != *byteState)
     {
       *byteState = reading;
-      if(x == 0)
+      if (x == 0)
       {
-        if(*byteState != 0x00)
+        if (*byteState != 0x00)
         {
           //Serial.println(reading, BIN);
           ioPtr->SetGlobalInputByte(reading);
         }
       }
-      if(x == 1)
+      if (x == 1)
       {
-        if(*byteState != bitMaskKeyselect)
+        if (*byteState != bitMaskKeyselect)
         {
           //Serial.println(reading, BIN);
           ioPtr->SetGlobalInputByte(reading);
         }
       }
-      
     }
   }
   *previousByteState = reading;
@@ -45,5 +44,5 @@ void InputManager::GetInput()
 
 void InputManager::Polling()
 {
-    GetInput();
+  GetInput();
 }
