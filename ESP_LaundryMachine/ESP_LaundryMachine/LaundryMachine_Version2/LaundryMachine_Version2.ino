@@ -13,8 +13,8 @@ void setup()
   //Serial.begin(9600);
   HC.HardwareControlSetup();
   //HC.SetCoin10Led(0);
-  //HC.SetCoin50Led(0);
   //HC.SetCoin200Led(0);
+  //HC.SetCoin50Led(0);
   //SM.IsEverythingClosed();
   //SH.IsSoapEnough(2,3);
   //CH.AreCoinsEnough(530);

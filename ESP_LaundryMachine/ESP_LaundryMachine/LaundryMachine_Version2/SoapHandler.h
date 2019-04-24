@@ -48,6 +48,8 @@ class SoapHandler
         /* Method that handles the incrementing of
         the local variables on input */
         void InsertSoap();
+
+        byte lastByte = 0x00;
 };
 
 #endif
