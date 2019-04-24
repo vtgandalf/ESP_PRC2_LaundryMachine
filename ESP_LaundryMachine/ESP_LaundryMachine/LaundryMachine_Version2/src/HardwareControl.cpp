@@ -1,4 +1,4 @@
-#include "HardwareControl.h"
+#include "../lib/HardwareControl.h"
 
 #define OUT_GROUP2      0
 #define OUT_GROUP1      1

@@ -1,4 +1,4 @@
-#include "CoinHandler.h"
+#include "../lib/CoinHandler.h"
 
 void CoinHandler::IndicateMissingCoins(int value)
 {

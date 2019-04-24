@@ -1,7 +1,7 @@
-#include "SoapHandler.h"
-#include "SecurityManager.h"
-#include "CoinHandler.h"
-#include "InputManager.h"
+#include "lib/SoapHandler.h"
+#include "lib/SecurityManager.h"
+#include "lib/CoinHandler.h"
+#include "lib/InputManager.h"
 HardwareControl HC;
 SoapHandler SH;
 SecurityManager SM;
