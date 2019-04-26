@@ -53,26 +53,40 @@ namespace test {
 
 
 	private: System::Windows::Forms::TextBox^  tbWarnings;
-	private: System::Windows::Forms::Button^  btnProgramA;
-	private: System::Windows::Forms::Button^  btnProgramB;
-	private: System::Windows::Forms::Button^  btnProgramC;
-	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::RadioButton^  radioButton1;
-	private: System::Windows::Forms::RadioButton^  radioButton2;
-	private: System::Windows::Forms::RadioButton^  radioButton3;
-	private: System::Windows::Forms::RadioButton^  radioButton4;
-	private: System::Windows::Forms::RadioButton^  radioButton5;
+	private: System::Windows::Forms::Button^  btnProgram;
+
+	private: System::Windows::Forms::Button^  btnStart;
+
+
+
+	private: System::Windows::Forms::RadioButton^  rbSoap1;
+	private: System::Windows::Forms::RadioButton^  rbSoap2;
+
+
+
+
+
 	private: System::Windows::Forms::Label^  lblBalance;
-	private: System::Windows::Forms::RadioButton^  radioButton6;
-	private: System::Windows::Forms::RadioButton^  radioButton7;
-	private: System::Windows::Forms::RadioButton^  radioButton8;
-	private: System::Windows::Forms::RadioButton^  radioButton9;
-	private: System::Windows::Forms::RadioButton^  radioButton10;
-	private: System::Windows::Forms::RadioButton^  radioButton11;
-	private: System::Windows::Forms::RadioButton^  radioButton12;
-	private: System::Windows::Forms::RadioButton^  radioButton13;
-	private: System::Windows::Forms::Button^  button2;
-	private: System::Windows::Forms::Button^  button3;
+	private: System::Windows::Forms::RadioButton^  rbCoin10_1;
+	private: System::Windows::Forms::RadioButton^  rbCoin10_2;
+	private: System::Windows::Forms::RadioButton^  rbCoin10_3;
+	private: System::Windows::Forms::RadioButton^  rbCoin50_1;
+	private: System::Windows::Forms::RadioButton^  rbCoin50_2;
+	private: System::Windows::Forms::RadioButton^  rbCoin50_3;
+	private: System::Windows::Forms::RadioButton^  rbCoin200_1;
+	private: System::Windows::Forms::RadioButton^  rbCoin200_2;
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::Button^  btnPressure;
+	private: System::Windows::Forms::Button^  btnHeater;
+
+
 	private: System::Windows::Forms::RadioButton^  radioButton14;
 	private: System::Windows::Forms::RadioButton^  radioButton15;
 	private: System::Windows::Forms::RadioButton^  radioButton16;
@@ -102,6 +116,22 @@ namespace test {
 	private: System::Windows::Forms::RadioButton^  radioButton40;
 	private: System::Windows::Forms::RadioButton^  radioButton41;
 	private: System::Windows::Forms::RadioButton^  radioButton42;
+private: System::Windows::Forms::RadioButton^  rbProgramA;
+private: System::Windows::Forms::RadioButton^  rbProgramB;
+private: System::Windows::Forms::RadioButton^  rbProgramC;
+private: System::Windows::Forms::RadioButton^  rbDrain;
+private: System::Windows::Forms::RadioButton^  rbSink;
+private: System::Windows::Forms::RadioButton^  rbDoorLock;
+
+
+
+
+
+
+private: System::Windows::Forms::Button^  btnReset;
+
+	private: System::Windows::Forms::Button^  btnLockDoor;
+
 
 	protected:
 
@@ -124,26 +154,21 @@ namespace test {
 			this->btnSoap1 = (gcnew System::Windows::Forms::Button());
 			this->btnSoap2 = (gcnew System::Windows::Forms::Button());
 			this->tbWarnings = (gcnew System::Windows::Forms::TextBox());
-			this->btnProgramA = (gcnew System::Windows::Forms::Button());
-			this->btnProgramB = (gcnew System::Windows::Forms::Button());
-			this->btnProgramC = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton3 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton4 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton5 = (gcnew System::Windows::Forms::RadioButton());
+			this->btnProgram = (gcnew System::Windows::Forms::Button());
+			this->btnStart = (gcnew System::Windows::Forms::Button());
+			this->rbSoap1 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbSoap2 = (gcnew System::Windows::Forms::RadioButton());
 			this->lblBalance = (gcnew System::Windows::Forms::Label());
-			this->radioButton6 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton7 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton8 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton9 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton10 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton11 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton12 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton13 = (gcnew System::Windows::Forms::RadioButton());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->rbCoin10_1 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbCoin10_2 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbCoin10_3 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbCoin50_1 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbCoin50_2 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbCoin50_3 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbCoin200_1 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbCoin200_2 = (gcnew System::Windows::Forms::RadioButton());
+			this->btnPressure = (gcnew System::Windows::Forms::Button());
+			this->btnHeater = (gcnew System::Windows::Forms::Button());
 			this->radioButton14 = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButton15 = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButton16 = (gcnew System::Windows::Forms::RadioButton());
@@ -173,6 +198,14 @@ namespace test {
 			this->radioButton40 = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButton41 = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButton42 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbProgramA = (gcnew System::Windows::Forms::RadioButton());
+			this->rbProgramB = (gcnew System::Windows::Forms::RadioButton());
+			this->rbProgramC = (gcnew System::Windows::Forms::RadioButton());
+			this->rbDrain = (gcnew System::Windows::Forms::RadioButton());
+			this->rbSink = (gcnew System::Windows::Forms::RadioButton());
+			this->rbDoorLock = (gcnew System::Windows::Forms::RadioButton());
+			this->btnReset = (gcnew System::Windows::Forms::Button());
+			this->btnLockDoor = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// btnCoin10
@@ -259,111 +292,51 @@ namespace test {
 			this->tbWarnings->TabIndex = 9;
 			this->tbWarnings->Text = L"WARNINGS";
 			// 
-			// btnProgramA
+			// btnProgram
 			// 
-			this->btnProgramA->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+			this->btnProgram->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
 				static_cast<System::Int32>(static_cast<System::Byte>(133)));
-			this->btnProgramA->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnProgramA->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btnProgram->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnProgram->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnProgramA->Location = System::Drawing::Point(503, 18);
-			this->btnProgramA->Name = L"btnProgramA";
-			this->btnProgramA->Size = System::Drawing::Size(174, 106);
-			this->btnProgramA->TabIndex = 10;
-			this->btnProgramA->Text = L"PROGRAM A";
-			this->btnProgramA->UseVisualStyleBackColor = false;
+			this->btnProgram->Location = System::Drawing::Point(896, 12);
+			this->btnProgram->Name = L"btnProgram";
+			this->btnProgram->Size = System::Drawing::Size(137, 106);
+			this->btnProgram->TabIndex = 10;
+			this->btnProgram->Text = L"Program";
+			this->btnProgram->UseVisualStyleBackColor = false;
 			// 
-			// btnProgramB
+			// btnStart
 			// 
-			this->btnProgramB->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+			this->btnStart->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
 				static_cast<System::Int32>(static_cast<System::Byte>(133)));
-			this->btnProgramB->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnProgramB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btnStart->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnStart->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnProgramB->Location = System::Drawing::Point(683, 18);
-			this->btnProgramB->Name = L"btnProgramB";
-			this->btnProgramB->Size = System::Drawing::Size(174, 106);
-			this->btnProgramB->TabIndex = 11;
-			this->btnProgramB->Text = L"PROGRAM B";
-			this->btnProgramB->UseVisualStyleBackColor = false;
+			this->btnStart->Location = System::Drawing::Point(503, 130);
+			this->btnStart->Name = L"btnStart";
+			this->btnStart->Size = System::Drawing::Size(534, 59);
+			this->btnStart->TabIndex = 13;
+			this->btnStart->Text = L"START";
+			this->btnStart->UseVisualStyleBackColor = false;
 			// 
-			// btnProgramC
+			// rbSoap1
 			// 
-			this->btnProgramC->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
-				static_cast<System::Int32>(static_cast<System::Byte>(133)));
-			this->btnProgramC->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnProgramC->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnProgramC->Location = System::Drawing::Point(863, 18);
-			this->btnProgramC->Name = L"btnProgramC";
-			this->btnProgramC->Size = System::Drawing::Size(174, 106);
-			this->btnProgramC->TabIndex = 12;
-			this->btnProgramC->Text = L"PROGRAM C";
-			this->btnProgramC->UseVisualStyleBackColor = false;
+			this->rbSoap1->AutoSize = true;
+			this->rbSoap1->Location = System::Drawing::Point(283, 219);
+			this->rbSoap1->Name = L"rbSoap1";
+			this->rbSoap1->Size = System::Drawing::Size(21, 20);
+			this->rbSoap1->TabIndex = 14;
+			this->rbSoap1->UseVisualStyleBackColor = true;
 			// 
-			// button1
+			// rbSoap2
 			// 
-			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
-				static_cast<System::Int32>(static_cast<System::Byte>(133)));
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(503, 130);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(534, 59);
-			this->button1->TabIndex = 13;
-			this->button1->Text = L"START";
-			this->button1->UseVisualStyleBackColor = false;
-			// 
-			// radioButton1
-			// 
-			this->radioButton1->AutoSize = true;
-			this->radioButton1->Location = System::Drawing::Point(283, 219);
-			this->radioButton1->Name = L"radioButton1";
-			this->radioButton1->Size = System::Drawing::Size(21, 20);
-			this->radioButton1->TabIndex = 14;
-			this->radioButton1->TabStop = true;
-			this->radioButton1->UseVisualStyleBackColor = true;
-			// 
-			// radioButton2
-			// 
-			this->radioButton2->AutoSize = true;
-			this->radioButton2->Location = System::Drawing::Point(310, 219);
-			this->radioButton2->Name = L"radioButton2";
-			this->radioButton2->Size = System::Drawing::Size(21, 20);
-			this->radioButton2->TabIndex = 15;
-			this->radioButton2->TabStop = true;
-			this->radioButton2->UseVisualStyleBackColor = true;
-			// 
-			// radioButton3
-			// 
-			this->radioButton3->AutoSize = true;
-			this->radioButton3->Location = System::Drawing::Point(283, 287);
-			this->radioButton3->Name = L"radioButton3";
-			this->radioButton3->Size = System::Drawing::Size(21, 20);
-			this->radioButton3->TabIndex = 16;
-			this->radioButton3->TabStop = true;
-			this->radioButton3->UseVisualStyleBackColor = true;
-			// 
-			// radioButton4
-			// 
-			this->radioButton4->AutoSize = true;
-			this->radioButton4->Location = System::Drawing::Point(310, 287);
-			this->radioButton4->Name = L"radioButton4";
-			this->radioButton4->Size = System::Drawing::Size(21, 20);
-			this->radioButton4->TabIndex = 17;
-			this->radioButton4->TabStop = true;
-			this->radioButton4->UseVisualStyleBackColor = true;
-			// 
-			// radioButton5
-			// 
-			this->radioButton5->AutoSize = true;
-			this->radioButton5->Location = System::Drawing::Point(337, 287);
-			this->radioButton5->Name = L"radioButton5";
-			this->radioButton5->Size = System::Drawing::Size(21, 20);
-			this->radioButton5->TabIndex = 18;
-			this->radioButton5->TabStop = true;
-			this->radioButton5->UseVisualStyleBackColor = true;
+			this->rbSoap2->AutoSize = true;
+			this->rbSoap2->Location = System::Drawing::Point(283, 287);
+			this->rbSoap2->Name = L"rbSoap2";
+			this->rbSoap2->Size = System::Drawing::Size(21, 20);
+			this->rbSoap2->TabIndex = 16;
+			this->rbSoap2->UseVisualStyleBackColor = true;
 			// 
 			// lblBalance
 			// 
@@ -378,114 +351,106 @@ namespace test {
 			this->lblBalance->TabIndex = 6;
 			this->lblBalance->Text = L"Balance:";
 			// 
-			// radioButton6
+			// rbCoin10_1
 			// 
-			this->radioButton6->AutoSize = true;
-			this->radioButton6->Location = System::Drawing::Point(108, 425);
-			this->radioButton6->Name = L"radioButton6";
-			this->radioButton6->Size = System::Drawing::Size(21, 20);
-			this->radioButton6->TabIndex = 21;
-			this->radioButton6->TabStop = true;
-			this->radioButton6->UseVisualStyleBackColor = true;
+			this->rbCoin10_1->AutoSize = true;
+			this->rbCoin10_1->Location = System::Drawing::Point(108, 425);
+			this->rbCoin10_1->Name = L"rbCoin10_1";
+			this->rbCoin10_1->Size = System::Drawing::Size(21, 20);
+			this->rbCoin10_1->TabIndex = 21;
+			this->rbCoin10_1->UseVisualStyleBackColor = true;
 			// 
-			// radioButton7
+			// rbCoin10_2
 			// 
-			this->radioButton7->AutoSize = true;
-			this->radioButton7->Location = System::Drawing::Point(108, 399);
-			this->radioButton7->Name = L"radioButton7";
-			this->radioButton7->Size = System::Drawing::Size(21, 20);
-			this->radioButton7->TabIndex = 20;
-			this->radioButton7->TabStop = true;
-			this->radioButton7->UseVisualStyleBackColor = true;
+			this->rbCoin10_2->AutoSize = true;
+			this->rbCoin10_2->Location = System::Drawing::Point(108, 399);
+			this->rbCoin10_2->Name = L"rbCoin10_2";
+			this->rbCoin10_2->Size = System::Drawing::Size(21, 20);
+			this->rbCoin10_2->TabIndex = 20;
+			this->rbCoin10_2->UseVisualStyleBackColor = true;
 			// 
-			// radioButton8
+			// rbCoin10_3
 			// 
-			this->radioButton8->AutoSize = true;
-			this->radioButton8->Location = System::Drawing::Point(108, 373);
-			this->radioButton8->Name = L"radioButton8";
-			this->radioButton8->Size = System::Drawing::Size(21, 20);
-			this->radioButton8->TabIndex = 19;
-			this->radioButton8->TabStop = true;
-			this->radioButton8->UseVisualStyleBackColor = true;
+			this->rbCoin10_3->AutoSize = true;
+			this->rbCoin10_3->Location = System::Drawing::Point(108, 373);
+			this->rbCoin10_3->Name = L"rbCoin10_3";
+			this->rbCoin10_3->Size = System::Drawing::Size(21, 20);
+			this->rbCoin10_3->TabIndex = 19;
+			this->rbCoin10_3->UseVisualStyleBackColor = true;
 			// 
-			// radioButton9
+			// rbCoin50_1
 			// 
-			this->radioButton9->AutoSize = true;
-			this->radioButton9->Location = System::Drawing::Point(183, 425);
-			this->radioButton9->Name = L"radioButton9";
-			this->radioButton9->Size = System::Drawing::Size(21, 20);
-			this->radioButton9->TabIndex = 24;
-			this->radioButton9->TabStop = true;
-			this->radioButton9->UseVisualStyleBackColor = true;
+			this->rbCoin50_1->AutoSize = true;
+			this->rbCoin50_1->Location = System::Drawing::Point(183, 425);
+			this->rbCoin50_1->Name = L"rbCoin50_1";
+			this->rbCoin50_1->Size = System::Drawing::Size(21, 20);
+			this->rbCoin50_1->TabIndex = 24;
+			this->rbCoin50_1->UseVisualStyleBackColor = true;
 			// 
-			// radioButton10
+			// rbCoin50_2
 			// 
-			this->radioButton10->AutoSize = true;
-			this->radioButton10->Location = System::Drawing::Point(183, 399);
-			this->radioButton10->Name = L"radioButton10";
-			this->radioButton10->Size = System::Drawing::Size(21, 20);
-			this->radioButton10->TabIndex = 23;
-			this->radioButton10->TabStop = true;
-			this->radioButton10->UseVisualStyleBackColor = true;
+			this->rbCoin50_2->AutoSize = true;
+			this->rbCoin50_2->Location = System::Drawing::Point(183, 399);
+			this->rbCoin50_2->Name = L"rbCoin50_2";
+			this->rbCoin50_2->Size = System::Drawing::Size(21, 20);
+			this->rbCoin50_2->TabIndex = 23;
+			this->rbCoin50_2->UseVisualStyleBackColor = true;
 			// 
-			// radioButton11
+			// rbCoin50_3
 			// 
-			this->radioButton11->AutoSize = true;
-			this->radioButton11->Location = System::Drawing::Point(183, 373);
-			this->radioButton11->Name = L"radioButton11";
-			this->radioButton11->Size = System::Drawing::Size(21, 20);
-			this->radioButton11->TabIndex = 22;
-			this->radioButton11->TabStop = true;
-			this->radioButton11->UseVisualStyleBackColor = true;
+			this->rbCoin50_3->AutoSize = true;
+			this->rbCoin50_3->Location = System::Drawing::Point(183, 373);
+			this->rbCoin50_3->Name = L"rbCoin50_3";
+			this->rbCoin50_3->Size = System::Drawing::Size(21, 20);
+			this->rbCoin50_3->TabIndex = 22;
+			this->rbCoin50_3->UseVisualStyleBackColor = true;
 			// 
-			// radioButton12
+			// rbCoin200_1
 			// 
-			this->radioButton12->AutoSize = true;
-			this->radioButton12->Location = System::Drawing::Point(259, 425);
-			this->radioButton12->Name = L"radioButton12";
-			this->radioButton12->Size = System::Drawing::Size(21, 20);
-			this->radioButton12->TabIndex = 27;
-			this->radioButton12->TabStop = true;
-			this->radioButton12->UseVisualStyleBackColor = true;
+			this->rbCoin200_1->AutoSize = true;
+			this->rbCoin200_1->Location = System::Drawing::Point(259, 425);
+			this->rbCoin200_1->Name = L"rbCoin200_1";
+			this->rbCoin200_1->Size = System::Drawing::Size(21, 20);
+			this->rbCoin200_1->TabIndex = 27;
+			this->rbCoin200_1->UseVisualStyleBackColor = true;
 			// 
-			// radioButton13
+			// rbCoin200_2
 			// 
-			this->radioButton13->AutoSize = true;
-			this->radioButton13->Location = System::Drawing::Point(259, 399);
-			this->radioButton13->Name = L"radioButton13";
-			this->radioButton13->Size = System::Drawing::Size(21, 20);
-			this->radioButton13->TabIndex = 26;
-			this->radioButton13->TabStop = true;
-			this->radioButton13->UseVisualStyleBackColor = true;
+			this->rbCoin200_2->AutoSize = true;
+			this->rbCoin200_2->Location = System::Drawing::Point(259, 399);
+			this->rbCoin200_2->Name = L"rbCoin200_2";
+			this->rbCoin200_2->Size = System::Drawing::Size(21, 20);
+			this->rbCoin200_2->TabIndex = 26;
+			this->rbCoin200_2->UseVisualStyleBackColor = true;
 			// 
-			// button2
+			// btnPressure
 			// 
-			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+			this->btnPressure->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
 				static_cast<System::Int32>(static_cast<System::Byte>(133)));
-			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btnPressure->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnPressure->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button2->Location = System::Drawing::Point(52, 74);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(131, 50);
-			this->button2->TabIndex = 28;
-			this->button2->Text = L"Pressure";
-			this->button2->UseVisualStyleBackColor = false;
+			this->btnPressure->Location = System::Drawing::Point(52, 46);
+			this->btnPressure->Name = L"btnPressure";
+			this->btnPressure->Size = System::Drawing::Size(131, 50);
+			this->btnPressure->TabIndex = 28;
+			this->btnPressure->Text = L"Pressure";
+			this->btnPressure->UseVisualStyleBackColor = false;
 			// 
-			// button3
+			// btnHeater
 			// 
-			this->button3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+			this->btnHeater->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
 				static_cast<System::Int32>(static_cast<System::Byte>(133)));
-			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btnHeater->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnHeater->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button3->Location = System::Drawing::Point(189, 74);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(131, 50);
-			this->button3->TabIndex = 29;
-			this->button3->Text = L"Heater";
-			this->button3->UseVisualStyleBackColor = false;
-			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
+			this->btnHeater->Location = System::Drawing::Point(189, 46);
+			this->btnHeater->Name = L"btnHeater";
+			this->btnHeater->Size = System::Drawing::Size(131, 50);
+			this->btnHeater->TabIndex = 29;
+			this->btnHeater->Text = L"Heater";
+			this->btnHeater->UseVisualStyleBackColor = false;
+			this->btnHeater->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
 			// 
 			// radioButton14
 			// 
@@ -494,7 +459,6 @@ namespace test {
 			this->radioButton14->Name = L"radioButton14";
 			this->radioButton14->Size = System::Drawing::Size(21, 20);
 			this->radioButton14->TabIndex = 32;
-			this->radioButton14->TabStop = true;
 			this->radioButton14->UseVisualStyleBackColor = true;
 			// 
 			// radioButton15
@@ -504,7 +468,6 @@ namespace test {
 			this->radioButton15->Name = L"radioButton15";
 			this->radioButton15->Size = System::Drawing::Size(21, 20);
 			this->radioButton15->TabIndex = 31;
-			this->radioButton15->TabStop = true;
 			this->radioButton15->UseVisualStyleBackColor = true;
 			// 
 			// radioButton16
@@ -514,7 +477,6 @@ namespace test {
 			this->radioButton16->Name = L"radioButton16";
 			this->radioButton16->Size = System::Drawing::Size(21, 20);
 			this->radioButton16->TabIndex = 30;
-			this->radioButton16->TabStop = true;
 			this->radioButton16->UseVisualStyleBackColor = true;
 			// 
 			// radioButton17
@@ -524,7 +486,6 @@ namespace test {
 			this->radioButton17->Name = L"radioButton17";
 			this->radioButton17->Size = System::Drawing::Size(21, 20);
 			this->radioButton17->TabIndex = 34;
-			this->radioButton17->TabStop = true;
 			this->radioButton17->UseVisualStyleBackColor = true;
 			// 
 			// radioButton18
@@ -534,7 +495,6 @@ namespace test {
 			this->radioButton18->Name = L"radioButton18";
 			this->radioButton18->Size = System::Drawing::Size(21, 20);
 			this->radioButton18->TabIndex = 33;
-			this->radioButton18->TabStop = true;
 			this->radioButton18->UseVisualStyleBackColor = true;
 			// 
 			// radioButton19
@@ -544,7 +504,6 @@ namespace test {
 			this->radioButton19->Name = L"radioButton19";
 			this->radioButton19->Size = System::Drawing::Size(21, 20);
 			this->radioButton19->TabIndex = 36;
-			this->radioButton19->TabStop = true;
 			this->radioButton19->UseVisualStyleBackColor = true;
 			// 
 			// radioButton20
@@ -554,7 +513,6 @@ namespace test {
 			this->radioButton20->Name = L"radioButton20";
 			this->radioButton20->Size = System::Drawing::Size(21, 20);
 			this->radioButton20->TabIndex = 35;
-			this->radioButton20->TabStop = true;
 			this->radioButton20->UseVisualStyleBackColor = true;
 			// 
 			// radioButton21
@@ -564,7 +522,6 @@ namespace test {
 			this->radioButton21->Name = L"radioButton21";
 			this->radioButton21->Size = System::Drawing::Size(21, 20);
 			this->radioButton21->TabIndex = 37;
-			this->radioButton21->TabStop = true;
 			this->radioButton21->UseVisualStyleBackColor = true;
 			// 
 			// radioButton22
@@ -574,7 +531,6 @@ namespace test {
 			this->radioButton22->Name = L"radioButton22";
 			this->radioButton22->Size = System::Drawing::Size(21, 20);
 			this->radioButton22->TabIndex = 38;
-			this->radioButton22->TabStop = true;
 			this->radioButton22->UseVisualStyleBackColor = true;
 			// 
 			// radioButton23
@@ -584,7 +540,6 @@ namespace test {
 			this->radioButton23->Name = L"radioButton23";
 			this->radioButton23->Size = System::Drawing::Size(21, 20);
 			this->radioButton23->TabIndex = 39;
-			this->radioButton23->TabStop = true;
 			this->radioButton23->UseVisualStyleBackColor = true;
 			// 
 			// radioButton24
@@ -594,7 +549,6 @@ namespace test {
 			this->radioButton24->Name = L"radioButton24";
 			this->radioButton24->Size = System::Drawing::Size(21, 20);
 			this->radioButton24->TabIndex = 40;
-			this->radioButton24->TabStop = true;
 			this->radioButton24->UseVisualStyleBackColor = true;
 			// 
 			// radioButton25
@@ -604,7 +558,6 @@ namespace test {
 			this->radioButton25->Name = L"radioButton25";
 			this->radioButton25->Size = System::Drawing::Size(21, 20);
 			this->radioButton25->TabIndex = 41;
-			this->radioButton25->TabStop = true;
 			this->radioButton25->UseVisualStyleBackColor = true;
 			// 
 			// radioButton26
@@ -614,7 +567,6 @@ namespace test {
 			this->radioButton26->Name = L"radioButton26";
 			this->radioButton26->Size = System::Drawing::Size(21, 20);
 			this->radioButton26->TabIndex = 42;
-			this->radioButton26->TabStop = true;
 			this->radioButton26->UseVisualStyleBackColor = true;
 			// 
 			// radioButton27
@@ -624,7 +576,6 @@ namespace test {
 			this->radioButton27->Name = L"radioButton27";
 			this->radioButton27->Size = System::Drawing::Size(21, 20);
 			this->radioButton27->TabIndex = 43;
-			this->radioButton27->TabStop = true;
 			this->radioButton27->UseVisualStyleBackColor = true;
 			// 
 			// radioButton28
@@ -634,7 +585,6 @@ namespace test {
 			this->radioButton28->Name = L"radioButton28";
 			this->radioButton28->Size = System::Drawing::Size(21, 20);
 			this->radioButton28->TabIndex = 44;
-			this->radioButton28->TabStop = true;
 			this->radioButton28->UseVisualStyleBackColor = true;
 			// 
 			// radioButton29
@@ -644,7 +594,6 @@ namespace test {
 			this->radioButton29->Name = L"radioButton29";
 			this->radioButton29->Size = System::Drawing::Size(21, 20);
 			this->radioButton29->TabIndex = 45;
-			this->radioButton29->TabStop = true;
 			this->radioButton29->UseVisualStyleBackColor = true;
 			// 
 			// radioButton30
@@ -654,7 +603,6 @@ namespace test {
 			this->radioButton30->Name = L"radioButton30";
 			this->radioButton30->Size = System::Drawing::Size(21, 20);
 			this->radioButton30->TabIndex = 46;
-			this->radioButton30->TabStop = true;
 			this->radioButton30->UseVisualStyleBackColor = true;
 			// 
 			// radioButton31
@@ -664,7 +612,6 @@ namespace test {
 			this->radioButton31->Name = L"radioButton31";
 			this->radioButton31->Size = System::Drawing::Size(21, 20);
 			this->radioButton31->TabIndex = 47;
-			this->radioButton31->TabStop = true;
 			this->radioButton31->UseVisualStyleBackColor = true;
 			// 
 			// radioButton32
@@ -674,7 +621,6 @@ namespace test {
 			this->radioButton32->Name = L"radioButton32";
 			this->radioButton32->Size = System::Drawing::Size(21, 20);
 			this->radioButton32->TabIndex = 48;
-			this->radioButton32->TabStop = true;
 			this->radioButton32->UseVisualStyleBackColor = true;
 			// 
 			// radioButton33
@@ -684,7 +630,6 @@ namespace test {
 			this->radioButton33->Name = L"radioButton33";
 			this->radioButton33->Size = System::Drawing::Size(21, 20);
 			this->radioButton33->TabIndex = 49;
-			this->radioButton33->TabStop = true;
 			this->radioButton33->UseVisualStyleBackColor = true;
 			// 
 			// radioButton34
@@ -694,7 +639,6 @@ namespace test {
 			this->radioButton34->Name = L"radioButton34";
 			this->radioButton34->Size = System::Drawing::Size(21, 20);
 			this->radioButton34->TabIndex = 50;
-			this->radioButton34->TabStop = true;
 			this->radioButton34->UseVisualStyleBackColor = true;
 			// 
 			// radioButton35
@@ -704,7 +648,6 @@ namespace test {
 			this->radioButton35->Name = L"radioButton35";
 			this->radioButton35->Size = System::Drawing::Size(21, 20);
 			this->radioButton35->TabIndex = 51;
-			this->radioButton35->TabStop = true;
 			this->radioButton35->UseVisualStyleBackColor = true;
 			// 
 			// radioButton36
@@ -714,7 +657,6 @@ namespace test {
 			this->radioButton36->Name = L"radioButton36";
 			this->radioButton36->Size = System::Drawing::Size(21, 20);
 			this->radioButton36->TabIndex = 52;
-			this->radioButton36->TabStop = true;
 			this->radioButton36->UseVisualStyleBackColor = true;
 			// 
 			// radioButton37
@@ -724,7 +666,6 @@ namespace test {
 			this->radioButton37->Name = L"radioButton37";
 			this->radioButton37->Size = System::Drawing::Size(21, 20);
 			this->radioButton37->TabIndex = 53;
-			this->radioButton37->TabStop = true;
 			this->radioButton37->UseVisualStyleBackColor = true;
 			// 
 			// radioButton38
@@ -734,7 +675,6 @@ namespace test {
 			this->radioButton38->Name = L"radioButton38";
 			this->radioButton38->Size = System::Drawing::Size(21, 20);
 			this->radioButton38->TabIndex = 54;
-			this->radioButton38->TabStop = true;
 			this->radioButton38->UseVisualStyleBackColor = true;
 			// 
 			// radioButton39
@@ -744,7 +684,6 @@ namespace test {
 			this->radioButton39->Name = L"radioButton39";
 			this->radioButton39->Size = System::Drawing::Size(21, 20);
 			this->radioButton39->TabIndex = 55;
-			this->radioButton39->TabStop = true;
 			this->radioButton39->UseVisualStyleBackColor = true;
 			// 
 			// radioButton40
@@ -754,7 +693,6 @@ namespace test {
 			this->radioButton40->Name = L"radioButton40";
 			this->radioButton40->Size = System::Drawing::Size(21, 20);
 			this->radioButton40->TabIndex = 56;
-			this->radioButton40->TabStop = true;
 			this->radioButton40->UseVisualStyleBackColor = true;
 			// 
 			// radioButton41
@@ -764,7 +702,6 @@ namespace test {
 			this->radioButton41->Name = L"radioButton41";
 			this->radioButton41->Size = System::Drawing::Size(21, 20);
 			this->radioButton41->TabIndex = 57;
-			this->radioButton41->TabStop = true;
 			this->radioButton41->UseVisualStyleBackColor = true;
 			// 
 			// radioButton42
@@ -774,8 +711,113 @@ namespace test {
 			this->radioButton42->Name = L"radioButton42";
 			this->radioButton42->Size = System::Drawing::Size(21, 20);
 			this->radioButton42->TabIndex = 58;
-			this->radioButton42->TabStop = true;
 			this->radioButton42->UseVisualStyleBackColor = true;
+			// 
+			// rbProgramA
+			// 
+			this->rbProgramA->AutoSize = true;
+			this->rbProgramA->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->rbProgramA->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbProgramA->Location = System::Drawing::Point(540, 57);
+			this->rbProgramA->Name = L"rbProgramA";
+			this->rbProgramA->Size = System::Drawing::Size(59, 36);
+			this->rbProgramA->TabIndex = 59;
+			this->rbProgramA->Text = L"A";
+			this->rbProgramA->UseVisualStyleBackColor = false;
+			// 
+			// rbProgramB
+			// 
+			this->rbProgramB->AutoSize = true;
+			this->rbProgramB->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->rbProgramB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbProgramB->Location = System::Drawing::Point(672, 57);
+			this->rbProgramB->Name = L"rbProgramB";
+			this->rbProgramB->Size = System::Drawing::Size(59, 36);
+			this->rbProgramB->TabIndex = 60;
+			this->rbProgramB->Text = L"B";
+			this->rbProgramB->UseVisualStyleBackColor = false;
+			// 
+			// rbProgramC
+			// 
+			this->rbProgramC->AutoSize = true;
+			this->rbProgramC->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->rbProgramC->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbProgramC->Location = System::Drawing::Point(804, 57);
+			this->rbProgramC->Name = L"rbProgramC";
+			this->rbProgramC->Size = System::Drawing::Size(60, 36);
+			this->rbProgramC->TabIndex = 61;
+			this->rbProgramC->Text = L"C";
+			this->rbProgramC->UseVisualStyleBackColor = false;
+			// 
+			// rbDrain
+			// 
+			this->rbDrain->AutoSize = true;
+			this->rbDrain->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->rbDrain->Location = System::Drawing::Point(561, 212);
+			this->rbDrain->Name = L"rbDrain";
+			this->rbDrain->Size = System::Drawing::Size(72, 24);
+			this->rbDrain->TabIndex = 62;
+			this->rbDrain->Text = L"Drain";
+			this->rbDrain->UseVisualStyleBackColor = false;
+			// 
+			// rbSink
+			// 
+			this->rbSink->AutoSize = true;
+			this->rbSink->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->rbSink->Location = System::Drawing::Point(905, 479);
+			this->rbSink->Name = L"rbSink";
+			this->rbSink->Size = System::Drawing::Size(65, 24);
+			this->rbSink->TabIndex = 63;
+			this->rbSink->Text = L"Sink";
+			this->rbSink->UseVisualStyleBackColor = false;
+			// 
+			// rbDoorLock
+			// 
+			this->rbDoorLock->AutoSize = true;
+			this->rbDoorLock->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->rbDoorLock->Location = System::Drawing::Point(741, 310);
+			this->rbDoorLock->Name = L"rbDoorLock";
+			this->rbDoorLock->Size = System::Drawing::Size(68, 24);
+			this->rbDoorLock->TabIndex = 64;
+			this->rbDoorLock->Text = L"Lock";
+			this->rbDoorLock->UseVisualStyleBackColor = false;
+			// 
+			// btnReset
+			// 
+			this->btnReset->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->btnReset->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnReset->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnReset->Location = System::Drawing::Point(310, 452);
+			this->btnReset->Name = L"btnReset";
+			this->btnReset->Size = System::Drawing::Size(70, 66);
+			this->btnReset->TabIndex = 65;
+			this->btnReset->Text = L"Reset";
+			this->btnReset->UseVisualStyleBackColor = false;
+			// 
+			// btnLockDoor
+			// 
+			this->btnLockDoor->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->btnLockDoor->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnLockDoor->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnLockDoor->Location = System::Drawing::Point(80, 132);
+			this->btnLockDoor->Name = L"btnLockDoor";
+			this->btnLockDoor->Size = System::Drawing::Size(180, 58);
+			this->btnLockDoor->TabIndex = 66;
+			this->btnLockDoor->Text = L"Lock Door";
+			this->btnLockDoor->UseVisualStyleBackColor = false;
 			// 
 			// MyForm
 			// 
@@ -784,6 +826,14 @@ namespace test {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(67)), static_cast<System::Int32>(static_cast<System::Byte>(74)),
 				static_cast<System::Int32>(static_cast<System::Byte>(66)));
 			this->ClientSize = System::Drawing::Size(1058, 590);
+			this->Controls->Add(this->btnLockDoor);
+			this->Controls->Add(this->btnReset);
+			this->Controls->Add(this->rbDoorLock);
+			this->Controls->Add(this->rbSink);
+			this->Controls->Add(this->rbDrain);
+			this->Controls->Add(this->rbProgramC);
+			this->Controls->Add(this->rbProgramB);
+			this->Controls->Add(this->rbProgramA);
 			this->Controls->Add(this->radioButton42);
 			this->Controls->Add(this->radioButton41);
 			this->Controls->Add(this->radioButton40);
@@ -813,25 +863,20 @@ namespace test {
 			this->Controls->Add(this->radioButton14);
 			this->Controls->Add(this->radioButton15);
 			this->Controls->Add(this->radioButton16);
-			this->Controls->Add(this->button3);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->radioButton12);
-			this->Controls->Add(this->radioButton13);
-			this->Controls->Add(this->radioButton9);
-			this->Controls->Add(this->radioButton10);
-			this->Controls->Add(this->radioButton11);
-			this->Controls->Add(this->radioButton6);
-			this->Controls->Add(this->radioButton7);
-			this->Controls->Add(this->radioButton8);
-			this->Controls->Add(this->radioButton5);
-			this->Controls->Add(this->radioButton4);
-			this->Controls->Add(this->radioButton3);
-			this->Controls->Add(this->radioButton2);
-			this->Controls->Add(this->radioButton1);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->btnProgramC);
-			this->Controls->Add(this->btnProgramB);
-			this->Controls->Add(this->btnProgramA);
+			this->Controls->Add(this->btnHeater);
+			this->Controls->Add(this->btnPressure);
+			this->Controls->Add(this->rbCoin200_1);
+			this->Controls->Add(this->rbCoin200_2);
+			this->Controls->Add(this->rbCoin50_1);
+			this->Controls->Add(this->rbCoin50_2);
+			this->Controls->Add(this->rbCoin50_3);
+			this->Controls->Add(this->rbCoin10_1);
+			this->Controls->Add(this->rbCoin10_2);
+			this->Controls->Add(this->rbCoin10_3);
+			this->Controls->Add(this->rbSoap2);
+			this->Controls->Add(this->rbSoap1);
+			this->Controls->Add(this->btnStart);
+			this->Controls->Add(this->btnProgram);
 			this->Controls->Add(this->tbWarnings);
 			this->Controls->Add(this->lblBalance);
 			this->Controls->Add(this->btnSoap2);
