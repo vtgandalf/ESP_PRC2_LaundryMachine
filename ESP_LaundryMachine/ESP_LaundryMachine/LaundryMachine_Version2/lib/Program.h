@@ -2,6 +2,11 @@
 #define PROGRAM_H
 
 #include "HardwareControl.h"
+#include "WaterManager.h"
+#include "HeaterHandler.h"
+#include "SecurityManager.h"
+#include "SoapHandler.h"
+#include "CoinHandler.h"
 
 using namespace sharedNamespace;
 
@@ -30,16 +35,36 @@ public:
     void ExecProgram(WashingProgram);
 
 private:
-    /* Method that handles the prewash stage */
-    void PreWash(int);
-    /* Method that handles the main wash stage */
+    /* Method that handles the prewash stage
+    input: sharedNamespace::Temp, defines what
+        should the heating during that stage be */
+    void PreWash(Temp);
+    /* Method that handles the main wash stage
+    input: 
+        - sharedNamespace::WaterLevel, defines how
+        full the tank should be before the soap is added
+        - sharedNamespace::Temp, defines the level of 
+        heating 
+        - int, defines how many times the tank should
+        repeat a cicle of rotating clockwise and 
+        anticlockwise */
     void MainWash(WaterLevel, Temp, int);
     /* Method that handles the centrifuge stage */
     void Centrifuge(int);
-    /* Vars which store the wahsing programs */
-    WashingProgram progA;
-    WashingProgram progB;
-    WashingProgram progC;
+    /* Vars which store the wahsing programs 
+    input: int, defines how many times the tank should
+        repeat a cicle of rotating clockwise and 
+        anticlockwise */
+    WashingProgram progA = {COLD, ALMOSTFULL, WARMER, 1, 1};
+    WashingProgram progB = {WARMER, ALMOSTFULL, WARMER, 1, 1};
+    WashingProgram progC = {WARMER, FULL, HOT, 3, 2};
+    /* Vars for the managers/handlers and the library */
+    HardwareControl _hardwareControl;
+    SecurityManager _securityManager;
+    SoapHandler _soapHandler;
+    CoinHandler _coinHandler;
+    HeaterHandler _heaterHandler;
+    WaterManager _waterManager;
 };
 
 #endif

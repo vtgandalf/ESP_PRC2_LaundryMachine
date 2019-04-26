@@ -22,6 +22,22 @@ public:
             - true - soap is enough
             - false - soap is not enough */
     bool IsSoapEnough(int, int);
+    /* This is a method that handles using the soap1 
+    in a washing program
+    input:
+        - how much soap to take
+    output: 
+        - true - soap has been successfully added
+        - false - not enough or out of range */
+    bool UseSoap1(int);
+    /* This is a method that handles using the soap1 
+    in a washing program
+    input:
+        - how much soap to take
+    output: 
+        - true - soap has been successfully added
+        - false - not enough or out of range */
+    bool UseSoap2(int);
 
 private:
     /* Booleans that indicate wheter or not an led has

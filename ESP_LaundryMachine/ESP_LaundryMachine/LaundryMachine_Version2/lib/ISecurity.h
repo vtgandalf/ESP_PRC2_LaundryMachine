@@ -7,9 +7,6 @@ using namespace sharedNamespace;
 class ISecurity
 {
 public:
-	/* Method that reads the water
-		level of the tank */
-	virtual WaterLevel GetWaterLevel() = 0;
 	/* Function to set the internal lock
 		input: 
 			- true - locked

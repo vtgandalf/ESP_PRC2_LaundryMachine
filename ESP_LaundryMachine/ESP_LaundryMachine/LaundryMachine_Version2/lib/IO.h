@@ -27,16 +27,6 @@ public:
 	/* Function to set the Speed
 		input: of type sharedNamespace::Speed */
 	virtual void SetSpeed(Speed) = 0;
-	/* Function to set the Drain
-		input: 
-			- true - turns it on
-			- false - turns it off */
-	virtual void SetDrain(bool) = 0;
-	/* Function to set the Sink
-		input: 
-			- true - turns it on
-			- false - turns it off */
-	virtual void SetSink(bool) = 0;
 	/* Function to set the Rotation
 		input: of type sharedNamespace::Rotation */
 	virtual void SetRotation(Rotation) = 0;
@@ -56,8 +46,6 @@ public:
 
 	/* Fields */
 	virtual bool Buzzer() = 0;			   // Returns the buzzer state
-	virtual bool Drain() = 0;			   // Returns the drain state
-	virtual bool Sink() = 0;			   // Returns the sink state
 	virtual bool Keyselect() = 0;		   // Returns the keyselect state
 	virtual bool Strobe() = 0;			   // returns the strobe state
 	virtual Rotation CurentRotation() = 0; // Returns the last set rotation

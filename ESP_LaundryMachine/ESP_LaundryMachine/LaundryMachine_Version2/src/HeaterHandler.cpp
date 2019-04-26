@@ -21,3 +21,12 @@ Temp HeaterHandler::GetTemperature()
 {
     return iheaterPtr->GetTemperature();
 }
+
+void HeaterHandler::StopHeating()
+{
+    if (iheaterPtr->Heater())
+    {
+        iheaterPtr->SetHeater(false);
+    }
+    
+}

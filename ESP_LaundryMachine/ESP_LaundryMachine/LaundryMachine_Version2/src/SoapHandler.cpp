@@ -113,3 +113,31 @@ void SoapHandler::Polling()
     InsertSoap();
     SetLed();
 }
+
+bool SoapHandler::UseSoap1(int x)
+{
+    if(soap1-x < 0)
+    {
+        soap1 -= x;
+        SetLed();
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool SoapHandler::UseSoap2(int x)
+{
+    if(soap2-x < 0)
+    {
+        soap2 -= x;
+        SetLed();
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

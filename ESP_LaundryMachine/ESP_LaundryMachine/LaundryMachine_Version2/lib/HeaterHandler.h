@@ -17,6 +17,9 @@ public:
         the temperature in the tank
         output: sharedNamespace::Temp */
     Temp GetTemperature();
+    /* This is a method that handles
+    disabling the heating */
+    void StopHeating();
 
 private:
     // accessing the library through this interface

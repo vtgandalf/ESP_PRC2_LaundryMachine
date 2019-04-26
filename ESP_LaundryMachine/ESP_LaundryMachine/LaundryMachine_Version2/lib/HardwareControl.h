@@ -16,9 +16,10 @@ instance */
 #include "ISoap.h"
 #include "IHeater.h"
 #include "SharedNamespace.h"
+#include "IWater.h"
 using namespace sharedNamespace;
 
-class HardwareControl : public ICoin, public ISecurity, public ISoap, public IO
+class HardwareControl : public ICoin, public ISecurity, public ISoap, public IO, public IWater
 {
 public:
     // Method that returns the singleton instance
@@ -36,15 +37,11 @@ public:
     /* IMPLEMENTATION OF IO */
     virtual void SetBuzzer(bool);
     virtual void SetSpeed(Speed);
-    virtual void SetDrain(bool);
-    virtual void SetSink(bool);
     virtual void SetRotation(Rotation);
     virtual void SetProgramLed(int);
     virtual void SetKeyselect(bool);
     virtual void SetStrobe(bool);
     virtual bool Buzzer();
-    virtual bool Drain();
-    virtual bool Sink();
     virtual bool Keyselect();
     virtual bool Strobe();
     virtual Rotation CurentRotation();
@@ -64,7 +61,6 @@ public:
     virtual void SetSoap2Led(bool);
 
     /* IMPLEMENTATION OF ISECURITY */
-    virtual WaterLevel GetWaterLevel();
     virtual void SetLock(bool);
     virtual bool Lock();
 
@@ -72,6 +68,14 @@ public:
     virtual Temp GetTemperature();
     virtual void SetHeater(bool);
     virtual bool Heater();
+
+    /* IMPLEMENTATION OF IWATER */
+    virtual WaterLevel GetWaterLevel();
+    virtual void SetDrain(bool);
+    virtual void SetSink(bool);
+    virtual bool Drain();
+    virtual bool Sink();
+
 
 private:
     // Singleton instance
