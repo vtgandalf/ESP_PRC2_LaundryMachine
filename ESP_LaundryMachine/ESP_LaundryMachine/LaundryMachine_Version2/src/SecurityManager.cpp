@@ -29,7 +29,10 @@ void SecurityManager::IndicateCompartments()
 
 bool SecurityManager::IsWaterLevelSafe()
 {
-	// to be implemented
+	bool response = false;
+	if(iwaterPtr->GetWaterLevel()>=ALMOSTEMPTY){
+		response = true;
+	}
 	return true;
 }
 

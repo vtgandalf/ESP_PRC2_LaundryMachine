@@ -17,6 +17,7 @@ struct WashingProgram
     Temp mainWashTemp;
     int mainWashRotations;
     int centrifugeRotations;
+    int price;
 };
 
 class Program
@@ -51,13 +52,21 @@ private:
     void MainWash(WaterLevel, Temp, int);
     /* Method that handles the centrifuge stage */
     void Centrifuge(int);
+    /* Method that handles reading the program button*/
+    void ReadProgramButton();
+    /* Method that handles reading the start button 
+    output: 
+        - true - if the button has been pressed
+        - false - if it hasnt*/
+    bool ReadStartButton();
+    /* Method that sets the leds for the programs 
+    input: {1,2,3} the number of the program */
+    void SetLeds(int);
     /* Vars which store the wahsing programs 
     input: int, defines how many times the tank should
         repeat a cicle of rotating clockwise and 
         anticlockwise */
-    WashingProgram progA = {COLD, ALMOSTFULL, WARMER, 1, 1};
-    WashingProgram progB = {WARMER, ALMOSTFULL, WARMER, 1, 1};
-    WashingProgram progC = {WARMER, FULL, HOT, 3, 2};
+    WashingProgram programs[3] = {{COLD, ALMOSTFULL, WARMER, 1, 1, 360},{WARMER, ALMOSTFULL, WARMER, 1, 1, 480}, {WARMER, FULL, HOT, 3, 2, 510}};
     /* Vars for the managers/handlers and the library */
     HardwareControl _hardwareControl;
     SecurityManager _securityManager;
@@ -65,6 +74,10 @@ private:
     CoinHandler _coinHandler;
     HeaterHandler _heaterHandler;
     WaterManager _waterManager;
+    // access the library through the io interface
+    IO *ioPtr = (IO *)HardwareControl::GetInstance();
+    // var indicating the selected program
+    int program = -1;
 };
 
 #endif
