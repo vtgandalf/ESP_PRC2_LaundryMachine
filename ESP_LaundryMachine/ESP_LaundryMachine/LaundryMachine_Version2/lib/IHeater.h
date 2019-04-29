@@ -1,7 +1,8 @@
 #ifndef IHEATER_H
 #define IHEATER_H
 
-#include "HardwareControl.h"
+#include "SharedNamespace.h"
+using namespace sharedNamespace;
 
 class IHeater
 {

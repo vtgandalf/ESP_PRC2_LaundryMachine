@@ -2,7 +2,6 @@
 #define IO_H
 
 #include "SharedNamespace.h"
-
 using namespace sharedNamespace;
 
 class IO

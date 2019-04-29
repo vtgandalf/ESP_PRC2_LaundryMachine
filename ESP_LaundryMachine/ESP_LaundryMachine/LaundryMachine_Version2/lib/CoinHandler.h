@@ -2,7 +2,6 @@
 #define COINHANDLER_H
 
 #include "HardwareControl.h"
-
 using namespace sharedNamespace;
 
 class CoinHandler
@@ -54,7 +53,7 @@ private:
     void SetLed();
     /* Method that controlls the coin leds
         showing that some amount of them is missing */
-    void IndicateMissingCoins(int value);
+    void IndicateMissingCoins(int);
 };
 
 #endif

@@ -2,7 +2,6 @@
 #define INPUTMANAGER_H
 
 #include "HardwareControl.h"
-
 using namespace sharedNamespace;
 
 class InputManager

@@ -2,6 +2,7 @@
 #define IWATER_H
 
 #include "SharedNamespace.h"
+using namespace sharedNamespace;
 
 class IWater
 {

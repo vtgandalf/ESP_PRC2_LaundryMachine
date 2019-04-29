@@ -2,7 +2,6 @@
 #define SECURITYMANAGER_H
 
 #include "HardwareControl.h"
-
 using namespace sharedNamespace;
 
 class SecurityManager

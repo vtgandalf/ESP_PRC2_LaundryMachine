@@ -2,7 +2,6 @@
 #define ISECURITY_H
 
 #include "SharedNamespace.h"
-using namespace sharedNamespace;
 
 class ISecurity
 {

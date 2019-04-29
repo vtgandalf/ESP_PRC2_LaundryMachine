@@ -2,7 +2,6 @@
 #define IHEATERHANDLER_H
 
 #include "HardwareControl.h"
-
 using namespace sharedNamespace;
 
 class HeaterHandler

@@ -2,7 +2,6 @@
 #define SOAPHANDLER_H
 
 #include "HardwareControl.h"
-
 using namespace sharedNamespace;
 
 class SoapHandler

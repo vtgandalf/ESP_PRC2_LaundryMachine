@@ -2,7 +2,6 @@
 #define ICOIN_H
 
 #include "SharedNamespace.h"
-#include "IO.h"
 
 class ICoin
 {
