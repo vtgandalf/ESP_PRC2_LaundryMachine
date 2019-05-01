@@ -2,6 +2,7 @@
 
 WashingProgram Program::PreProgram()
 {
+    _hardwareControl.HardwareControlSetup();
     // to be implemented
     bool trig = false;
     while (trig != true)

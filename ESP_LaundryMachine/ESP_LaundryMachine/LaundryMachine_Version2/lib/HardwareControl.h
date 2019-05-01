@@ -17,9 +17,10 @@ instance */
 #include "IHeater.h"
 #include "SharedNamespace.h"
 #include "IWater.h"
+#include "IMotor.h"
 using namespace sharedNamespace;
 
-class HardwareControl : public ICoin, public ISecurity, public ISoap, public IO, public IWater
+class HardwareControl : public ICoin, public ISecurity, public ISoap, public IO, public IWater, public IMotor
 {
 public:
     // Method that returns the singleton instance
@@ -36,17 +37,12 @@ public:
     //protected:
     /* IMPLEMENTATION OF IO */
     virtual void SetBuzzer(bool);
-    virtual void SetSpeed(Speed);
-    virtual void SetRotation(Rotation);
     virtual void SetProgramLed(int);
     virtual void SetKeyselect(bool);
     virtual void SetStrobe(bool);
     virtual bool Buzzer();
     virtual bool Keyselect();
     virtual bool Strobe();
-    virtual Rotation CurentRotation();
-    virtual Speed CurentSpeed();
-
     virtual byte GetRawInputByte();
     virtual void SetGlobalInputByte(byte);
     virtual byte GetGlobalInputByte();
@@ -76,6 +72,11 @@ public:
     virtual bool Drain();
     virtual bool Sink();
 
+    /* IMPLEMENTATION OF IMOTOR */
+    virtual void SetSpeed(Speed);
+    virtual void SetRotation(Rotation);
+    virtual Rotation CurentRotation();
+    virtual Speed CurentSpeed();
 
 private:
     // Singleton instance

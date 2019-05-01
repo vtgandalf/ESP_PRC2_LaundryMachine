@@ -23,12 +23,6 @@ public:
 			- true - turns it on
 			- false - turns it off */
 	virtual void SetBuzzer(bool) = 0;
-	/* Function to set the Speed
-		input: of type sharedNamespace::Speed */
-	virtual void SetSpeed(Speed) = 0;
-	/* Function to set the Rotation
-		input: of type sharedNamespace::Rotation */
-	virtual void SetRotation(Rotation) = 0;
 	/* Function that sets the leds indicating
 		which program has been chose
 		input:
@@ -47,8 +41,6 @@ public:
 	virtual bool Buzzer() = 0;			   // Returns the buzzer state
 	virtual bool Keyselect() = 0;		   // Returns the keyselect state
 	virtual bool Strobe() = 0;			   // returns the strobe state
-	virtual Rotation CurentRotation() = 0; // Returns the last set rotation
-	virtual Speed CurentSpeed() = 0;	   // Returns the last set speed
 };
 
 #endif
