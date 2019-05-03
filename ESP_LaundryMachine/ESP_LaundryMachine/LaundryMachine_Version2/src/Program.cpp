@@ -2,6 +2,7 @@
 
 WashingProgram Program::PreProgram()
 {
+    Serial.println("Waiting for coins, soap, program selection and etc...");
     _hardwareControl.HardwareControlSetup();
     // to be implemented
     bool trig = false;
@@ -40,6 +41,7 @@ WashingProgram Program::PreProgram()
 
 void Program::ExecProgram(WashingProgram program)
 {
+    Serial.println("Program has been started.");
     // to be implemented
     PreWash(program.preWashTemp);
     MainWash(program.mainWashWaterLevel, program.mainWashTemp, program.mainWashRotations);
@@ -51,7 +53,12 @@ void Program::PreWash(Temp temperature)
     // to be implemented
 
     // fill water at least 50%
-    _waterManager.FillUpWater(ALMOSTFULL);
+    if (!_waterManager.FillUpWater(ALMOSTFULL, program, &_securityManager))
+    {
+        Serial.println("Program exiting due to lack of pressure");
+        _waterManager.EmptyWaterTank();
+        return;
+    }
 
     // add soap1
     if (_waterManager.Drain())
@@ -90,7 +97,12 @@ void Program::PreWash(Temp temperature)
         {
             Serial.println("Error: the tank does not have enough water");
             Serial.println("Actio: Fill up the tank");
-            _waterManager.FillUpWater(ALMOSTFULL);
+            if (!_waterManager.FillUpWater(ALMOSTFULL, program, &_securityManager))
+            {
+                Serial.println("Program exiting due to lack of pressure");
+                _waterManager.EmptyWaterTank();
+                return;
+            }
         }
     }
 
@@ -107,7 +119,12 @@ void Program::MainWash(WaterLevel waterLevel, Temp temperature, int numberOfRota
     // to be implemented
 
     // fill water until >= waterLevel
-    _waterManager.FillUpWater(waterLevel);
+    if (!_waterManager.FillUpWater(waterLevel, program, &_securityManager))
+    {
+        Serial.println("Program exiting due to lack of pressure");
+        _waterManager.EmptyWaterTank();
+        return;
+    }
     // add soap2
     if (_waterManager.Drain())
     {
@@ -145,7 +162,12 @@ void Program::MainWash(WaterLevel waterLevel, Temp temperature, int numberOfRota
         {
             Serial.println("Error: the tank does not have enough water");
             Serial.println("Actio: Fill up the tank");
-            _waterManager.FillUpWater(ALMOSTFULL);
+            if (!_waterManager.FillUpWater(ALMOSTFULL, program, &_securityManager))
+            {
+                Serial.println("Program exiting due to lack of pressure");
+                _waterManager.EmptyWaterTank();
+                return;
+            }
         }
     }
 
@@ -162,7 +184,12 @@ void Program::MainWash(WaterLevel waterLevel, Temp temperature, int numberOfRota
     ///////////////////////////////////////////////
 
     // fill water until >= 50%
-    _waterManager.FillUpWater(ALMOSTEMPTY);
+    if (!_waterManager.FillUpWater(ALMOSTEMPTY, program, &_securityManager))
+    {
+        Serial.println("Program exiting due to lack of pressure");
+        _waterManager.EmptyWaterTank();
+        return;
+    }
 
     // no heating
     _heaterHandler.StopHeating();

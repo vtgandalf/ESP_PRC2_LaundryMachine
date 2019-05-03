@@ -368,6 +368,14 @@ void HardwareControl::SetProgramLed(int x)
 {
   switch (x)
   {
+  case 0:
+    centipede.digitalWrite(OUT_GROUP2, HIGH);
+    centipede.digitalWrite(OUT_GROUP1, HIGH);
+    centipede.digitalWrite(OUT_DATAC, LOW);
+    centipede.digitalWrite(OUT_DATAB, LOW);
+    centipede.digitalWrite(OUT_DATAA, LOW);
+    break;
+
   case 1:
     centipede.digitalWrite(OUT_GROUP2, HIGH);
     centipede.digitalWrite(OUT_GROUP1, HIGH);

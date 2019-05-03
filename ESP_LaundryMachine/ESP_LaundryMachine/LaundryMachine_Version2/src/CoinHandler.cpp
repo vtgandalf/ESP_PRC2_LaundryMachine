@@ -59,7 +59,7 @@ void CoinHandler::NewCoin()
             coin10++;
             coin10LedHasBeenSet = false;
             actionHasBeenTaken = true;
-            Serial.println("coin10++");
+            Serial.println("Coin10 has been added.");
         }
     }
     else if ((temp | bitMaskCoin50) == temp)
@@ -69,7 +69,7 @@ void CoinHandler::NewCoin()
             coin50++;
             coin50LedHasBeenSet = false;
             actionHasBeenTaken = true;
-            Serial.println("coin50++");
+            Serial.println("Coin50 has been added.");
         }
     }
     else if ((temp | bitMaskCoin200) == temp)
@@ -79,7 +79,7 @@ void CoinHandler::NewCoin()
             coin200++;
             coin200LedHasBeenSet = false;
             actionHasBeenTaken = true;
-            Serial.println("coin200++");
+            Serial.println("Coin200 has been added.");
         }
     }
     if (actionHasBeenTaken)
@@ -94,7 +94,7 @@ void CoinHandler::Clear()
     byte temp = ioPtr->GetGlobalInputByte();
     if ((temp | bitMaskClear) == temp)
     {
-        Serial.println("Clear");
+        Serial.println("Clear has been pressed.");
         coin10LedHasBeenSet = false;
         coin50LedHasBeenSet = false;
         coin200LedHasBeenSet = false;

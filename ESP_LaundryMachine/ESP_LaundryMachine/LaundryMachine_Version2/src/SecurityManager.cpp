@@ -30,7 +30,8 @@ void SecurityManager::IndicateCompartments()
 bool SecurityManager::IsWaterLevelSafe()
 {
 	bool response = false;
-	if(iwaterPtr->GetWaterLevel()>=ALMOSTEMPTY){
+	if (iwaterPtr->GetWaterLevel() >= ALMOSTEMPTY)
+	{
 		response = true;
 	}
 	return true;
@@ -38,18 +39,43 @@ bool SecurityManager::IsWaterLevelSafe()
 
 bool SecurityManager::IsEverythingClosed()
 {
-	bool returnVal;
+	/*bool returnVal;
 	returnVal = doorHasBeenLocked;
 	if (!returnVal)
 	{
 		IndicateCompartments();
 	}
-	return returnVal;
+	return returnVal;*/
+	return true;
 }
 
-void SecurityManager::SafeMode()
+bool SecurityManager::SafeMode(int program)
 {
 	// to be implemented
+	prevMillis = millis();
+	bool trig = false;
+	Serial.print("Going in SafeMode(), waiting... ");
+	while (!trig)
+	{
+		if(IsPressureOn())
+		{
+			Serial.println(" Pressure came back!");
+			return true;
+		}
+		if (((millis() - prevMillis) / (60 * 1000)) > timeIntervalSafeMode)
+		{
+			Serial.println("Ten monutes have passed and still no pressure!")
+			trig = true;
+		}
+		else
+		{
+			ioPtr->SetProgramLed(0);
+			delay(1000);
+			ioPtr->SetProgramLed(program + 1);
+			delay(1000);
+		}
+	}
+	return false;
 }
 
 // method that handles the polling
@@ -60,7 +86,9 @@ void SecurityManager::Polling()
 	// to be implemented
 	DoorClosed();
 	if (!IsPressureOn())
-		SafeMode();
+	{
+		//SafeMode();
+	}
 }
 
 void SecurityManager::DoorClosed()
@@ -80,4 +108,12 @@ void SecurityManager::DoorClosed()
 
 	if (actionHasBeenTaken)
 		ioPtr->SetGlobalInputByte(0x00);
+}
+
+void SecurityManager::LockDoor()
+{
+	if (!isecurityPtr->Lock())
+	{
+		isecurityPtr->SetLock(true);
+	}
 }

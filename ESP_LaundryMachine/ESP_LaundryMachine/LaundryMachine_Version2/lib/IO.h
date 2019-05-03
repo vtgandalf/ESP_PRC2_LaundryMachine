@@ -26,6 +26,7 @@ public:
 	/* Function that sets the leds indicating
 		which program has been chose
 		input:
+			- 0 - all leds are off
 			- 1 - first led lights up
 			- 2 - second led lights up
 			- 3 - third led lights up */

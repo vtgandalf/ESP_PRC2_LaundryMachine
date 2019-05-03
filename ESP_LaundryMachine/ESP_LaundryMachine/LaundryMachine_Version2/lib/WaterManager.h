@@ -2,6 +2,7 @@
 #define WATERMANAGER_H
 
 #include "HardwareControl.h"
+#include "SecurityManager.h"
 
 using namespace sharedNamespace;
 
@@ -11,8 +12,12 @@ public:
     /* This is a method that handles filling
     up the tank with water up to a desired
     point
-    input: sharedNamespace::WaterLevel */
-    void FillUpWater(WaterLevel);
+    input: sharedNamespace::WaterLevel 
+    output:
+        - false - filling up failed due to
+                security reasons
+        - true - filling up sucessful*/
+    bool FillUpWater(WaterLevel, int, SecurityManager *);
     /* This is a method that handles emptying
     the tank fully. It will halt every other
     process until that is done */

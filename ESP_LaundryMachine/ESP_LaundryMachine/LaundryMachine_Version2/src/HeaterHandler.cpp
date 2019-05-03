@@ -2,12 +2,7 @@
 
 void HeaterHandler::HeatUp(Temp temperature)
 {
-    /* to be added:
-            the heater shoudl
-            only turn on whenever
-            the water level is save,
-            which the securityManager 
-            should indicate */
+    Serial.print("Heating up... ");
     while (GetTemperature() <= temperature)
     {
         if (!iheaterPtr->Heater())
@@ -15,6 +10,7 @@ void HeaterHandler::HeatUp(Temp temperature)
             iheaterPtr->SetHeater(true);
         }
     }
+    Serial.print("done.");
 }
 
 Temp HeaterHandler::GetTemperature()
@@ -26,6 +22,7 @@ void HeaterHandler::StopHeating()
 {
     if (iheaterPtr->Heater())
     {
+        Serial.println("Heater has been stopped.");
         iheaterPtr->SetHeater(false);
     }
     

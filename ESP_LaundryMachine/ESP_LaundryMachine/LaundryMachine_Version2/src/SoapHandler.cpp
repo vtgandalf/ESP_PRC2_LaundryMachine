@@ -43,7 +43,7 @@ void SoapHandler::SetLed()
         {
             isoapPtr->SetSoap1Led(true);
             soap1LedHasBeenSetUp = true;
-            Serial.println("SetSoap1Led");
+            Serial.println("SetSoap1Led has been set.");
         }
     }
     if (soap2 == 3)
@@ -52,7 +52,7 @@ void SoapHandler::SetLed()
         {
             isoapPtr->SetSoap2Led(true);
             soap2LedHasBeenSetUp = true;
-            Serial.println("SetSoap2Led");
+            Serial.println("SetSoap2Led has been set.");
         }
     }
 }
@@ -78,7 +78,7 @@ void SoapHandler::InsertSoap()
             //Serial.println(soap1);
             soap1++;
             soap1LedHasBeenSetUp = false;
-            Serial.print("soap1: ");
+            Serial.print("Soap1 has been added.");
             Serial.println(soap1);
             lastByte = 0x00;
         }
@@ -93,7 +93,7 @@ void SoapHandler::InsertSoap()
             //Serial.println(soap2);
             soap2++;
             soap2LedHasBeenSetUp = false;
-            Serial.print("soap2: ");
+            Serial.print("Soap2 has been added.");
             Serial.println(soap2);
             lastByte = 0x00;
         }
