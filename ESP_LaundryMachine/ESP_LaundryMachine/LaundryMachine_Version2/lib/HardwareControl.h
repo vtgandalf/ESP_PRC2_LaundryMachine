@@ -18,9 +18,10 @@ instance */
 #include "SharedNamespace.h"
 #include "IWater.h"
 #include "IMotor.h"
+#include "IProgram.h"
 using namespace sharedNamespace;
 
-class HardwareControl : public ICoin, public ISecurity, public ISoap, public IO, public IWater, public IMotor
+class HardwareControl : public ICoin, public ISecurity, public ISoap, public IO, public IWater, public IMotor, public IProgram
 {
 public:
     // Method that returns the singleton instance
@@ -37,7 +38,6 @@ public:
     //protected:
     /* IMPLEMENTATION OF IO */
     virtual void SetBuzzer(bool);
-    virtual void SetProgramLed(int);
     virtual void SetKeyselect(bool);
     virtual void SetStrobe(bool);
     virtual bool Buzzer();
@@ -51,14 +51,22 @@ public:
     virtual void SetCoin10Led(int);
     virtual void SetCoin50Led(int);
     virtual void SetCoin200Led(int);
+    virtual bool Coin10Action();
+    virtual bool Coin50Action();
+    virtual bool Coin200Action();
+    virtual bool ClearAction();
 
     /* IMPLEMENTATION OF ISOAP */
     virtual void SetSoap1Led(bool);
     virtual void SetSoap2Led(bool);
+    virtual bool Soap1Action();
+    virtual bool Soap2Action();
 
     /* IMPLEMENTATION OF ISECURITY */
     virtual void SetLock(bool);
     virtual bool Lock();
+    virtual bool DoorAction();
+    virtual bool PressureAction();
 
     /* IMPLEMENTATION OF IHEATER */
     virtual Temp GetTemperature();
@@ -77,6 +85,11 @@ public:
     virtual void SetRotation(Rotation);
     virtual Rotation CurentRotation();
     virtual Speed CurentSpeed();
+
+    /* IMPLEMENTATION OF IPROGRAM */
+    virtual void SetProgramLed(int);
+    virtual bool ProgramAction();
+    virtual bool StartAction();
 
 private:
     // Singleton instance
@@ -112,6 +125,30 @@ private:
         properly reading and debouncing the multiplexed
         buttons and switches */
     byte inputReadings = 0x00;
+    /* This variable stores the previous debounced input
+    byte */
+    byte previousByte = 0x00;
+    /* This method checks the debounced input byte for
+    a switch click based on the input
+    input:
+        - byte - bitmask for specific switch
+        - byte - bitmask for the keyselect 
+        - byte - the debounced reading byte
+        - byte - the previousByte
+
+    output:
+        - true - if a switch press has been recognized */
+    bool CheckSwitchClick(byte, byte, byte, byte);
+    /* This method checks the debounced input byte for
+    a button click based on the input
+    input:
+        - byte - bitmask for specific switch
+        - byte - the debounced reading byte
+        - byte - the previousByte
+
+    output:
+        - true - if a switch press has been recognized */
+    bool CheckButtonClick(byte, byte, byte);
 };
 
 #endif

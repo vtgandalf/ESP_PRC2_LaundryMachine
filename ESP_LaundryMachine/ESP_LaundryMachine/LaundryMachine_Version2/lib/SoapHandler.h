@@ -47,7 +47,7 @@ private:
     bool soap1LedHasBeenSetUp = true;
     bool soap2LedHasBeenSetUp = true;
     // accessing the library through interfaces
-    IO *ioPtr = (IO *)HardwareControl::GetInstance();
+    //IO *ioPtr = (IO *)HardwareControl::GetInstance();
     ISoap *isoapPtr = (ISoap *)HardwareControl::GetInstance();
     // vars storing the inserted soap
     int soap1 = 0;
@@ -63,8 +63,6 @@ private:
     /* Method that handles the incrementing of
         the local variables on input */
     void InsertSoap();
-
-    byte lastByte = 0x00;
 };
 
 #endif

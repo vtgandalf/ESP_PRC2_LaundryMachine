@@ -23,7 +23,7 @@ void InputManager::Debouncing(byte *previousByteState, byte *byteState, byte rea
       }
       if (x == 1)
       {
-        if (*byteState != bitMaskKeyselect)
+        if (*byteState != 0x10) // 0x10 is the bitmask for keyselect
         {
           //Serial.println(reading, BIN);
           ioPtr->SetGlobalInputByte(reading);

@@ -59,50 +59,19 @@ void SoapHandler::SetLed()
 
 void SoapHandler::InsertSoap()
 {
-    bool actionHasBeenTaken = false;
-    byte temp = ioPtr->GetGlobalInputByte();
-    /*if (temp != 0x00)
+    if ((soap1 < 2) && isoapPtr->Soap1Action())
     {
-        Serial.println(lastByte, BIN);
-        Serial.println(temp, BIN);
-        Serial.println(" ");
-    }*/
-    if (((temp | bitMaskSoap1) == temp) & ((temp | bitMaskKeyselect) != temp))
-    {
-
-        actionHasBeenTaken = true;
-        if (soap1 < 2)
-        {
-            //Serial.println("soap1++");
-            //Serial.print("soap1: ");
-            //Serial.println(soap1);
-            soap1++;
-            soap1LedHasBeenSetUp = false;
-            Serial.print("Soap1 has been added.");
-            Serial.println(soap1);
-            lastByte = 0x00;
-        }
+        soap1++;
+        soap1LedHasBeenSetUp = false;
+        Serial.print("Soap1 has been added.");
+        Serial.println(soap1);
     }
-    else if (((temp | bitMaskSoap2) == temp) & ((temp | bitMaskKeyselect) != temp))
+    if ((soap2 < 3) && isoapPtr->Soap2Action())
     {
-        actionHasBeenTaken = true;
-        if (soap2 < 3)
-        {
-            //Serial.println("soap2++");
-            //Serial.print("soap2: ");
-            //Serial.println(soap2);
-            soap2++;
-            soap2LedHasBeenSetUp = false;
-            Serial.print("Soap2 has been added.");
-            Serial.println(soap2);
-            lastByte = 0x00;
-        }
-    }
-
-    if (actionHasBeenTaken)
-    {
-        lastByte = temp;
-        ioPtr->SetGlobalInputByte(0x00);
+        soap2++;
+        soap2LedHasBeenSetUp = false;
+        Serial.print("Soap2 has been added.");
+        Serial.println(soap2);
     }
 }
 
@@ -116,7 +85,7 @@ void SoapHandler::Polling()
 
 bool SoapHandler::UseSoap1(int x)
 {
-    if(soap1-x < 0)
+    if (soap1 - x < 0)
     {
         soap1 -= x;
         SetLed();
@@ -130,7 +99,7 @@ bool SoapHandler::UseSoap1(int x)
 
 bool SoapHandler::UseSoap2(int x)
 {
-    if(soap2-x < 0)
+    if (soap2 - x < 0)
     {
         soap2 -= x;
         SetLed();

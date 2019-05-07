@@ -2,13 +2,7 @@
 
 bool SecurityManager::IsPressureOn()
 {
-	bool response = false;
-	byte temp = ioPtr->GetRawInputByte();
-	if (((temp | bitMaskPressure) == temp) && ((temp | bitMaskKeyselect) != temp))
-	{
-		response = true;
-	}
-	return response;
+	return isecurityPtr->PressureAction();
 }
 
 void SecurityManager::IndicateCompartments()
@@ -57,21 +51,21 @@ bool SecurityManager::SafeMode(int program)
 	Serial.print("Going in SafeMode(), waiting... ");
 	while (!trig)
 	{
-		if(IsPressureOn())
+		if (IsPressureOn())
 		{
 			Serial.println(" Pressure came back!");
 			return true;
 		}
 		if (((millis() - prevMillis) / (60 * 1000)) > timeIntervalSafeMode)
 		{
-			Serial.println("Ten monutes have passed and still no pressure!")
+			Serial.println("Ten monutes have passed and still no pressure!");
 			trig = true;
 		}
 		else
 		{
-			ioPtr->SetProgramLed(0);
+			iprogramPtr->SetProgramLed(0);
 			delay(1000);
-			ioPtr->SetProgramLed(program + 1);
+			iprogramPtr->SetProgramLed(program + 1);
 			delay(1000);
 		}
 	}
@@ -93,11 +87,8 @@ void SecurityManager::Polling()
 
 void SecurityManager::DoorClosed()
 {
-	bool actionHasBeenTaken = false;
-	byte temp = ioPtr->GetGlobalInputByte();
-	if (((temp | bitMaskDoorlock) == temp) & ((temp | bitMaskKeyselect) != temp))
+	if (isecurityPtr->DoorAction())
 	{
-		actionHasBeenTaken = true;
 		Serial.println("lock the door");
 		if (!doorHasBeenLocked)
 		{
@@ -105,9 +96,6 @@ void SecurityManager::DoorClosed()
 			doorHasBeenLocked = true;
 		}
 	}
-
-	if (actionHasBeenTaken)
-		ioPtr->SetGlobalInputByte(0x00);
 }
 
 void SecurityManager::LockDoor()

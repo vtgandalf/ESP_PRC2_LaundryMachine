@@ -63,7 +63,8 @@ private:
         wastes cpu cycles.*/
 	bool doorHasBeenLocked = false;
 	// accessing the library through the interfaces
-	IO *ioPtr = (IO *)HardwareControl::GetInstance();
+	IProgram *iprogramPtr = (IProgram *)HardwareControl::GetInstance();
+	//IO *ioPtr = (IO *)HardwareControl::GetInstance();
 	ISecurity *isecurityPtr = (ISecurity *)HardwareControl::GetInstance();
 	IWater *iwaterPtr = (IWater *)HardwareControl::GetInstance();
 	/* Checks if the door has been closed

@@ -215,11 +215,8 @@ void Program::Centrifuge(int numberOfRotations)
 
 void Program::ReadProgramButton()
 {
-    bool actionHasBeenTaken = false;
-    byte temp = ioPtr->GetGlobalInputByte();
-    if (temp | bitMaskProgram)
+    if(iprogramPtr->ProgramAction())
     {
-        actionHasBeenTaken = true;
         if (program <= 1)
         {
             program++;
@@ -229,33 +226,17 @@ void Program::ReadProgramButton()
             program = 0;
         }
     }
-    if (actionHasBeenTaken)
-    {
-        ioPtr->SetGlobalInputByte(0x00);
-    }
 }
 
 bool Program::ReadStartButton()
 {
-    bool response = false;
-    bool actionHasBeenTaken = false;
-    byte temp = ioPtr->GetGlobalInputByte();
-    if (temp | bitMaskStart)
-    {
-        actionHasBeenTaken = true;
-        response = true;
-    }
-    if (actionHasBeenTaken)
-    {
-        ioPtr->SetGlobalInputByte(0x00);
-    }
-    return response;
+    return iprogramPtr->StartAction();
 }
 
 void Program::SetLeds(int prog)
 {
     if ((prog >= 0) && (prog <= 2))
     {
-        ioPtr->SetProgramLed(prog);
+        iprogramPtr->SetProgramLed(prog);
     }
 }

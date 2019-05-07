@@ -75,7 +75,7 @@ private:
     HeaterHandler _heaterHandler;
     WaterManager _waterManager;
     // access the library through the io interface
-    IO *ioPtr = (IO *)HardwareControl::GetInstance();
+    IProgram *iprogramPtr = (IProgram *)HardwareControl::GetInstance();
     // var indicating the selected program
     int program = -1;
 };

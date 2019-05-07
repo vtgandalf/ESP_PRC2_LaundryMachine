@@ -23,14 +23,6 @@ public:
 			- true - turns it on
 			- false - turns it off */
 	virtual void SetBuzzer(bool) = 0;
-	/* Function that sets the leds indicating
-		which program has been chose
-		input:
-			- 0 - all leds are off
-			- 1 - first led lights up
-			- 2 - second led lights up
-			- 3 - third led lights up */
-	virtual void SetProgramLed(int) = 0;
 	virtual void SetKeyselect(bool) = 0;
 	virtual void SetStrobe(bool) = 0;
 	/* Method that sets the value of

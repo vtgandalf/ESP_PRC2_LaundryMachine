@@ -40,7 +40,7 @@ private:
     bool coin200LedHasBeenSet = true;
     /* Getting a pointer to the library through the interface
         allows us to only have access to the functions we need */
-    IO *ioPtr = (IO *)HardwareControl::GetInstance();
+    //IO *ioPtr = (IO *)HardwareControl::GetInstance();
     ICoin *icoinPtr = (ICoin *)HardwareControl::GetInstance();
     // Method for incrementing the coin counters
     void NewCoin();

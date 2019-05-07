@@ -50,49 +50,31 @@ bool CoinHandler::AreCoinsEnough(int value)
 
 void CoinHandler::NewCoin()
 {
-    bool actionHasBeenTaken = false;
-    byte temp = ioPtr->GetGlobalInputByte();
-    if (((temp | bitMaskCoin10) == temp) && ((temp | bitMaskProgram) != temp))
+    if ((coin10 < 3) && icoinPtr->Coin10Action())
     {
-        if (coin10 < 3)
-        {
-            coin10++;
-            coin10LedHasBeenSet = false;
-            actionHasBeenTaken = true;
-            Serial.println("Coin10 has been added.");
-        }
+        coin10++;
+        coin10LedHasBeenSet = false;
+        Serial.println("Coin10 has been added.");
     }
-    else if ((temp | bitMaskCoin50) == temp)
+
+    if ((coin50 < 3) && icoinPtr->Coin50Action())
     {
-        if (coin50 < 3)
-        {
-            coin50++;
-            coin50LedHasBeenSet = false;
-            actionHasBeenTaken = true;
-            Serial.println("Coin50 has been added.");
-        }
+        coin50++;
+        coin50LedHasBeenSet = false;
+        Serial.println("Coin50 has been added.");
     }
-    else if ((temp | bitMaskCoin200) == temp)
+
+    if ((coin200 < 2) && icoinPtr->Coin200Action())
     {
-        if (coin200 < 2)
-        {
-            coin200++;
-            coin200LedHasBeenSet = false;
-            actionHasBeenTaken = true;
-            Serial.println("Coin200 has been added.");
-        }
-    }
-    if (actionHasBeenTaken)
-    {
-        ioPtr->SetGlobalInputByte(0x00);
+        coin200++;
+        coin200LedHasBeenSet = false;
+        Serial.println("Coin200 has been added.");
     }
 }
 
 void CoinHandler::Clear()
 {
-    bool actionHasBeenTaken = false;
-    byte temp = ioPtr->GetGlobalInputByte();
-    if ((temp | bitMaskClear) == temp)
+    if (icoinPtr->ClearAction())
     {
         Serial.println("Clear has been pressed.");
         coin10LedHasBeenSet = false;
@@ -101,11 +83,6 @@ void CoinHandler::Clear()
         coin10 = 0;
         coin50 = 0;
         coin200 = 0;
-        actionHasBeenTaken = true;
-    }
-    if (actionHasBeenTaken)
-    {
-        ioPtr->SetGlobalInputByte(0x00);
     }
 }
 
