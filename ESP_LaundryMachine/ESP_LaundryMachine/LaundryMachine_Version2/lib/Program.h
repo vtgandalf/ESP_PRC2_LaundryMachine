@@ -74,6 +74,7 @@ private:
     CoinHandler _coinHandler;
     HeaterHandler _heaterHandler;
     WaterManager _waterManager;
+    MotorManager _motorManager;
     // access the library through the io interface
     IProgram *iprogramPtr = (IProgram *)HardwareControl::GetInstance();
     // var indicating the selected program

@@ -107,14 +107,16 @@ void Program::PreWash(Temp temperature)
     }
 
     // rotate clockwise, lowspeed, 60s
+    _motorManager.Rotate(CLOCKWISE, LOWSPEED, 60);
 
     // rotate anticlockwise, lowspeed, 60s
+    _motorManager.Rotate(COUNTERCLOCKWISE, LOWSPEED, 60);
 
     // sink
     _waterManager.EmptyWaterTank();
 }
 
-void Program::MainWash(WaterLevel waterLevel, Temp temperature, int numberOfRotations)
+void Program::MainWash(WaterLevel waterLevel, Temp temperature, int numberOfRepetitions)
 {
     // to be implemented
 
@@ -171,10 +173,15 @@ void Program::MainWash(WaterLevel waterLevel, Temp temperature, int numberOfRota
         }
     }
 
-    // REPEAT the following *numberOfRotations
-    // rotate clockwise, medspeed, 60s
-    // rotate anticlockwise, medspeed, 60s
-
+    // REPEAT the following *numberOfRepetitions
+    for(int i=0; i<numberOfRepetitions; i++)
+    {
+        // rotate clockwise, medspeed, 60s
+        _motorManager.Rotate(CLOCKWISE, MEDIUMSPEED, 60);
+        // rotate anticlockwise, medspeed, 60s
+        _motorManager.Rotate(COUNTERCLOCKWISE, MEDIUMSPEED, 60);
+    }
+    
     // no heating
     _heaterHandler.StopHeating();
 
@@ -194,23 +201,33 @@ void Program::MainWash(WaterLevel waterLevel, Temp temperature, int numberOfRota
     // no heating
     _heaterHandler.StopHeating();
 
-    // REPEAT the following *numberOfRotations
-    // rotate clockwise, medspeed, 60s
-    // rotate anticlockwise, medspeed, 60s
+    // REPEAT the following *numberOfRepetitions
+    for(int i=0; i<numberOfRepetitions; i++)
+    {
+        // rotate clockwise, medspeed, 60s
+        _motorManager.Rotate(CLOCKWISE, MEDIUMSPEED, 60);
+        // rotate anticlockwise, medspeed, 60s
+        _motorManager.Rotate(COUNTERCLOCKWISE, MEDIUMSPEED, 60);
+    }
 
     // sink water until empty
     _waterManager.EmptyWaterTank();
 }
 
-void Program::Centrifuge(int numberOfRotations)
+void Program::Centrifuge(int numberOfRepetitions)
 {
     // to be implemented
 
     // sink
     _waterManager.EmptyWaterTank();
-    // REPEAT the following *numberOfRotations
-    // rotate clockwise, highspeed, 30s
-    // rotate anticlockwise, highspeed, 30s
+    // REPEAT the following *numberOfRepetitions
+    for(int i=0; i<numberOfRepetitions; i++)
+    {
+        // rotate clockwise, highspeed, 30s
+        _motorManager.Rotate(CLOCKWISE, HIGHSPEED, 30);
+        // rotate anticlockwise, highspeed, 30s
+        _motorManager.Rotate(COUNTERCLOCKWISE, HIGHSPEED, 30);
+    }
 }
 
 void Program::ReadProgramButton()
