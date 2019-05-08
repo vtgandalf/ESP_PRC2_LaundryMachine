@@ -58,7 +58,7 @@ bool SecurityManager::SafeMode(int program)
 		}
 		if (((millis() - prevMillis) / (60 * 1000)) > timeIntervalSafeMode)
 		{
-			Serial.println("Ten monutes have passed and still no pressure!");
+			Serial.println("Ten minutes have passed and still no pressure!");
 			trig = true;
 		}
 		else
@@ -73,7 +73,7 @@ bool SecurityManager::SafeMode(int program)
 }
 
 // method that handles the polling
-// contains everything that has to be checked regularly
+// contains everything that has to be checked regularly 60
 void SecurityManager::Polling()
 {
 	//Serial.println(isecurityPtr->Lock());
