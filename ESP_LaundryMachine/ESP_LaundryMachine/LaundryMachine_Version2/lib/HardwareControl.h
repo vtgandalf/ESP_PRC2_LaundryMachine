@@ -126,8 +126,11 @@ private:
         buttons and switches */
     byte inputReadings = 0x00;
     /* This variable stores the previous debounced input
-    byte */
-    byte previousByte = 0x00;
+    byte for the switches */
+    byte previousByteSwitches = 0x00;
+    /* This variable stores the previous debounced input
+    byte for the buttons */
+    byte previousByteButtons = 0x00;
     /* This method checks the debounced input byte for
     a switch click based on the input
     input:
@@ -139,6 +142,7 @@ private:
     output:
         - true - if a switch press has been recognized */
     bool CheckSwitchClick(byte, byte, byte, byte);
+    bool CheckSwitchSoapClick(byte, byte, byte, byte *);
     /* This method checks the debounced input byte for
     a button click based on the input
     input:
