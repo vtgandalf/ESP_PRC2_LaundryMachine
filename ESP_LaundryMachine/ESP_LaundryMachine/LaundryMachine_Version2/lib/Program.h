@@ -7,6 +7,8 @@
 #include "SecurityManager.h"
 #include "SoapHandler.h"
 #include "CoinHandler.h"
+#include "MotorManager.h"
+#include "InputManager.h"
 
 using namespace sharedNamespace;
 
@@ -75,6 +77,7 @@ private:
     HeaterHandler _heaterHandler;
     WaterManager _waterManager;
     MotorManager _motorManager;
+    InputManager _inputManager;
     // access the library through the io interface
     IProgram *iprogramPtr = (IProgram *)HardwareControl::GetInstance();
     // var indicating the selected program

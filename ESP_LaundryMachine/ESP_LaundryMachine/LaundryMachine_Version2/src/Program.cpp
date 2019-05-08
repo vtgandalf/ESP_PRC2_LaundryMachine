@@ -2,12 +2,16 @@
 
 WashingProgram Program::PreProgram()
 {
-    Serial.println("Waiting for coins, soap, program selection and etc...");
     _hardwareControl.HardwareControlSetup();
     // to be implemented
+    Serial.println("Waiting for coins, soap, program selection and etc...");
     bool trig = false;
     while (trig != true)
     {
+        //Serial.println("PreProgram loop");
+        // update input
+        _inputManager.Polling();
+
         // get coins
         _coinHandler.Polling();
 
@@ -242,6 +246,7 @@ void Program::ReadProgramButton()
         {
             program = 0;
         }
+        Serial.println(program);
     }
 }
 

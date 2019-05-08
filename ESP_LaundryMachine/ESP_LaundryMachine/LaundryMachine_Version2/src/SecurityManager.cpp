@@ -2,7 +2,8 @@
 
 bool SecurityManager::IsPressureOn()
 {
-	return isecurityPtr->PressureAction();
+	//return isecurityPtr->PressureAction();
+	return true;
 }
 
 void SecurityManager::IndicateCompartments()
