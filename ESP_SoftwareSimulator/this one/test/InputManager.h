@@ -30,19 +30,19 @@ private:
             - reading - the raw input
             - lastDebounceTime - the last time and action was recorded 
             - x - keyselect*/
-    void Debouncing(byte *previousByteState, byte *byteState, byte reading, unsigned long *lastDebounceTime, int x);
+    void Debouncing(char *previousByteState, char *byteState, char reading, unsigned long *lastDebounceTime, int x);
 
     // vars required for Debouncing()
 
-    byte previousByteStateButtons;
-    byte byteStateButtons;
-    byte previousByteStateSwitches;
-    byte byteStateSwitches;
+    char previousByteStateButtons;
+    char byteStateButtons;
+    char previousByteStateSwitches;
+    char byteStateSwitches;
     unsigned long lastDebounceTimeByteButtons;
     unsigned long lastDebounceTimeByteSwitches;
     unsigned long timerTreshold = 20;
     // accessing the library through the IO interface
-    IO *ioPtr = (IO *)HardwareControl::GetInstance();
+//    IO *ioPtr = (IO *)HardwareControl::GetInstance();
 };
 
 #endif

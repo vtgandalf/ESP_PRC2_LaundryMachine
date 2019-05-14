@@ -50,7 +50,8 @@ void SecurityManager::SafeMode()
 	// to be implemented
 }
 
-// method that handles the polling
+// method that handles the 
+
 // contains everything that has to be checked regularly
 void SecurityManager::Polling()
 {

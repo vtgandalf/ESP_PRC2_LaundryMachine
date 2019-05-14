@@ -46,7 +46,7 @@ public:
 			- 1 - first led lights up
 			- 2 - second led lights up
 			- 3 - third led lights up */
-	virtual bool SetProgramLed(int) = 0;
+	virtual void SetProgramLed(int) = 0;
 	virtual void SetKeyselect(bool) = 0;
 	virtual void SetStrobe(bool) = 0;
 	/* Method that sets the value of

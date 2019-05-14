@@ -3,6 +3,7 @@
 #include "SecurityManager.h"
 #include "SoapHandler.h"
 #include "CoinHandler.h"
+#include "Program.h"
 
 #pragma once
 
@@ -26,11 +27,9 @@ namespace test {
 		//InputManager *inm;
 		SecurityManager *scm;
 		SoapHandler *sph;
-	private: System::Windows::Forms::CheckBox^  cbProgramA;
-	public:
-	private: System::Windows::Forms::CheckBox^  cbProgramB;
-	private: System::Windows::Forms::CheckBox^  cbProgramC;
-			 CoinHandler *cnh;
+		CoinHandler *cnh;
+		Program *prg;
+		
 
 		MyForm(void)
 		{
@@ -43,10 +42,12 @@ namespace test {
 			scm = new SecurityManager();
 			sph = new SoapHandler();
 			cnh = new CoinHandler();
+			prg = new Program();
 
 			scm->setHwc(hwc);
 			sph->setHwc(hwc);
 			cnh->setHwc(hwc);
+			prg->setHwc(hwc);
 
 
 		}
@@ -63,9 +64,26 @@ namespace test {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::CheckBox^  cbLock;
+	public:
 	private: System::Windows::Forms::Button^  btnCoin10;
 	private: System::Windows::Forms::Button^  btnCoin50;
 	private: System::Windows::Forms::Button^  btnCoin200;
+
+	private: System::Windows::Forms::CheckBox^  cbDrain;
+	public:
+	private: System::Windows::Forms::CheckBox^  cbSink;
+	private: System::Windows::Forms::CheckBox^  cbWaterLevel3;
+	private: System::Windows::Forms::CheckBox^  cbWaterLevel1;
+	private: System::Windows::Forms::CheckBox^  cbWaterLevel2;
+	private: System::Windows::Forms::CheckBox^  cbTemp3;
+	private: System::Windows::Forms::CheckBox^  cbTemp1;
+	private: System::Windows::Forms::CheckBox^  cbTemp2;
+	private: System::Windows::Forms::CheckBox^  cbHeater;
+	private: System::Windows::Forms::CheckBox^  cbProgramA;
+	public:
+	private: System::Windows::Forms::CheckBox^  cbProgramB;
+	private: System::Windows::Forms::CheckBox^  cbProgramC;
 
 	protected:
 
@@ -168,20 +186,20 @@ private: System::Windows::Forms::RadioButton^  rb22;
 
 
 
-private: System::Windows::Forms::RadioButton^  rbHeater;
-private: System::Windows::Forms::RadioButton^  rbWaterLevel1;
-private: System::Windows::Forms::RadioButton^  rbWaterLevel2;
-private: System::Windows::Forms::RadioButton^  rbWaterLevel3;
 
 
 
 
 
-private: System::Windows::Forms::RadioButton^  rbTemp3;
 
-private: System::Windows::Forms::RadioButton^  rbTemp2;
 
-private: System::Windows::Forms::RadioButton^  rbTemp1;
+
+
+
+
+
+
+
 
 
 
@@ -196,11 +214,11 @@ private: System::Windows::Forms::RadioButton^  rb14;
 
 
 
-private: System::Windows::Forms::RadioButton^  rbLock;
 
-private: System::Windows::Forms::RadioButton^  rbSink;
 
-private: System::Windows::Forms::RadioButton^  rbDrain;
+
+
+
 private: System::Windows::Forms::Timer^  timer;
 private: System::ComponentModel::IContainer^  components;
 
@@ -252,20 +270,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->rb20 = (gcnew System::Windows::Forms::RadioButton());
 			this->rb21 = (gcnew System::Windows::Forms::RadioButton());
 			this->rb22 = (gcnew System::Windows::Forms::RadioButton());
-			this->rbHeater = (gcnew System::Windows::Forms::RadioButton());
-			this->rbWaterLevel1 = (gcnew System::Windows::Forms::RadioButton());
-			this->rbWaterLevel2 = (gcnew System::Windows::Forms::RadioButton());
-			this->rbWaterLevel3 = (gcnew System::Windows::Forms::RadioButton());
-			this->rbTemp3 = (gcnew System::Windows::Forms::RadioButton());
-			this->rbTemp2 = (gcnew System::Windows::Forms::RadioButton());
-			this->rbTemp1 = (gcnew System::Windows::Forms::RadioButton());
 			this->rb10 = (gcnew System::Windows::Forms::RadioButton());
 			this->rb14 = (gcnew System::Windows::Forms::RadioButton());
 			this->btnCloseDoor = (gcnew System::Windows::Forms::Button());
 			this->btnReset = (gcnew System::Windows::Forms::Button());
-			this->rbLock = (gcnew System::Windows::Forms::RadioButton());
-			this->rbSink = (gcnew System::Windows::Forms::RadioButton());
-			this->rbDrain = (gcnew System::Windows::Forms::RadioButton());
 			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->cbSoap1 = (gcnew System::Windows::Forms::CheckBox());
 			this->cbSoap2 = (gcnew System::Windows::Forms::CheckBox());
@@ -280,6 +288,16 @@ private: System::ComponentModel::IContainer^  components;
 			this->cbProgramA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbProgramB = (gcnew System::Windows::Forms::CheckBox());
 			this->cbProgramC = (gcnew System::Windows::Forms::CheckBox());
+			this->cbLock = (gcnew System::Windows::Forms::CheckBox());
+			this->cbDrain = (gcnew System::Windows::Forms::CheckBox());
+			this->cbSink = (gcnew System::Windows::Forms::CheckBox());
+			this->cbWaterLevel3 = (gcnew System::Windows::Forms::CheckBox());
+			this->cbWaterLevel1 = (gcnew System::Windows::Forms::CheckBox());
+			this->cbWaterLevel2 = (gcnew System::Windows::Forms::CheckBox());
+			this->cbTemp3 = (gcnew System::Windows::Forms::CheckBox());
+			this->cbTemp1 = (gcnew System::Windows::Forms::CheckBox());
+			this->cbTemp2 = (gcnew System::Windows::Forms::CheckBox());
+			this->cbHeater = (gcnew System::Windows::Forms::CheckBox());
 			this->SuspendLayout();
 			// 
 			// btnCoin10
@@ -383,6 +401,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->btnProgram->TabIndex = 10;
 			this->btnProgram->Text = L"Program";
 			this->btnProgram->UseVisualStyleBackColor = false;
+			this->btnProgram->Click += gcnew System::EventHandler(this, &MyForm::btnProgram_Click);
 			// 
 			// btnStart
 			// 
@@ -640,76 +659,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->rb22->TabStop = true;
 			this->rb22->UseVisualStyleBackColor = true;
 			// 
-			// rbHeater
-			// 
-			this->rbHeater->AutoSize = true;
-			this->rbHeater->Location = System::Drawing::Point(762, 381);
-			this->rbHeater->Name = L"rbHeater";
-			this->rbHeater->Size = System::Drawing::Size(21, 20);
-			this->rbHeater->TabIndex = 50;
-			this->rbHeater->TabStop = true;
-			this->rbHeater->UseVisualStyleBackColor = true;
-			// 
-			// rbWaterLevel1
-			// 
-			this->rbWaterLevel1->AutoSize = true;
-			this->rbWaterLevel1->Location = System::Drawing::Point(734, 377);
-			this->rbWaterLevel1->Name = L"rbWaterLevel1";
-			this->rbWaterLevel1->Size = System::Drawing::Size(21, 20);
-			this->rbWaterLevel1->TabIndex = 51;
-			this->rbWaterLevel1->TabStop = true;
-			this->rbWaterLevel1->UseVisualStyleBackColor = true;
-			// 
-			// rbWaterLevel2
-			// 
-			this->rbWaterLevel2->AutoSize = true;
-			this->rbWaterLevel2->Location = System::Drawing::Point(734, 357);
-			this->rbWaterLevel2->Name = L"rbWaterLevel2";
-			this->rbWaterLevel2->Size = System::Drawing::Size(21, 20);
-			this->rbWaterLevel2->TabIndex = 52;
-			this->rbWaterLevel2->TabStop = true;
-			this->rbWaterLevel2->UseVisualStyleBackColor = true;
-			// 
-			// rbWaterLevel3
-			// 
-			this->rbWaterLevel3->AutoSize = true;
-			this->rbWaterLevel3->Location = System::Drawing::Point(734, 337);
-			this->rbWaterLevel3->Name = L"rbWaterLevel3";
-			this->rbWaterLevel3->Size = System::Drawing::Size(21, 20);
-			this->rbWaterLevel3->TabIndex = 53;
-			this->rbWaterLevel3->TabStop = true;
-			this->rbWaterLevel3->UseVisualStyleBackColor = true;
-			// 
-			// rbTemp3
-			// 
-			this->rbTemp3->AutoSize = true;
-			this->rbTemp3->Location = System::Drawing::Point(789, 337);
-			this->rbTemp3->Name = L"rbTemp3";
-			this->rbTemp3->Size = System::Drawing::Size(21, 20);
-			this->rbTemp3->TabIndex = 54;
-			this->rbTemp3->TabStop = true;
-			this->rbTemp3->UseVisualStyleBackColor = true;
-			// 
-			// rbTemp2
-			// 
-			this->rbTemp2->AutoSize = true;
-			this->rbTemp2->Location = System::Drawing::Point(789, 357);
-			this->rbTemp2->Name = L"rbTemp2";
-			this->rbTemp2->Size = System::Drawing::Size(21, 20);
-			this->rbTemp2->TabIndex = 55;
-			this->rbTemp2->TabStop = true;
-			this->rbTemp2->UseVisualStyleBackColor = true;
-			// 
-			// rbTemp1
-			// 
-			this->rbTemp1->AutoSize = true;
-			this->rbTemp1->Location = System::Drawing::Point(789, 377);
-			this->rbTemp1->Name = L"rbTemp1";
-			this->rbTemp1->Size = System::Drawing::Size(21, 20);
-			this->rbTemp1->TabIndex = 56;
-			this->rbTemp1->TabStop = true;
-			this->rbTemp1->UseVisualStyleBackColor = true;
-			// 
 			// rb10
 			// 
 			this->rb10->AutoSize = true;
@@ -754,50 +703,11 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->btnReset->Location = System::Drawing::Point(310, 451);
 			this->btnReset->Name = L"btnReset";
-			this->btnReset->Size = System::Drawing::Size(70, 66);
+			this->btnReset->Size = System::Drawing::Size(73, 66);
 			this->btnReset->TabIndex = 60;
 			this->btnReset->Text = L"Reset";
 			this->btnReset->UseVisualStyleBackColor = false;
 			this->btnReset->Click += gcnew System::EventHandler(this, &MyForm::btnReset_Click);
-			// 
-			// rbLock
-			// 
-			this->rbLock->AutoSize = true;
-			this->rbLock->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
-				static_cast<System::Int32>(static_cast<System::Byte>(133)));
-			this->rbLock->Location = System::Drawing::Point(734, 312);
-			this->rbLock->Name = L"rbLock";
-			this->rbLock->Size = System::Drawing::Size(68, 24);
-			this->rbLock->TabIndex = 64;
-			this->rbLock->TabStop = true;
-			this->rbLock->Text = L"Lock";
-			this->rbLock->UseVisualStyleBackColor = false;
-			// 
-			// rbSink
-			// 
-			this->rbSink->AutoSize = true;
-			this->rbSink->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
-				static_cast<System::Int32>(static_cast<System::Byte>(133)));
-			this->rbSink->Location = System::Drawing::Point(904, 481);
-			this->rbSink->Name = L"rbSink";
-			this->rbSink->Size = System::Drawing::Size(65, 24);
-			this->rbSink->TabIndex = 65;
-			this->rbSink->TabStop = true;
-			this->rbSink->Text = L"Sink";
-			this->rbSink->UseVisualStyleBackColor = false;
-			// 
-			// rbDrain
-			// 
-			this->rbDrain->AutoSize = true;
-			this->rbDrain->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
-				static_cast<System::Int32>(static_cast<System::Byte>(133)));
-			this->rbDrain->Location = System::Drawing::Point(560, 216);
-			this->rbDrain->Name = L"rbDrain";
-			this->rbDrain->Size = System::Drawing::Size(72, 24);
-			this->rbDrain->TabIndex = 66;
-			this->rbDrain->TabStop = true;
-			this->rbDrain->Text = L"Drain";
-			this->rbDrain->UseVisualStyleBackColor = false;
 			// 
 			// timer
 			// 
@@ -936,6 +846,107 @@ private: System::ComponentModel::IContainer^  components;
 			this->cbProgramC->Text = L"C";
 			this->cbProgramC->UseVisualStyleBackColor = false;
 			// 
+			// cbLock
+			// 
+			this->cbLock->AutoSize = true;
+			this->cbLock->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->cbLock->Location = System::Drawing::Point(735, 310);
+			this->cbLock->Name = L"cbLock";
+			this->cbLock->Size = System::Drawing::Size(69, 24);
+			this->cbLock->TabIndex = 80;
+			this->cbLock->Text = L"Lock";
+			this->cbLock->UseVisualStyleBackColor = false;
+			// 
+			// cbDrain
+			// 
+			this->cbDrain->AutoSize = true;
+			this->cbDrain->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->cbDrain->Location = System::Drawing::Point(571, 215);
+			this->cbDrain->Name = L"cbDrain";
+			this->cbDrain->Size = System::Drawing::Size(73, 24);
+			this->cbDrain->TabIndex = 81;
+			this->cbDrain->Text = L"Drain";
+			this->cbDrain->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->cbDrain->UseVisualStyleBackColor = false;
+			// 
+			// cbSink
+			// 
+			this->cbSink->AutoSize = true;
+			this->cbSink->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(172)), static_cast<System::Int32>(static_cast<System::Byte>(168)),
+				static_cast<System::Int32>(static_cast<System::Byte>(133)));
+			this->cbSink->Location = System::Drawing::Point(904, 480);
+			this->cbSink->Name = L"cbSink";
+			this->cbSink->Size = System::Drawing::Size(66, 24);
+			this->cbSink->TabIndex = 82;
+			this->cbSink->Text = L"Sink";
+			this->cbSink->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->cbSink->UseVisualStyleBackColor = false;
+			// 
+			// cbWaterLevel3
+			// 
+			this->cbWaterLevel3->AutoSize = true;
+			this->cbWaterLevel3->Location = System::Drawing::Point(738, 338);
+			this->cbWaterLevel3->Name = L"cbWaterLevel3";
+			this->cbWaterLevel3->Size = System::Drawing::Size(22, 21);
+			this->cbWaterLevel3->TabIndex = 85;
+			this->cbWaterLevel3->UseVisualStyleBackColor = true;
+			// 
+			// cbWaterLevel1
+			// 
+			this->cbWaterLevel1->AutoSize = true;
+			this->cbWaterLevel1->Location = System::Drawing::Point(738, 380);
+			this->cbWaterLevel1->Name = L"cbWaterLevel1";
+			this->cbWaterLevel1->Size = System::Drawing::Size(22, 21);
+			this->cbWaterLevel1->TabIndex = 84;
+			this->cbWaterLevel1->UseVisualStyleBackColor = true;
+			// 
+			// cbWaterLevel2
+			// 
+			this->cbWaterLevel2->AutoSize = true;
+			this->cbWaterLevel2->Location = System::Drawing::Point(738, 359);
+			this->cbWaterLevel2->Name = L"cbWaterLevel2";
+			this->cbWaterLevel2->Size = System::Drawing::Size(22, 21);
+			this->cbWaterLevel2->TabIndex = 83;
+			this->cbWaterLevel2->UseVisualStyleBackColor = true;
+			// 
+			// cbTemp3
+			// 
+			this->cbTemp3->AutoSize = true;
+			this->cbTemp3->Location = System::Drawing::Point(785, 339);
+			this->cbTemp3->Name = L"cbTemp3";
+			this->cbTemp3->Size = System::Drawing::Size(22, 21);
+			this->cbTemp3->TabIndex = 88;
+			this->cbTemp3->UseVisualStyleBackColor = true;
+			// 
+			// cbTemp1
+			// 
+			this->cbTemp1->AutoSize = true;
+			this->cbTemp1->Location = System::Drawing::Point(785, 381);
+			this->cbTemp1->Name = L"cbTemp1";
+			this->cbTemp1->Size = System::Drawing::Size(22, 21);
+			this->cbTemp1->TabIndex = 87;
+			this->cbTemp1->UseVisualStyleBackColor = true;
+			// 
+			// cbTemp2
+			// 
+			this->cbTemp2->AutoSize = true;
+			this->cbTemp2->Location = System::Drawing::Point(785, 360);
+			this->cbTemp2->Name = L"cbTemp2";
+			this->cbTemp2->Size = System::Drawing::Size(22, 21);
+			this->cbTemp2->TabIndex = 86;
+			this->cbTemp2->UseVisualStyleBackColor = true;
+			// 
+			// cbHeater
+			// 
+			this->cbHeater->AutoSize = true;
+			this->cbHeater->Location = System::Drawing::Point(761, 386);
+			this->cbHeater->Name = L"cbHeater";
+			this->cbHeater->Size = System::Drawing::Size(22, 21);
+			this->cbHeater->TabIndex = 89;
+			this->cbHeater->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
@@ -943,6 +954,16 @@ private: System::ComponentModel::IContainer^  components;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(67)), static_cast<System::Int32>(static_cast<System::Byte>(74)),
 				static_cast<System::Int32>(static_cast<System::Byte>(66)));
 			this->ClientSize = System::Drawing::Size(1058, 590);
+			this->Controls->Add(this->cbHeater);
+			this->Controls->Add(this->cbTemp3);
+			this->Controls->Add(this->cbTemp1);
+			this->Controls->Add(this->cbTemp2);
+			this->Controls->Add(this->cbWaterLevel3);
+			this->Controls->Add(this->cbWaterLevel1);
+			this->Controls->Add(this->cbWaterLevel2);
+			this->Controls->Add(this->cbSink);
+			this->Controls->Add(this->cbDrain);
+			this->Controls->Add(this->cbLock);
 			this->Controls->Add(this->cbProgramC);
 			this->Controls->Add(this->cbProgramB);
 			this->Controls->Add(this->cbProgramA);
@@ -956,20 +977,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->Controls->Add(this->cbCoin200_2);
 			this->Controls->Add(this->cbSoap2);
 			this->Controls->Add(this->cbSoap1);
-			this->Controls->Add(this->rbDrain);
-			this->Controls->Add(this->rbSink);
-			this->Controls->Add(this->rbLock);
 			this->Controls->Add(this->btnReset);
 			this->Controls->Add(this->btnCloseDoor);
 			this->Controls->Add(this->rb14);
 			this->Controls->Add(this->rb10);
-			this->Controls->Add(this->rbTemp1);
-			this->Controls->Add(this->rbTemp2);
-			this->Controls->Add(this->rbTemp3);
-			this->Controls->Add(this->rbWaterLevel3);
-			this->Controls->Add(this->rbWaterLevel2);
-			this->Controls->Add(this->rbWaterLevel1);
-			this->Controls->Add(this->rbHeater);
 			this->Controls->Add(this->rb22);
 			this->Controls->Add(this->rb21);
 			this->Controls->Add(this->rb20);
@@ -1027,10 +1038,12 @@ private: System::Void timer_Tick(System::Object^  sender, System::EventArgs^  e)
 	scm->Polling();
 	sph->Polling();
 	cnh->Polling();
+	prg->PreProgram();
+	
 	//inm->Polling();
 
 	// Handle Outputs
-	rbLock->Checked = hwc->Lock();
+	cbLock->Checked = hwc->Lock();
 	cbSoap1->Checked = hwc->Soap1();
 	cbSoap2->Checked = hwc->Soap2();
 	cbCoin10_1->Checked = (hwc->Coin10()) & 0b001;
@@ -1041,6 +1054,9 @@ private: System::Void timer_Tick(System::Object^  sender, System::EventArgs^  e)
 	cbCoin50_3->Checked = (hwc->Coin50()) & 0b100;
 	cbCoin200_1->Checked = (hwc->Coin200()) & 0b01;
 	cbCoin200_2->Checked = (hwc->Coin200()) & 0b10;
+	cbProgramA->Checked = (hwc->Program()) & 0b001;
+	cbProgramB->Checked = (hwc->Program()) & 0b010;
+	cbProgramC->Checked = (hwc->Program()) & 0b100;
 
 }
 private: System::Void btnSoap1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1062,6 +1078,9 @@ private: System::Void btnCoin200_Click(System::Object^  sender, System::EventArg
 }
 private: System::Void btnReset_Click(System::Object^  sender, System::EventArgs^  e) {
 	hwc->SetGlobalInputByte(0b11110);
+}
+private: System::Void btnProgram_Click(System::Object^  sender, System::EventArgs^  e) {
+	hwc->SetGlobalInputByte(0b11001);
 }
 };
 }

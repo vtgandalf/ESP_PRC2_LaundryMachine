@@ -187,6 +187,22 @@ char HardwareControl::Coin200()
 	return temp;
 }
 
+char HardwareControl::Program()
+{
+	char temp = 0;
+	if (programLedsArray[0] == true) {
+		temp = temp | 0b001;
+	}
+	if (programLedsArray[1] == true) {
+		temp = temp | 0b010;
+	}
+	if (programLedsArray[2] == true) {
+		temp = temp | 0b100;
+	}
+	return temp;
+}
+
+
 void HardwareControl::SetStrobe(bool boolean)
 {
   strobe = boolean;
@@ -427,7 +443,7 @@ void HardwareControl::SetSoap1Led(bool boolean)
   
 }
 
-bool HardwareControl::SetProgramLed(int x)
+void HardwareControl::SetProgramLed(int x)
 {
   switch (x)
   {
@@ -461,7 +477,6 @@ bool HardwareControl::SetProgramLed(int x)
     default:
       break;
   }
-  return programLedsArray;
 }
 
 /* PUBLIC GETTERS */
@@ -591,6 +606,29 @@ bool HardwareControl::Coin200Action()
 bool HardwareControl::ClearAction()
 {
 	bool response = CheckButtonClick(BitMaskClear, GetGlobalInputByte(), previousByteButtons);
+	if (response)
+	{
+		previousByteButtons = GetGlobalInputByte();
+		SetGlobalInputByte(0x00);
+	}
+	return response;
+}
+
+
+bool HardwareControl::ProgramAction()
+{
+	bool response = CheckButtonClick(BitMaskProgram, GetGlobalInputByte(), previousByteButtons);
+	if (response)
+	{
+		previousByteButtons = GetGlobalInputByte();
+		SetGlobalInputByte(0x00);
+	}
+	return response;
+}
+
+bool HardwareControl::StartAction()
+{
+	bool response = CheckButtonClick(BitMaskStart, GetGlobalInputByte(), previousByteButtons);
 	if (response)
 	{
 		previousByteButtons = GetGlobalInputByte();

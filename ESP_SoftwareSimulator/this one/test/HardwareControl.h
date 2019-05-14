@@ -40,7 +40,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         virtual void SetDrain(bool);
         virtual void SetSink(bool);
         virtual void SetRotation(Rotation);
-        virtual bool SetProgramLed(int);
+        //virtual bool SetProgramLed(int);
         virtual void SetKeyselect(bool);
         virtual void SetStrobe(bool);
         virtual bool Heater();
@@ -82,6 +82,12 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         virtual void SetHeater(bool);
         virtual void SetLock(bool);
         virtual bool Lock();
+
+		/* IMPLEMENTATION OF IPROGRAM */
+		virtual void SetProgramLed(int);
+		virtual bool ProgramAction();
+		virtual bool StartAction();
+		virtual char Program();
         
     private:
         // Singleton instance

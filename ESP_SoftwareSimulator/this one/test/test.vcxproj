@@ -137,23 +137,32 @@
   <ItemGroup>
     <ClCompile Include="CoinHandler.cpp" />
     <ClCompile Include="HardwareControl.cpp" />
+    <ClCompile Include="HeaterHandler.cpp" />
+    <ClCompile Include="MotorManager.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="Program.cpp" />
     <ClCompile Include="SecurityManager.cpp" />
     <ClCompile Include="SoapHandler.cpp" />
+    <ClCompile Include="WaterManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoinHandler.h" />
     <ClInclude Include="HardwareControl.h" />
+    <ClInclude Include="HeaterHandler.h" />
     <ClInclude Include="ICoin.h" />
     <ClInclude Include="IO.h" />
+    <ClInclude Include="IProgram.h" />
     <ClInclude Include="ISecurity.h" />
     <ClInclude Include="ISoap.h" />
+    <ClInclude Include="MotorManager.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Program.h" />
     <ClInclude Include="SecurityManager.h" />
     <ClInclude Include="SharedNamespace.h" />
     <ClInclude Include="SoapHandler.h" />
+    <ClInclude Include="WaterManager.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
