@@ -1,29 +1,12 @@
-﻿  HeaterHandler.cpp
-d:\onedrive - fhict\school shit\esp\this one\test\heaterhandler.cpp(8): error C2065: 'iheaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\heaterhandler.cpp(10): error C2065: 'iheaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\heaterhandler.cpp(18): error C2065: 'iheaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\heaterhandler.cpp(23): error C2065: 'iheaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\heaterhandler.cpp(26): error C2065: 'iheaterPtr': undeclared identifier
+﻿  CoinHandler.cpp
+  HardwareControl.cpp
+  HeaterHandler.cpp
+  MotorManager.cpp
+  MyForm.cpp
+  Program.cpp
+  SecurityManager.cpp
+  SoapHandler.cpp
   WaterManager.cpp
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(6): error C2065: 'Serial': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(7): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(11): error C2660: 'SecurityManager::SafeMode': function does not take 1 arguments
-  d:\onedrive - fhict\school shit\esp\this one\test\securitymanager.h(33): note: see declaration of 'SecurityManager::SafeMode'
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(20): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(22): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(24): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(26): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(29): error C2065: 'Serial': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(35): error C2065: 'Serial': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(36): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(38): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(40): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(42): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(44): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(47): error C2065: 'Serial': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(52): error C2065: 'iwaterPtr': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(57): error C2065: 'Serial': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(58): error C2065: 'Serial': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(59): error C2065: 'Serial': undeclared identifier
-d:\onedrive - fhict\school shit\esp\this one\test\watermanager.cpp(60): error C2065: 'iwaterPtr': undeclared identifier
   Generating Code...
+  CoinHandler.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  test.vcxproj -> D:\OneDrive - FHICT\school shit\ESP\this one\x64\Debug\test.exe

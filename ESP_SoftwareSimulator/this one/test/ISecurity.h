@@ -9,7 +9,7 @@ class ISecurity
 public:
 	/* Method that reads the water
 		level of the tank */
-	virtual WaterLevel GetWaterLevel(bool waterlvl1, bool waterlvl2, bool waterlvl3) = 0;
+	virtual WaterLevel GetWaterLevel() = 0;
 	/* Function to set the internal lock
 		input: 
 			- true - locked

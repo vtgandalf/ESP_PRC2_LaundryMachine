@@ -38,8 +38,13 @@ public:
         - false - turn it off */
     void SetDrain(bool);
 
+	void Polling();
+
+	void setHwc(HardwareControl *hwcont);
+
 private:
 //    IWater* iwaterPtr = (IWater*)HardwareControl::GetInstance();
+	HardwareControl *hwc;
 };
 
 #endif

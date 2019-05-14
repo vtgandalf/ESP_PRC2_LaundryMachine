@@ -20,9 +20,21 @@ public:
     disabling the heating */
     void StopHeating();
 
+	bool Heater();
+	void SetHeater(bool request);
+
+
+
+	void setHwc(HardwareControl *hwcont);
+
+	void Polling();
+
+
+
 private:
     // accessing the library through this interface
 //    IHeater *iheaterPtr = (IHeater *)HardwareControl::GetInstance();
+	HardwareControl *hwc;
 };
 
 #endif

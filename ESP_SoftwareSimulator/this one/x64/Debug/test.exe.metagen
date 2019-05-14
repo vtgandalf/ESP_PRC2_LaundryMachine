@@ -22,3 +22,6 @@ Class test.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     SecurityManager* scm : Public
     SoapHandler* sph : Public
     CoinHandler* cnh : Public
+    WaterManager* wtr : Public
+    HeaterHandler* htr : Public
+    Program* prg : Public

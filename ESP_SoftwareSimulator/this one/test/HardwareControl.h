@@ -34,7 +34,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
     
     //protected:
         /* IMPLEMENTATION OF IO */
-        virtual Temp GetTemperature(bool temp1, bool temp2, bool temp3);
+        virtual Temp GetTemperature();
         virtual void SetBuzzer(bool);
         virtual void SetSpeed(Speed);
         virtual void SetDrain(bool);
@@ -78,7 +78,7 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
 		virtual bool Soap2();
 
         /* IMPLEMENTATION OF ISECURITY */
-        virtual WaterLevel GetWaterLevel(bool waterlvl1, bool waterlvl2, bool waterlvl3);
+        virtual WaterLevel GetWaterLevel();
         virtual void SetHeater(bool);
         virtual void SetLock(bool);
         virtual bool Lock();
@@ -88,6 +88,16 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
 		virtual bool ProgramAction();
 		virtual bool StartAction();
 		virtual char Program();
+
+		/* IMPLEMENTATION OF IWATER */
+		virtual void UpdateWaterLevel();
+		virtual bool PressureAction();
+
+		/* IMPLEMENTATION OF IHEATER */
+		virtual void UpdateTemperature();
+		virtual bool HeaterAction();
+
+
         
     private:
         // Singleton instance
@@ -119,6 +129,10 @@ class HardwareControl: public ICoin, public ISecurity, public ISoap, public IO
         bool keyselect;
         // var for the strobe state
         bool strobe;
+		// var for the water level
+		int waterLvl = 0;
+		// var for the temperature
+		int heaterTemp = 0;
         /* This variable stores the last reccorded
         and debounced input. It is crutial for 
         properly reading and debouncing the multiplexed

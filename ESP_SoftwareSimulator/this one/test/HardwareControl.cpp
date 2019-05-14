@@ -36,6 +36,7 @@
 #define BitMaskSoap2 0x04
 #define BitMaskSoap1 0x02
 #define BitMaskPressure 0x01
+#define BitMaskHeater 0x1F
 #define BitMaskKeyselect 0x10
 
 int OUT_GROUP1 = 0;
@@ -459,8 +460,8 @@ void HardwareControl::SetProgramLed(int x)
     case 2:
       OUT_GROUP2 = 1;
       OUT_GROUP1 = 1;
-	  programLedsArray[0] = true;
-	  programLedsArray[1] = false;
+	  programLedsArray[0] = false;
+	  programLedsArray[1] = true;
 	  programLedsArray[2] = false;
 	 
       break;
@@ -468,62 +469,95 @@ void HardwareControl::SetProgramLed(int x)
     case 3:
       OUT_GROUP2 = 1;
       OUT_GROUP1 = 1;
-	  programLedsArray[0] = true;
+	  programLedsArray[0] = false;
 	  programLedsArray[1] = false;
-	  programLedsArray[2] = false;
+	  programLedsArray[2] = true;
 	 
       break;
 
     default:
+	OUT_GROUP2 = 1;
+	OUT_GROUP1 = 1;
+	programLedsArray[0] = false;
+	programLedsArray[1] = false;
+	programLedsArray[2] = false;
       break;
   }
 }
 
-/* PUBLIC GETTERS */
-Temp HardwareControl::GetTemperature(bool temp1, bool temp2, bool temp3)
+void HardwareControl::UpdateTemperature()
 {
-  //read the rbs and return the temperature
-  if (temp1 == true)
-  {
-    return WARM;
-  }
-  else if (temp1 == true && temp2 == true)
-  {
-    return WARMER;
-  }
-  else if (temp1 == true && temp2 == true && temp3 == true)
-  {
-    return HOT;
-  }
-  else
-  {
-    return COLD;
-  }
-  
-  
+	heaterTemp++;
+	if (heaterTemp > 3)
+	{
+		heaterTemp = 3;
+	}
+}
 
+void HardwareControl::UpdateWaterLevel()
+{
+	waterLvl++;
+	if (waterLvl > 3)
+	{
+		waterLvl = 3;
+	}
+}
+
+/* PUBLIC GETTERS */
+Temp HardwareControl::GetTemperature()
+{
+	switch (heaterTemp)
+	{
+	case 0:
+		return COLD;
+		break;
+
+	case 1:
+		return WARM;
+		break;
+
+	case 2:
+		return WARMER;
+		break;
+
+	case 3:
+		return HOT;
+		break;
+
+	default:
+		return COLD;
+		break;
+	}
   
 }
 
-WaterLevel HardwareControl::GetWaterLevel(bool waterlvl1, bool waterlvl2, bool waterlvl3)
+
+WaterLevel HardwareControl::GetWaterLevel()
 {
   //read the rbs and return the water level
-   if (waterlvl1 == true)
-  {
-    return ALMOSTEMPTY;
-  }
-  else if (waterlvl1 == true && waterlvl2 == true)
-  {
-    return ALMOSTFULL;
-  }
-  else if (waterlvl3 == true && waterlvl2 == true && waterlvl3 == true)
-  {
-    return FULL;
-  }
-  else
-  {
-    return EMPTY;
-  }
+	switch (waterLvl)
+	{
+	case 0:
+		return EMPTY;
+		break;
+
+	case 1:
+		return ALMOSTEMPTY;
+		break;
+
+	case 2:
+		return ALMOSTFULL;
+		break;
+
+	case 3:
+		return FULL;
+		break;
+
+	default:
+		return EMPTY;
+		break;
+
+	}
  
 
 }
@@ -552,7 +586,7 @@ char HardwareControl::GetGlobalInputByte()
 bool HardwareControl::CheckButtonClick(char bitm, char in, char prev)
 {
 	bool response = false;
-	if ((in | bitm) == in)
+	/*if ((in & bitm) == in)
 	{
 		response = true;
 		if (prev == bitm)
@@ -562,11 +596,18 @@ bool HardwareControl::CheckButtonClick(char bitm, char in, char prev)
 				response = true;
 			}
 		}
-		if ((prev | bitm) != prev)
+		if ((prev & bitm) != prev)
 		{
 			response = true;
 		}
-	}
+	}*/
+
+		if (in == bitm) 
+		{
+			response = true;
+		}
+		
+	
 	return response;
 }
 
@@ -629,6 +670,28 @@ bool HardwareControl::ProgramAction()
 bool HardwareControl::StartAction()
 {
 	bool response = CheckButtonClick(BitMaskStart, GetGlobalInputByte(), previousByteButtons);
+	if (response)
+	{
+		previousByteButtons = GetGlobalInputByte();
+		SetGlobalInputByte(0x00);
+	}
+	return response;
+}
+
+bool HardwareControl::PressureAction()
+{
+	bool response = CheckButtonClick(BitMaskPressure, GetGlobalInputByte(), previousByteButtons);
+	if (response)
+	{
+		previousByteButtons = GetGlobalInputByte();
+		SetGlobalInputByte(0x00);
+	}
+	return response;
+}
+
+bool HardwareControl::HeaterAction()
+{
+	bool response = CheckButtonClick(BitMaskHeater, GetGlobalInputByte(), previousByteButtons);
 	if (response)
 	{
 		previousByteButtons = GetGlobalInputByte();

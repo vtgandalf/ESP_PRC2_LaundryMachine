@@ -1,3 +1,5 @@
+#include <Windows.h>
+
 #include "HardwareControl.h"
 //#include "InputManager.h"
 #include "SecurityManager.h"
@@ -24,12 +26,13 @@ namespace test {
 	public:
 		// 'Hardware' Objects
 		HardwareControl *hwc;
-		//InputManager *inm;
 		SecurityManager *scm;
 		SoapHandler *sph;
 		CoinHandler *cnh;
+		WaterManager *wtr;
+		HeaterHandler *htr;
 		Program *prg;
-		
+
 
 		MyForm(void)
 		{
@@ -38,17 +41,19 @@ namespace test {
 			//TODO: Add the constructor code here
 			//
 			hwc = new HardwareControl();
-			//inm = new InputManager();
 			scm = new SecurityManager();
 			sph = new SoapHandler();
 			cnh = new CoinHandler();
+			wtr = new WaterManager();
+			htr = new HeaterHandler();
 			prg = new Program();
 
 			scm->setHwc(hwc);
 			sph->setHwc(hwc);
 			cnh->setHwc(hwc);
 			prg->setHwc(hwc);
-
+			wtr->setHwc(hwc);
+			htr->setHwc(hwc);
 
 		}
 
@@ -69,6 +74,10 @@ namespace test {
 	private: System::Windows::Forms::Button^  btnCoin10;
 	private: System::Windows::Forms::Button^  btnCoin50;
 	private: System::Windows::Forms::Button^  btnCoin200;
+	private: System::Windows::Forms::Timer^  timerWater;
+	public:
+	private: System::Windows::Forms::Timer^  timerHeater;
+	public:
 
 	private: System::Windows::Forms::CheckBox^  cbDrain;
 	public:
@@ -175,11 +184,11 @@ namespace test {
 	private: System::Windows::Forms::RadioButton^  rb8;
 
 	private: System::Windows::Forms::RadioButton^  rb7;
-private: System::Windows::Forms::RadioButton^  rb18;
-private: System::Windows::Forms::RadioButton^  rb19;
-private: System::Windows::Forms::RadioButton^  rb20;
-private: System::Windows::Forms::RadioButton^  rb21;
-private: System::Windows::Forms::RadioButton^  rb22;
+	private: System::Windows::Forms::RadioButton^  rb18;
+	private: System::Windows::Forms::RadioButton^  rb19;
+	private: System::Windows::Forms::RadioButton^  rb20;
+	private: System::Windows::Forms::RadioButton^  rb21;
+	private: System::Windows::Forms::RadioButton^  rb22;
 
 
 
@@ -203,8 +212,8 @@ private: System::Windows::Forms::RadioButton^  rb22;
 
 
 
-private: System::Windows::Forms::RadioButton^  rb10;
-private: System::Windows::Forms::RadioButton^  rb14;
+	private: System::Windows::Forms::RadioButton^  rb10;
+	private: System::Windows::Forms::RadioButton^  rb14;
 
 
 	private: System::Windows::Forms::Button^  btnCloseDoor;
@@ -219,8 +228,8 @@ private: System::Windows::Forms::RadioButton^  rb14;
 
 
 
-private: System::Windows::Forms::Timer^  timer;
-private: System::ComponentModel::IContainer^  components;
+	private: System::Windows::Forms::Timer^  timer;
+	private: System::ComponentModel::IContainer^  components;
 
 
 	protected:
@@ -298,6 +307,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->cbTemp1 = (gcnew System::Windows::Forms::CheckBox());
 			this->cbTemp2 = (gcnew System::Windows::Forms::CheckBox());
 			this->cbHeater = (gcnew System::Windows::Forms::CheckBox());
+			this->timerWater = (gcnew System::Windows::Forms::Timer(this->components));
+			this->timerHeater = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
 			// btnCoin10
@@ -395,9 +406,9 @@ private: System::ComponentModel::IContainer^  components;
 			this->btnProgram->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnProgram->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnProgram->Location = System::Drawing::Point(904, 18);
+			this->btnProgram->Location = System::Drawing::Point(884, 18);
 			this->btnProgram->Name = L"btnProgram";
-			this->btnProgram->Size = System::Drawing::Size(133, 106);
+			this->btnProgram->Size = System::Drawing::Size(153, 106);
 			this->btnProgram->TabIndex = 10;
 			this->btnProgram->Text = L"Program";
 			this->btnProgram->UseVisualStyleBackColor = false;
@@ -444,6 +455,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->btnPressure->TabIndex = 28;
 			this->btnPressure->Text = L"Pressure";
 			this->btnPressure->UseVisualStyleBackColor = false;
+			this->btnPressure->Click += gcnew System::EventHandler(this, &MyForm::btnPressure_Click);
 			// 
 			// btnHeater
 			// 
@@ -458,6 +470,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->btnHeater->TabIndex = 29;
 			this->btnHeater->Text = L"Heater";
 			this->btnHeater->UseVisualStyleBackColor = false;
+			this->btnHeater->Click += gcnew System::EventHandler(this, &MyForm::btnHeater_Click);
 			// 
 			// rb3
 			// 
@@ -825,7 +838,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Int32>(static_cast<System::Byte>(133)));
 			this->cbProgramB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->cbProgramB->Location = System::Drawing::Point(700, 54);
+			this->cbProgramB->Location = System::Drawing::Point(690, 54);
 			this->cbProgramB->Name = L"cbProgramB";
 			this->cbProgramB->Size = System::Drawing::Size(60, 36);
 			this->cbProgramB->TabIndex = 78;
@@ -839,7 +852,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Int32>(static_cast<System::Byte>(133)));
 			this->cbProgramC->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->cbProgramC->Location = System::Drawing::Point(817, 54);
+			this->cbProgramC->Location = System::Drawing::Point(795, 54);
 			this->cbProgramC->Name = L"cbProgramC";
 			this->cbProgramC->Size = System::Drawing::Size(61, 36);
 			this->cbProgramC->TabIndex = 79;
@@ -947,6 +960,18 @@ private: System::ComponentModel::IContainer^  components;
 			this->cbHeater->TabIndex = 89;
 			this->cbHeater->UseVisualStyleBackColor = true;
 			// 
+			// timerWater
+			// 
+			this->timerWater->Enabled = true;
+			this->timerWater->Interval = 2000;
+			this->timerWater->Tick += gcnew System::EventHandler(this, &MyForm::timerWater_Tick);
+			// 
+			// timerHeater
+			// 
+			this->timerHeater->Enabled = true;
+			this->timerHeater->Interval = 2000;
+			this->timerHeater->Tick += gcnew System::EventHandler(this, &MyForm::timerHeater_Tick);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
@@ -1021,66 +1046,155 @@ private: System::ComponentModel::IContainer^  components;
 #pragma endregion
 
 
-private: System::Void btnStart_Click(System::Object^  sender, System::EventArgs^  e) {
-	//asyiaap++;
-	//bool temp[3] = { false,false,false };
-	//temp = hwc->SetCoin10Led(2);
-}
-private: System::Void btnCloseDoor_Click(System::Object^  sender, System::EventArgs^  e) {
-	hwc->SetGlobalInputByte(0b01000);
-}
+	private: System::Void btnStart_Click(System::Object^  sender, System::EventArgs^  e) {
+		//asyiaap++;
+		//bool temp[3] = { false,false,false };
+		//temp = hwc->SetCoin10Led(2);
+	}
+	private: System::Void btnCloseDoor_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b01000);
+	}
 
-private: System::Void timer_Tick(System::Object^  sender, System::EventArgs^  e) {
-	
-	// Check Inputs
+	private: System::Void timer_Tick(System::Object^  sender, System::EventArgs^  e) {
 
-	// Call all polling functions
-	scm->Polling();
-	sph->Polling();
-	cnh->Polling();
-	prg->PreProgram();
-	
-	//inm->Polling();
+		// Check Inputs
 
-	// Handle Outputs
-	cbLock->Checked = hwc->Lock();
-	cbSoap1->Checked = hwc->Soap1();
-	cbSoap2->Checked = hwc->Soap2();
-	cbCoin10_1->Checked = (hwc->Coin10()) & 0b001;
-	cbCoin10_2->Checked = (hwc->Coin10()) & 0b010;
-	cbCoin10_3->Checked = (hwc->Coin10()) & 0b100;
-	cbCoin50_1->Checked = (hwc->Coin50()) & 0b001;
-	cbCoin50_2->Checked = (hwc->Coin50()) & 0b010;
-	cbCoin50_3->Checked = (hwc->Coin50()) & 0b100;
-	cbCoin200_1->Checked = (hwc->Coin200()) & 0b01;
-	cbCoin200_2->Checked = (hwc->Coin200()) & 0b10;
-	cbProgramA->Checked = (hwc->Program()) & 0b001;
-	cbProgramB->Checked = (hwc->Program()) & 0b010;
-	cbProgramC->Checked = (hwc->Program()) & 0b100;
+		// Call all polling functions
+		scm->Polling();
+		sph->Polling();
+		cnh->Polling();
+		wtr->Polling();
+		htr->Polling();
+		prg->PreProgram();
 
-}
-private: System::Void btnSoap1_Click(System::Object^  sender, System::EventArgs^  e) {
-	hwc->SetGlobalInputByte(0b00010);
-}
-private: System::Void btnSoap2_Click(System::Object^  sender, System::EventArgs^  e) {
-	hwc->SetGlobalInputByte(0b00100);
 
-}
-private: System::Void btnCoin10_Click(System::Object^  sender, System::EventArgs^  e) {
-	hwc->SetGlobalInputByte(0b11000);
-}
-private: System::Void btnCoin50_Click(System::Object^  sender, System::EventArgs^  e) {
-	hwc->SetGlobalInputByte(0b10100);
+		// Handle Outputs
+		cbLock->Checked = hwc->Lock();
+		cbSoap1->Checked = hwc->Soap1();
+		cbSoap2->Checked = hwc->Soap2();
+		cbCoin10_1->Checked = (hwc->Coin10()) & 0b001;
+		cbCoin10_2->Checked = (hwc->Coin10()) & 0b010;
+		cbCoin10_3->Checked = (hwc->Coin10()) & 0b100;
+		cbCoin50_1->Checked = (hwc->Coin50()) & 0b001;
+		cbCoin50_2->Checked = (hwc->Coin50()) & 0b010;
+		cbCoin50_3->Checked = (hwc->Coin50()) & 0b100;
+		cbCoin200_1->Checked = (hwc->Coin200()) & 0b01;
+		cbCoin200_2->Checked = (hwc->Coin200()) & 0b10;
+		cbProgramA->Checked = (hwc->Program()) & 0b001;
+		cbProgramB->Checked = (hwc->Program()) & 0b010;
+		cbProgramC->Checked = (hwc->Program()) & 0b100;
+		// show water level in checkbox
+		if (hwc->GetWaterLevel() == EMPTY) { cbWaterLevel1->Checked = false; cbWaterLevel2->Checked = false; cbWaterLevel3->Checked = false; }
+		else if (hwc->GetWaterLevel() == ALMOSTEMPTY) { cbWaterLevel1->Checked = true; cbWaterLevel2->Checked = false; cbWaterLevel3->Checked = false; }
+		else if (hwc->GetWaterLevel() == ALMOSTFULL) { cbWaterLevel1->Checked = true; cbWaterLevel2->Checked = true; cbWaterLevel3->Checked = false; }
+		else if (hwc->GetWaterLevel() == FULL) { cbWaterLevel1->Checked = true; cbWaterLevel2->Checked = true; cbWaterLevel3->Checked = true; }
+		// show heater temperature in checkbox
+		if (hwc->GetTemperature() == COLD) { cbTemp1->Checked = false; cbTemp2->Checked = false; cbTemp3->Checked = false; }
+		else if (hwc->GetTemperature() == WARM) { cbTemp1->Checked = true; cbTemp2->Checked = false; cbTemp3->Checked = false; }
+		else if (hwc->GetTemperature() == WARMER) { cbTemp1->Checked = true; cbTemp2->Checked = true; cbTemp3->Checked = false; }
+		else if (hwc->GetTemperature() == HOT) { cbTemp1->Checked = true; cbTemp2->Checked = true; cbTemp3->Checked = true; }
 
-}
-private: System::Void btnCoin200_Click(System::Object^  sender, System::EventArgs^  e) {
-	hwc->SetGlobalInputByte(0b10010);
-}
-private: System::Void btnReset_Click(System::Object^  sender, System::EventArgs^  e) {
-	hwc->SetGlobalInputByte(0b11110);
-}
-private: System::Void btnProgram_Click(System::Object^  sender, System::EventArgs^  e) {
-	hwc->SetGlobalInputByte(0b11001);
+	}
+	private: System::Void btnSoap1_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b00010);
+	}
+	private: System::Void btnSoap2_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b00100);
+
+	}
+	private: System::Void btnCoin10_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b11000);
+	}
+	private: System::Void btnCoin50_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b10100);
+
+	}
+	private: System::Void btnCoin200_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b10010);
+	}
+	private: System::Void btnReset_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b11110);
+	}
+	private: System::Void btnProgram_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b11001);
+	}
+	private: System::Void timerWater_Tick(System::Object^  sender, System::EventArgs^  e) {
+		if (hwc->Drain() == true && hwc->GetWaterLevel() != FULL) {
+			// Water going in animation
+			rb1->Checked = true;
+			Sleep(500);
+			rb2->Checked = true;
+			Sleep(500);
+			rb3->Checked = true;
+			Sleep(500);
+			rb4->Checked = true;
+			Sleep(500);
+			rb5->Checked = true;
+			Sleep(500);
+			rb5->Checked = false;
+			Sleep(500);
+
+			// increment water level
+			hwc->UpdateWaterLevel();
+		}
+		else
+		{
+			// Turn Drain LED off
+			cbDrain->Checked = false;
+			// Change color back to default
+			btnPressure->BackColor = BackColor.FromArgb(172, 168, 133);
+		}
+	}
+	private: System::Void btnPressure_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b00001);
+		// Change the button for the color to indicate stopping water pressure
+		if (btnPressure->BackColor == BackColor.FromArgb(0xE0, 0x38, 0x38))
+		{
+			// Change color back to default
+			btnPressure->BackColor = BackColor.FromArgb(172, 168, 133);
+			// Turn Drain LED off
+			cbDrain->Checked = false;
+		}
+		else
+		{
+			// Change color to red
+			btnPressure->BackColor = BackColor.FromArgb(0xE0, 0x38, 0x38);
+			// Turn Drain LED on
+			cbDrain->Checked = true;
+		}
+	}
+	private: System::Void btnHeater_Click(System::Object^  sender, System::EventArgs^  e) {
+		hwc->SetGlobalInputByte(0b11111);
+		// Change the button for the color to indicate stopping water pressure
+		if (btnHeater->BackColor == BackColor.FromArgb(0xE0, 0x38, 0x38))
+		{
+			// Change color back to default
+			btnHeater->BackColor = BackColor.FromArgb(172, 168, 133);
+			// Turn Heater LED off
+			cbHeater->Checked = false;
+		}
+		else
+		{
+			// Change color to red
+			btnHeater->BackColor = BackColor.FromArgb(0xE0, 0x38, 0x38);
+			// Turn Heater LED on
+			cbHeater->Checked = true;
+		}
+	}
+private: System::Void timerHeater_Tick(System::Object^  sender, System::EventArgs^  e) {
+	if (hwc->Heater() == true && hwc->GetTemperature() != HOT){
+		// increment heater temperature
+		hwc->UpdateTemperature();
+		// Turn Heater LED on
+		cbHeater->Checked = true;
+	}
+	else
+	{
+		// Turn Heater LED off
+		cbHeater->Checked = false;
+		// Change color back to default
+		btnHeater->BackColor = BackColor.FromArgb(172, 168, 133);
+	}
 }
 };
 }

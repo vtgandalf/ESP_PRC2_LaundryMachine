@@ -2,15 +2,15 @@
 
 WashingProgram Program::PreProgram()
 {
-    _hardwareControl.HardwareControlSetup();
+   // _hardwareControl.HardwareControlSetup();
     // to be implemented
     //Serial.println("Waiting for coins, soap, program selection and etc...");
     bool trig = false;
-    while (trig != true)
+    /*while (trig != true)
     {
         //Serial.println("PreProgram loop");
         // update input
-        _inputManager.Polling();
+        //_inputManager.Polling();
 
         // get coins
         _coinHandler.Polling();
@@ -20,9 +20,10 @@ WashingProgram Program::PreProgram()
 
         // lock door
         _securityManager.Polling();
-
+		*/
         // get program
         ReadProgramButton();
+		SetLeds(program);
 
         // PRESS START BUTTONS
         if (ReadStartButton())
@@ -39,7 +40,7 @@ WashingProgram Program::PreProgram()
                 //Serial.println("You cant start the program yet!");
             }
         }
-    }
+   // }
     return programs[program];
 }
 
@@ -239,7 +240,7 @@ void Program::ReadProgramButton()
 	if (hwc->ProgramAction())
     //if(iprogramPtr->ProgramAction())
     {
-        if (program <= 1)
+        if (program <= 2)
         {
             program++;
         }
@@ -259,7 +260,7 @@ bool Program::ReadStartButton()
 
 void Program::SetLeds(int prog)
 {
-    if ((prog >= 0) && (prog <= 2))
+    if ((prog >= 0) && (prog <= 3))
     {
 		hwc->SetProgramLed(prog);
         //iprogramPtr->SetProgramLed(prog);
@@ -269,4 +270,7 @@ void Program::SetLeds(int prog)
 void Program::setHwc(HardwareControl *hwcont)
 {
 	hwc = hwcont;
+	_coinHandler.setHwc(hwc);
+	_soapHandler.setHwc(hwc);
+	_securityManager.setHwc(hwc);
 }
