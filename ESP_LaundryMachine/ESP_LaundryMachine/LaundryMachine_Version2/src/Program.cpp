@@ -100,7 +100,7 @@ void Program::PreWash(Temp temperature)
         else
         {
             Serial.println("Error: the tank does not have enough water");
-            Serial.println("Actio: Fill up the tank");
+            Serial.println("Action: Fill up the tank");
             if (!_waterManager.FillUpWater(ALMOSTFULL, program, &_securityManager))
             {
                 Serial.println("Program exiting due to lack of pressure");
