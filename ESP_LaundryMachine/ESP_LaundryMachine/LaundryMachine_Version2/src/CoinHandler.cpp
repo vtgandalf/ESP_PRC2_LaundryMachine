@@ -1,5 +1,8 @@
 #include "../lib/CoinHandler.h"
 
+#define coin10and50maxValue 3
+#define coin200maxValue 2
+
 void CoinHandler::IndicateMissingCoins(int value)
 {
     int temp = value;
@@ -50,21 +53,21 @@ bool CoinHandler::AreCoinsEnough(int value)
 
 void CoinHandler::NewCoin()
 {
-    if ((coin10 < 3) && icoinPtr->Coin10Action())
+    if ((coin10 < coin10and50maxValue) && icoinPtr->Coin10Action())
     {
         coin10++;
         coin10LedHasBeenSet = false;
         Serial.println("Coin10 has been added.");
     }
 
-    if ((coin50 < 3) && icoinPtr->Coin50Action())
+    if ((coin50 < coin10and50maxValue) && icoinPtr->Coin50Action())
     {
         coin50++;
         coin50LedHasBeenSet = false;
         Serial.println("Coin50 has been added.");
     }
 
-    if ((coin200 < 2) && icoinPtr->Coin200Action())
+    if ((coin200 < coin200maxValue) && icoinPtr->Coin200Action())
     {
         coin200++;
         coin200LedHasBeenSet = false;

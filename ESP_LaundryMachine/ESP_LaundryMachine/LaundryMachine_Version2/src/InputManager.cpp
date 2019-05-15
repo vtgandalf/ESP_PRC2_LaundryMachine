@@ -1,5 +1,8 @@
 #include "../lib/InputManager.h"
 
+#define emptyBitmask 0x00
+#define keyselectBitmask 0x10
+
 void InputManager::Debouncing(byte *previousByteState, byte *byteState, byte reading, unsigned long *lastDebounceTime, int x)
 {
   if (reading != *previousByteState)
@@ -15,7 +18,7 @@ void InputManager::Debouncing(byte *previousByteState, byte *byteState, byte rea
       *byteState = reading;
       if (x == 0)
       {
-        if (*byteState != 0x00)
+        if (*byteState != emptyBitmask)
         {
           //Serial.println(reading, BIN);
           ioPtr->SetGlobalInputByte(reading);
@@ -23,7 +26,7 @@ void InputManager::Debouncing(byte *previousByteState, byte *byteState, byte rea
       }
       if (x == 1)
       {
-        if (*byteState != 0x10) // 0x10 is the bitmask for keyselect
+        if (*byteState != keyselectBitmask) // 0x10 is the bitmask for keyselect
         {
           //Serial.println(reading, BIN);
           ioPtr->SetGlobalInputByte(reading);

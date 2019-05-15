@@ -25,6 +25,7 @@
 #define IN_IN1 22
 #define IN_IN0 23
 
+#define BitMaskEmpty 0x00
 #define BitMaskClear 0x1E
 #define BitMaskCoin10 0x18
 #define BitMaskProgram 0x19
@@ -472,7 +473,7 @@ byte HardwareControl::GetRawInputByte()
 {
   // reading the buttons and storring their data
   // into the reading byte
-  byte temp = 0x00;
+  byte temp = BitMaskEmpty;
   temp |= centipede.digitalRead(IN_IN0);
   temp |= centipede.digitalRead(IN_IN1) << 1;
   temp |= centipede.digitalRead(IN_IN2) << 2;
@@ -589,7 +590,7 @@ bool HardwareControl::Soap1Action()
   if (response)
   {
     previousByteSwitches = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }
@@ -601,7 +602,7 @@ bool HardwareControl::Soap2Action()
   if (response)
   {
     previousByteSwitches = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }
@@ -612,7 +613,7 @@ bool HardwareControl::DoorAction()
   if (response)
   {
     previousByteSwitches = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }
@@ -623,7 +624,7 @@ bool HardwareControl::PressureAction()
   if (response)
   {
     previousByteSwitches = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }
@@ -634,7 +635,7 @@ bool HardwareControl::Coin10Action()
   if (response)
   {
     previousByteButtons = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }
@@ -645,7 +646,7 @@ bool HardwareControl::Coin50Action()
   if (response)
   {
     previousByteButtons = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }
@@ -656,7 +657,7 @@ bool HardwareControl::Coin200Action()
   if (response)
   {
     previousByteButtons = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }
@@ -667,7 +668,7 @@ bool HardwareControl::ClearAction()
   if (response)
   {
     previousByteButtons = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }
@@ -678,7 +679,7 @@ bool HardwareControl::ProgramAction()
   if (response)
   {
     previousByteButtons = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }
@@ -689,7 +690,7 @@ bool HardwareControl::StartAction()
   if (response)
   {
     previousByteButtons = GetGlobalInputByte();
-    SetGlobalInputByte(0x00);
+    SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
 }

@@ -1,5 +1,8 @@
 #include "../lib/SoapHandler.h"
 
+#define soap1max 2
+#define soap2max 3
+
 void SoapHandler::IndicateMissingSoap(int soap1Required, int soap2Required)
 {
     for (int i = 0; i < (soap1Required - soap1); i++)
@@ -37,7 +40,7 @@ void SoapHandler::SetLed()
 {
     //Serial.println("SoapHandler::SetLed");
     //to be implemented
-    if (soap1 == 2)
+    if (soap1 == soap1max)
     {
         if (!soap1LedHasBeenSetUp)
         {
@@ -46,7 +49,7 @@ void SoapHandler::SetLed()
             Serial.println("SetSoap1Led has been set.");
         }
     }
-    if (soap2 == 3)
+    if (soap2 == soap2max)
     {
         if (!soap2LedHasBeenSetUp)
         {
@@ -59,14 +62,14 @@ void SoapHandler::SetLed()
 
 void SoapHandler::InsertSoap()
 {
-    if ((soap1 < 2) && isoapPtr->Soap1Action())
+    if ((soap1 < soap1max) && isoapPtr->Soap1Action())
     {
         soap1++;
         soap1LedHasBeenSetUp = false;
         Serial.print("Soap1 has been added.");
         Serial.println(soap1);
     }
-    if ((soap2 < 3) && isoapPtr->Soap2Action())
+    if ((soap2 < soap2max) && isoapPtr->Soap2Action())
     {
         soap2++;
         soap2LedHasBeenSetUp = false;
