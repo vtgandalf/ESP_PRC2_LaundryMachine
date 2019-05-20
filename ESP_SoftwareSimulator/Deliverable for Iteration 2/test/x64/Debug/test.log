@@ -1,0 +1,12 @@
+﻿  CoinHandler.cpp
+  HardwareControl.cpp
+  HeaterHandler.cpp
+  MotorManager.cpp
+  MyForm.cpp
+  Program.cpp
+  SecurityManager.cpp
+  SoapHandler.cpp
+  WaterManager.cpp
+  Generating Code...
+  CoinHandler.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  test.vcxproj -> D:\OneDrive - FHICT\school shit\ESP\this one\x64\Debug\test.exe
