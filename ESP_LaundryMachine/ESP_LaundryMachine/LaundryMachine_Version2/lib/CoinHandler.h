@@ -24,6 +24,7 @@ public:
         be ran during the main loop of the arduino
         program */
     void Polling();
+    void ClearCoins();
 
 private:
     // IN DEV

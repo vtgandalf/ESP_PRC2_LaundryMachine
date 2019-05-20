@@ -2,6 +2,13 @@
 
 void MotorManager::Rotate(Rotation direction, Speed speed, long duration)
 {
+    Serial.print("Motor starts rotating ");
+    Serial.print(direction);
+    Serial.print(" ");
+    Serial.print(speed);
+    Serial.print(" ");
+    Serial.print(duration);
+    Serial.print(" ... ");
     if (direction == CLOCKWISE)
     {
         prevMillis = millis();
@@ -43,5 +50,6 @@ void MotorManager::Rotate(Rotation direction, Speed speed, long duration)
     else if (speed == HIGHSPEED)
     {
         delay(5000);
-    } 
+    }
+    Serial.println("Done!");
 }

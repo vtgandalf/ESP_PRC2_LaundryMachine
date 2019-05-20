@@ -88,10 +88,11 @@ void SoapHandler::Polling()
 
 bool SoapHandler::UseSoap1(int x)
 {
-    if (soap1 - x < 0)
+    if (soap1 - x >= 0)
     {
+        Serial.println("Soap 1 added!");
         soap1 -= x;
-        SetLed();
+        isoapPtr->SetSoap1Led(false);
         return true;
     }
     else
@@ -102,10 +103,11 @@ bool SoapHandler::UseSoap1(int x)
 
 bool SoapHandler::UseSoap2(int x)
 {
-    if (soap2 - x < 0)
+    Serial.println("Soap 2 added!");
+    if (soap2 - x >= 0)
     {
         soap2 -= x;
-        SetLed();
+        isoapPtr->SetSoap2Led(false);
         return true;
     }
     else

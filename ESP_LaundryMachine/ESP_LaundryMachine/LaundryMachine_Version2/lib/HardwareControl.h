@@ -21,7 +21,7 @@ instance */
 #include "IProgram.h"
 using namespace sharedNamespace;
 
-class HardwareControl : public ICoin, public ISecurity, public ISoap, public IO, public IWater, public IMotor, public IProgram
+class HardwareControl : public ICoin, public ISecurity, public ISoap, public IO, public IWater, public IHeater, public IMotor, public IProgram
 {
 public:
     // Method that returns the singleton instance
@@ -141,6 +141,7 @@ private:
 
     output:
         - true - if a switch press has been recognized */
+    bool CheckSimpleClick(byte, byte);
     bool CheckSwitchClick(byte, byte, byte, byte);
     bool CheckSwitchSoapClick(byte, byte, byte, byte *);
     /* This method checks the debounced input byte for

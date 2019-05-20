@@ -27,9 +27,10 @@ WashingProgram Program::PreProgram()
         // PRESS START BUTTONS
         if (ReadStartButton())
         {
-            if (_coinHandler.AreCoinsEnough(programs[program].price) && _soapHandler.IsSoapEnough(2, 3) && _securityManager.IsEverythingClosed())
+            if (_coinHandler.AreCoinsEnough(programs[program].price) & _soapHandler.IsSoapEnough(2, 3) & _securityManager.IsEverythingClosed())
             {
                 trig = true;
+                _coinHandler.ClearCoins();
                 Serial.print("Program ");
                 Serial.print(program);
                 Serial.println(" is about to start!");
@@ -246,6 +247,7 @@ void Program::ReadProgramButton()
         {
             program = 0;
         }
+        SetLeds(program);
         Serial.println(program);
     }
 }
@@ -259,6 +261,6 @@ void Program::SetLeds(int prog)
 {
     if ((prog >= 0) && (prog <= 2))
     {
-        iprogramPtr->SetProgramLed(prog);
+        iprogramPtr->SetProgramLed(prog+1);
     }
 }

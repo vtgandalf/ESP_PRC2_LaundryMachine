@@ -3,14 +3,22 @@
 void HeaterHandler::HeatUp(Temp temperature)
 {
     Serial.print("Heating up... ");
-    while (GetTemperature() <= temperature)
+    while (GetTemperature() < temperature)
     {
         if (!iheaterPtr->Heater())
         {
             iheaterPtr->SetHeater(true);
         }
     }
-    Serial.print("done.");
+    if (iheaterPtr->Heater())
+    {
+        iheaterPtr->SetHeater(false);
+    }
+    //iheaterPtr->SetHeater(true);
+    //Serial.print(" ");
+    //Serial.println(iheaterPtr->GetTemperature());
+    //Serial.print(" ");
+    Serial.println("done.");
 }
 
 Temp HeaterHandler::GetTemperature()
@@ -25,5 +33,4 @@ void HeaterHandler::StopHeating()
         Serial.println("Heater has been stopped.");
         iheaterPtr->SetHeater(false);
     }
-    
 }

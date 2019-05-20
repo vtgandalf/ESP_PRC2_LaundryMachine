@@ -26,6 +26,10 @@ void CoinHandler::IndicateMissingCoins(int value)
         icoinPtr->SetCoin200Led(0);
         delay(300);
     }
+    coin10LedHasBeenSet = false;
+    coin50LedHasBeenSet = false;
+    coin200LedHasBeenSet = false;
+    SetLed();
 }
 
 void CoinHandler::Change()
@@ -80,12 +84,7 @@ void CoinHandler::Clear()
     if (icoinPtr->ClearAction())
     {
         Serial.println("Clear has been pressed.");
-        coin10LedHasBeenSet = false;
-        coin50LedHasBeenSet = false;
-        coin200LedHasBeenSet = false;
-        coin10 = 0;
-        coin50 = 0;
-        coin200 = 0;
+        ClearCoins();
     }
 }
 
@@ -115,4 +114,14 @@ void CoinHandler::Polling()
     Clear();
     NewCoin();
     SetLed();
+}
+
+void CoinHandler::ClearCoins()
+{
+    coin10LedHasBeenSet = false;
+    coin50LedHasBeenSet = false;
+    coin200LedHasBeenSet = false;
+    coin10 = 0;
+    coin50 = 0;
+    coin200 = 0;
 }

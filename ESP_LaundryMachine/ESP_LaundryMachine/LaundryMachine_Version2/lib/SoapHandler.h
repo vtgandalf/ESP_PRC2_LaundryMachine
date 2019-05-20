@@ -29,7 +29,7 @@ public:
         - true - soap has been successfully added
         - false - not enough or out of range */
     bool UseSoap1(int);
-    /* This is a method that handles using the soap1 
+    /* This is a method that handles using the soap2 
     in a washing program
     input:
         - how much soap to take
