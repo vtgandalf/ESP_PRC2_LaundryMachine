@@ -2,14 +2,16 @@
 #include "lib/HardwareControl.h"
 #include "lib/InputManager.h"
 #include "lib/HeaterHandler.h"
+#include "lib/Controller.h"
 
-Program program;
+//Program program;
 //HardwareControl HC;
 //CoinHandler CH;
 //SoapHandler SH;
 //SecurityManager SM;
 //InputManager IM;
 //HeaterHandler HH;
+Controller ctrl;
 
 void setup()
 {
@@ -18,9 +20,10 @@ void setup()
 
 void loop()
 {
+    ctrl.MainStateMachine();
     //program.Testing();
     //program.PreProgram();
-    program.ExecProgram(program.PreProgram());
+    //program.ExecProgram(program.PreProgram());
     //HC.SetHeater(true);
     //Serial.println(HC.GetTemperature());
     //HH.HeatUp(WARM);

@@ -1,24 +1,24 @@
 #include "../lib/HeaterHandler.h"
 
-void HeaterHandler::HeatUp(Temp temperature)
+bool HeaterHandler::HeatUp(Temp temperature)
 {
-    Serial.print("Heating up... ");
-    while (GetTemperature() < temperature)
+    bool response = false;
+    if (GetTemperature() < temperature)
     {
         if (!iheaterPtr->Heater())
         {
             iheaterPtr->SetHeater(true);
         }
     }
-    if (iheaterPtr->Heater())
+    if (GetTemperature() == temperature)
     {
-        iheaterPtr->SetHeater(false);
+        response = true;
+        if (iheaterPtr->Heater())
+        {
+            iheaterPtr->SetHeater(false);
+        }
     }
-    //iheaterPtr->SetHeater(true);
-    //Serial.print(" ");
-    //Serial.println(iheaterPtr->GetTemperature());
-    //Serial.print(" ");
-    Serial.println("done.");
+    return response;
 }
 
 Temp HeaterHandler::GetTemperature()
@@ -30,7 +30,6 @@ void HeaterHandler::StopHeating()
 {
     if (iheaterPtr->Heater())
     {
-        Serial.println("Heater has been stopped.");
         iheaterPtr->SetHeater(false);
     }
 }

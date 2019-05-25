@@ -9,10 +9,11 @@
 #include "CoinHandler.h"
 #include "MotorManager.h"
 #include "InputManager.h"
+#include "WashingProgram.h"
 
 using namespace sharedNamespace;
 
-struct WashingProgram
+/*struct WashingProgram
 {
     Temp preWashTemp;
     WaterLevel mainWashWaterLevel;
@@ -20,11 +21,13 @@ struct WashingProgram
     int mainWashRotations;
     int centrifugeRotations;
     int price;
-};
+};*/
 
 class Program
 {
 public:
+    /* Method that handles the setup of the HardwareControl lib */
+    void Setup();
     /* A method that handles the stage
     prior to any washing program. It includes
     waiting for coins, soap, doorlock,
@@ -36,6 +39,51 @@ public:
     a woshing program accordingly to the program
     that has been passed on from the PreProgram() */
     void ExecProgram(WashingProgram);
+
+    // NEW
+    /* Method that is responsible for calling the objects
+    that handle filling up the water tank 
+    output:
+        - true - tank has been filled
+        - false - tank is not yet filled */
+    bool FillUpWater(WaterLevel);
+    /* Method that is responsible for calling the objects
+    that handle adding soap1 */
+    void AddSoap1();
+    /* Method that is responsible for calling the objects
+    that handle adding soap2 */
+    void AddSoap2();
+    /* Method that is responsible for calling the objects
+    that handle heating up */
+    bool HeatUp(Temp);
+    /* Method that is responsible for calling the objects
+    that handle stopping the heating */
+    void StopHeating();
+    /* Method that is responsible for calling the objects
+    that handle rotating the tank */
+    bool Rotate(Rotation, Speed, int);
+    /* Method that is responsible for calling the objects
+    that handle sinking the water
+    output:
+        - false - tank is not yet empty
+        - true - tank is empty */
+    bool Sink();
+    /* Method that is responsible for calling the objects
+    responsible for the input */
+    void InputPolling();
+    /* This method handles saving the current time, which
+    needed for the motor manager */
+    void SaveTimeMotorManager();
+    /* This is a method that calls the SecurityManager
+    to check the pressure and possibly fall into 
+    save mode */
+    int SecurityFallBack();
+    /* This is a method that calls the security manager
+    in order to save the current time for further checking */
+    void SaveTimeSecurityManager();
+    /* This is a method that handles blinking the program
+    led in case in save mode */
+    void BlinkProgramLed();
 
 private:
     /* Method that handles the prewash stage
@@ -68,7 +116,8 @@ private:
     input: int, defines how many times the tank should
         repeat a cicle of rotating clockwise and 
         anticlockwise */
-    WashingProgram programs[3] = {{COLD, ALMOSTFULL, WARMER, 1, 1, 360},{WARMER, ALMOSTFULL, WARMER, 1, 1, 480}, {WARMER, FULL, HOT, 3, 2, 510}};
+    WashingProgram programs[3] = {WashingProgram(COLD, ALMOSTFULL, WARMER, 1, 1, 360), WashingProgram(WARMER, ALMOSTFULL, WARMER, 1, 1, 480), WashingProgram(WARMER, FULL, HOT, 3, 2, 510)};
+    //WashingProgram programs[3] = {{COLD, ALMOSTFULL, WARMER, 1, 1, 360},{WARMER, ALMOSTFULL, WARMER, 1, 1, 480}, {WARMER, FULL, HOT, 3, 2, 510}};
     /* Vars for the managers/handlers and the library */
     HardwareControl _hardwareControl;
     SecurityManager _securityManager;

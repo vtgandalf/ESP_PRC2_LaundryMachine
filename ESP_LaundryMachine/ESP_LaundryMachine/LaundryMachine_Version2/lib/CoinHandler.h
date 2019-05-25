@@ -24,7 +24,16 @@ public:
         be ran during the main loop of the arduino
         program */
     void Polling();
+    /* Method that clears the coins counters */
     void ClearCoins();
+    /* This is a method that handles using the coins
+    for a washing program
+    input:
+        - how much coins to take
+    output: 
+        - true - coins have been successfully used
+        - false - not enough or out of range */
+    void UseCoins(int);
 
 private:
     // IN DEV

@@ -17,11 +17,14 @@ public:
         - false - filling up failed due to
                 security reasons
         - true - filling up sucessful*/
-    bool FillUpWater(WaterLevel, int, SecurityManager *);
+    bool FillUpWater(WaterLevel);
     /* This is a method that handles emptying
     the tank fully. It will halt every other
-    process until that is done */
-    void EmptyWaterTank();
+    process until that is done 
+    output:
+        - false - if its not done
+        - true - if its done */
+    bool EmptyWaterTank();
     /* Method that returns the current status
     of the drain. That is needed for adding the
     soap, since it should be for that action to 

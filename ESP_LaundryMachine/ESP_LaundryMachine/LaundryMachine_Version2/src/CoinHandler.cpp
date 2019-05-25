@@ -125,3 +125,24 @@ void CoinHandler::ClearCoins()
     coin50 = 0;
     coin200 = 0;
 }
+
+void CoinHandler::UseCoins(int value)
+{
+    int temp = value;
+    int coin10counter;
+    int coin50counter;
+    int coin200counter;
+    coin200counter = temp / 200;
+    temp = temp - coin200counter * 200;
+    coin50counter = temp / 50;
+    temp = temp - coin50counter * 50;
+    coin10counter = temp / 10;
+    temp = temp - coin10counter * 10;
+    coin10 -= coin10counter;
+    coin50 -= coin50counter;
+    coin200 -= coin200counter;
+    coin10LedHasBeenSet = false;
+    coin50LedHasBeenSet = false;
+    coin200LedHasBeenSet = false;
+    SetLed();
+}

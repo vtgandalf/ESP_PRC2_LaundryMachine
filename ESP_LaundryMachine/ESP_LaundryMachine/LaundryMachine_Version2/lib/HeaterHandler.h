@@ -10,8 +10,11 @@ public:
     /* This method will handle the turning 
         on the heater and maintaining the temperature
         in the tank
-        input:  sharedNamespace::Temp */
-    void HeatUp(Temp);
+        input:  sharedNamespace::Temp 
+        output:
+            - true - Temp has been reached
+            - false - Temp hasn't been reached*/
+    bool HeatUp(Temp);
     /* This is a method which will return 
         the temperature in the tank
         output: sharedNamespace::Temp */

@@ -37,14 +37,24 @@ public:
 			- true - the pressure is back
 			- false - there is no pressure 
 						even after waiting*/
-	bool SafeMode(int);
+	int SafeMode();
 	/* Method that handles all the essential
         proccesses for this object that have to 
         be ran during the main loop of the arduino
-        program */
+        program 
+		output:
+			- 1 - pressure is on
+			- 0 - pressure is off and is save mode
+			- -1 - time interal has passed and the
+					that is running should force
+					exit! */
 	void Polling();
 	/* This is a method that locks the door */
 	void LockDoor();
+	/* This is a method that saves the time
+	at which the pressure dropped and the save
+	mode was activated */
+	void SaveTime();
 
 private:
 	/* Variable containing the time which the

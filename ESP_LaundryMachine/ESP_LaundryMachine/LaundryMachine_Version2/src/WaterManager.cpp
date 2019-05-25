@@ -1,22 +1,10 @@
 #include "../lib/WaterManager.h"
 
-bool WaterManager::FillUpWater(WaterLevel level, int program, SecurityManager *sec)
+bool WaterManager::FillUpWater(WaterLevel level)
 {
     bool response = false;
-    Serial.print("Filling up tank... ");
-    while (iwaterPtr->GetWaterLevel() < level)
+    if (iwaterPtr->GetWaterLevel() < level)
     {
-        if (!sec->IsPressureOn())
-        {
-            response = sec->SafeMode(program);
-        }
-        else
-        {
-            if (!response)
-            {
-                response = true;
-            }
-        }
         if (!iwaterPtr->Drain())
         {
             iwaterPtr->SetDrain(true);
@@ -26,14 +14,17 @@ bool WaterManager::FillUpWater(WaterLevel level, int program, SecurityManager *s
             iwaterPtr->SetSink(false);
         }
     }
-    Serial.println("done.");
+    if(iwaterPtr->GetWaterLevel() == level)
+    {
+        response = true;
+    }
     return response;
 }
 
-void WaterManager::EmptyWaterTank()
+bool WaterManager::EmptyWaterTank()
 {
-    Serial.print("Emptying tank... ");
-    while (iwaterPtr->GetWaterLevel() > EMPTY)
+    bool response = false;
+    if (iwaterPtr->GetWaterLevel() > EMPTY)
     {
         if (iwaterPtr->Drain())
         {
@@ -44,7 +35,12 @@ void WaterManager::EmptyWaterTank()
             iwaterPtr->SetSink(true);
         }
     }
-    Serial.println("done.");
+    if (iwaterPtr->GetWaterLevel() == EMPTY)
+    {
+        response = true;
+        iwaterPtr->SetSink(false);
+    }
+    return response;
 }
 
 bool WaterManager::Drain()

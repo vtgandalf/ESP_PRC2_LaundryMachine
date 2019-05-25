@@ -15,7 +15,9 @@ class MotorManager
         - sharedNamespace::Speed (giving the speed for rotation)
         - long - gives the suration of the rotation in seconds
     */
-    void Rotate(Rotation, Speed, long);
+    bool Rotate(Rotation, Speed, long);
+    /* This method saves the current millis() */
+    void SaveTime();
 
     private:
     // accessing the library through the interfaces
