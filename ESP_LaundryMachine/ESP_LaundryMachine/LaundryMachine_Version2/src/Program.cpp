@@ -31,10 +31,11 @@ WashingProgram Program::PreProgram()
         // PRESS START BUTTONS
         if (ReadStartButton())
         {
-            if (_coinHandler.AreCoinsEnough(programs[program].Price()) & _soapHandler.IsSoapEnough(2, 3) & _securityManager.IsEverythingClosed())
+            if (_coinHandler.AreCoinsEnough(programs[program].Price()) & _soapHandler.IsSoapEnough(2, 3) & _securityManager.IsEverythingClosed() & program != -1)
             {
                 trig = true;
                 _coinHandler.UseCoins(programs[program].Price());
+                _securityManager.LockDoor();
                 Serial.print("Program ");
                 Serial.print(program);
                 Serial.println(" is about to start!");

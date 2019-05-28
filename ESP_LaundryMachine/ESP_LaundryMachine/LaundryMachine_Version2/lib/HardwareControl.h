@@ -154,6 +154,8 @@ private:
     output:
         - true - if a switch press has been recognized */
     bool CheckButtonClick(byte, byte, byte);
+    bool CheckSwitchClickOld(byte, byte, byte);
+    bool CheckButtonClickOld(byte, byte);
 };
 
 #endif

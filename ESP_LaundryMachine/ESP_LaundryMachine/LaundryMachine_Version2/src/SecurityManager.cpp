@@ -52,7 +52,7 @@ int SecurityManager::SafeMode()
 	//Serial.print("Going in SafeMode(), waiting... ");
 	if (IsPressureOn())
 	{
-		Serial.println(" Pressure came back!");
+		//Serial.println(" Pressure came back!");
 		response = 1;
 	}
 	else

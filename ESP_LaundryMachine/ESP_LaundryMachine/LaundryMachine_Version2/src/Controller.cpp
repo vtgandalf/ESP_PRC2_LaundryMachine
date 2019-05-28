@@ -1,5 +1,12 @@
 #include "../lib/Controller.h"
 
+void Controller::ProgramStatesCalling()
+{
+    PreWashStateMachine();
+    MainWashStateMachine();
+    CentrifugeStateMachine();
+}
+
 void Controller::MainStateMachine()
 {
     while (true)
@@ -17,7 +24,9 @@ void Controller::MainStateMachine()
             break;
 
         case ExecProgram:
+            programState = PreWash;
             ProgramStateMachine();
+            //ProgramStatesCalling();
             mainState = PreProgram;
             break;
 
@@ -31,7 +40,6 @@ void Controller::MainStateMachine()
 void Controller::ProgramStateMachine()
 {
     bool trig = false;
-    programState = PreWash;
     while (!trig)
     {
         switch (programState)
@@ -42,7 +50,7 @@ void Controller::ProgramStateMachine()
             break;
 
         case MainWash:
-            MainStateMachine();
+            MainWashStateMachine();
             programState = Centrifuge;
             break;
 
@@ -57,6 +65,7 @@ void Controller::ProgramStateMachine()
             break;
 
         default:
+            Serial.println("Error in Program State Machine!");
             break;
         }
     }
@@ -72,11 +81,12 @@ void Controller::PreWashStateMachine()
     {
         _program.InputPolling();
         _program.HeatUp(temp);
-        SecurityCheckUp(&trig);
+        //SecurityCheckUp(&trig);
         switch (washingState)
         {
         case FillUpTank:
             //Serial.println("--- FillUpTank ---");
+            //Serial.println(_program.FillUpWater(ALMOSTFULL));
             if (_program.FillUpWater(ALMOSTFULL))
             {
                 washingState = AddSoap1;
@@ -151,7 +161,7 @@ void Controller::MainWashStateMachine()
     {
         _program.InputPolling();
         _program.HeatUp(temp);
-        SecurityCheckUp(&trig);
+        //SecurityCheckUp(&trig);
         switch (washingState)
         {
         case FillUpTank:
@@ -334,7 +344,7 @@ void Controller::SecurityCheckUp(bool *trig)
         break;
 
     case 1:
-        if (washingState = Waiting)
+        if (washingState == Waiting)
         {
             washingState = lastWashingState;
         }

@@ -13,6 +13,7 @@ public:
     void MainStateMachine();
 
 private:
+    void ProgramStatesCalling();
     /* A method that handles the program state machine */
     void ProgramStateMachine();
     /* This method handles the preWash state machine */
