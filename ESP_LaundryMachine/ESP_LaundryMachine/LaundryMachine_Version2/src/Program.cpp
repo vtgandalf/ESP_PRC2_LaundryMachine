@@ -3,6 +3,8 @@
 void Program::Setup()
 {
     _hardwareControl.HardwareControlSetup();
+    program = 0;
+    SetLeds(program);
 }
 
 WashingProgram Program::PreProgram()
@@ -31,7 +33,7 @@ WashingProgram Program::PreProgram()
         // PRESS START BUTTONS
         if (ReadStartButton())
         {
-            if (_coinHandler.AreCoinsEnough(programs[program].Price()) & _soapHandler.IsSoapEnough(2, 3) & _securityManager.IsEverythingClosed() & program != -1)
+            if (_coinHandler.AreCoinsEnough(programs[program].Price()) & _soapHandler.IsSoapEnough(2, 3) & _securityManager.IsEverythingClosed() & _securityManager.IsPressureOn() & program != -1)
             {
                 trig = true;
                 _coinHandler.UseCoins(programs[program].Price());
@@ -382,6 +384,16 @@ void Program::BlinkProgramLed()
 {
     iprogramPtr->SetProgramLed(0);
     delay(500);
-    iprogramPtr->SetProgramLed(program);
+    iprogramPtr->SetProgramLed(program+1);
     delay(500);
+}
+
+void Program::StopDrain(bool boolean)
+{
+    _waterManager.SetDrain(!boolean);
+}
+
+void Program::UnlockDoor()
+{
+    _securityManager.UnlockDoor();
 }

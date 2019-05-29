@@ -2,8 +2,8 @@
 
 bool SecurityManager::IsPressureOn()
 {
-	//return isecurityPtr->PressureAction();
-	return true;
+	return isecurityPtr->PressureAction();
+	//return true;
 }
 
 void SecurityManager::IndicateCompartments()
@@ -41,7 +41,7 @@ bool SecurityManager::IsEverythingClosed()
 		IndicateCompartments();
 	}
 	return returnVal;*/
-	return true;
+	return isecurityPtr->DoorAction();
 }
 
 int SecurityManager::SafeMode()
@@ -58,12 +58,19 @@ int SecurityManager::SafeMode()
 	else
 	{
 		response = 0;
-		if (((millis() - prevMillis) / (60 * 1000)) > timeIntervalSafeMode)
+		if (previousSafeModeResponse != response)
 		{
-			Serial.println("Ten minutes have passed and still no pressure!");
+			SaveTime();
+		}
+		unsigned long timePassed = ((millis() - prevMillis)/1000);
+		if (timePassed > timeIntervalSafeMode * 60)
+		{
+			Serial.print(timeIntervalSafeMode);
+			Serial.println(" minutes have passed and still no pressure!");
 			response = -1;
 		}
 	}
+	previousSafeModeResponse = response;
 	return response;
 }
 
@@ -84,12 +91,12 @@ void SecurityManager::DoorClosed()
 {
 	if (isecurityPtr->DoorAction())
 	{
-		Serial.println("lock the door");
-		if (!doorHasBeenLocked)
+		//Serial.println("lock the door");
+		/*if (!doorHasBeenLocked)
 		{
 			isecurityPtr->SetLock(true);
 			doorHasBeenLocked = true;
-		}
+		}*/
 	}
 }
 
@@ -98,6 +105,14 @@ void SecurityManager::LockDoor()
 	if (!isecurityPtr->Lock())
 	{
 		isecurityPtr->SetLock(true);
+	}
+}
+
+void SecurityManager::UnlockDoor()
+{
+	if (isecurityPtr->Lock())
+	{
+		isecurityPtr->SetLock(false);
 	}
 }
 

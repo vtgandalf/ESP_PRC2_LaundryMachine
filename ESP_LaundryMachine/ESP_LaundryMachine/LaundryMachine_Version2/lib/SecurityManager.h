@@ -55,17 +55,18 @@ public:
 	at which the pressure dropped and the save
 	mode was activated */
 	void SaveTime();
+	void UnlockDoor();
 
 private:
 	/* Variable containing the time which the
 	safe mode should wait the pressure to come back.
 	Please, note that it is in minutes */
-	long timeIntervalSafeMode = 10;
+	unsigned long timeIntervalSafeMode = 1; // should be 10
 	/* Var which is a holder for the last millis value
 	from the cpu at which the pressure dropped. It is
 	used to calculate the time passed since the beginning
 	of the SafeMode() */
-	long prevMillis;
+	unsigned long prevMillis;
 	/* Boolean that indicated wheter or not the door has
         been locked after the last command. This is
         neccessary since without it we do keep locking the 
@@ -73,7 +74,7 @@ private:
         wastes cpu cycles.*/
 	bool doorHasBeenLocked = false;
 	// accessing the library through the interfaces
-	IProgram *iprogramPtr = (IProgram *)HardwareControl::GetInstance();
+	//IProgram *iprogramPtr = (IProgram *)HardwareControl::GetInstance();
 	//IO *ioPtr = (IO *)HardwareControl::GetInstance();
 	ISecurity *isecurityPtr = (ISecurity *)HardwareControl::GetInstance();
 	IWater *iwaterPtr = (IWater *)HardwareControl::GetInstance();
@@ -84,6 +85,7 @@ private:
 		are not yet closed through the corresponding
 		leds */
 	void IndicateCompartments();
+	int previousSafeModeResponse = 1;
 };
 
 #endif

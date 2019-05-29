@@ -84,6 +84,8 @@ public:
     /* This is a method that handles blinking the program
     led in case in save mode */
     void BlinkProgramLed();
+    void StopDrain(bool);
+    void UnlockDoor();
 
 private:
     /* Method that handles the prewash stage
@@ -116,7 +118,7 @@ private:
     input: int, defines how many times the tank should
         repeat a cicle of rotating clockwise and 
         anticlockwise */
-    WashingProgram programs[3] = {WashingProgram(COLD, ALMOSTFULL, WARMER, 1, 1, 360), WashingProgram(WARMER, ALMOSTFULL, WARMER, 1, 1, 480), WashingProgram(WARMER, FULL, HOT, 3, 2, 510)};
+    WashingProgram programs[3] = {WashingProgram(COLD, ALMOSTFULL, WARMER, 2, 1, 360), WashingProgram(WARMER, ALMOSTFULL, WARMER, 2, 1, 480), WashingProgram(WARMER, FULL, HOT, 4, 2, 510)};
     //WashingProgram programs[3] = {{COLD, ALMOSTFULL, WARMER, 1, 1, 360},{WARMER, ALMOSTFULL, WARMER, 1, 1, 480}, {WARMER, FULL, HOT, 3, 2, 510}};
     /* Vars for the managers/handlers and the library */
     HardwareControl _hardwareControl;

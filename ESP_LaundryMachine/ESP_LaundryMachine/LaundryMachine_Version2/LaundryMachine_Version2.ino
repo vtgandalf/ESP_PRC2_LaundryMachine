@@ -20,6 +20,8 @@ void setup()
 
 void loop()
 {
+    //Serial.println(SM.IsPressureOn());
+    //Serial.println(HC.PressureAction());
     ctrl.MainStateMachine();
     //program.Testing();
     //program.PreProgram();

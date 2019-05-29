@@ -156,6 +156,11 @@ private:
     bool CheckButtonClick(byte, byte, byte);
     bool CheckSwitchClickOld(byte, byte, byte);
     bool CheckButtonClickOld(byte, byte);
+    // FINAL INPUT METHODS
+    bool CheckCoinGroupButtonClick(byte, byte);
+    bool CheckSoapGroupSwitchClick(byte, byte, byte);
+    bool CheckProgramGroupButtonClick(byte, byte);
+    bool CheckOtherGroupSwitchClick(byte, byte, byte);
 };
 
 #endif

@@ -46,22 +46,22 @@ void Controller::ProgramStateMachine()
         {
         case PreWash:
             PreWashStateMachine();
-            programState = MainWash;
             break;
 
         case MainWash:
             MainWashStateMachine();
-            programState = Centrifuge;
             break;
 
         case Centrifuge:
             CentrifugeStateMachine();
             trig = true;
+            _program.UnlockDoor();
             break;
 
         case ForceQuit:
             ForceQuitStateMachine();
             trig = true;
+            _program.UnlockDoor();
             break;
 
         default:
@@ -81,7 +81,10 @@ void Controller::PreWashStateMachine()
     {
         _program.InputPolling();
         _program.HeatUp(temp);
-        //SecurityCheckUp(&trig);
+        if (washingState == FillUpTank || washingState == Waiting)
+        {
+            SecurityCheckUp(&trig);
+        }
         switch (washingState)
         {
         case FillUpTank:
@@ -133,6 +136,7 @@ void Controller::PreWashStateMachine()
             if (_program.Sink())
             {
                 trig = true;
+                programState = MainWash;
                 //washingState = FillUpTank;
             }
             break;
@@ -161,7 +165,10 @@ void Controller::MainWashStateMachine()
     {
         _program.InputPolling();
         _program.HeatUp(temp);
-        //SecurityCheckUp(&trig);
+        if (washingState == FillUpTank || washingState == Waiting)
+        {
+            SecurityCheckUp(&trig);
+        }
         switch (washingState)
         {
         case FillUpTank:
@@ -229,15 +236,17 @@ void Controller::MainWashStateMachine()
             temp = COLD;
             if (_program.Sink())
             {
-                trig = true;
+                //trig = true;
                 if (stage == 1)
                 {
                     trig = true;
-                    washingState = FillUpTank;
+                    programState = Centrifuge;
+                    // washingState = FillUpTank;
                 }
-                else
+                if (stage == 0)
                 {
                     stage++;
+                    tankReps = 0;
                     washingState = FillUpTank;
                 }
             }
@@ -337,7 +346,9 @@ void Controller::SecurityCheckUp(bool *trig)
         // in save mode
         if (washingState != Waiting)
         {
-            _program.SaveTimeSecurityManager();
+            Serial.println("Pressure dropped! Entering Waiting state.");
+            //_program.SaveTimeSecurityManager();
+            _program.StopDrain(true);
             lastWashingState = washingState;
             washingState = Waiting;
         }
@@ -346,6 +357,7 @@ void Controller::SecurityCheckUp(bool *trig)
     case 1:
         if (washingState == Waiting)
         {
+            Serial.println("Pressure came back!");
             washingState = lastWashingState;
         }
         break;

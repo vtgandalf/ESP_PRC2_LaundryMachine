@@ -60,6 +60,8 @@ private:
     //WashingProgram = delete;
     WashingProgram _washingProgram = WashingProgram(WARMER, FULL, HOT, 3, 2, 510);
     void SecurityCheckUp(bool *);
+    bool trigProgramStateMachine = false;
+    bool trigExecProgramStateMachine = false;
 };
 
 #endif

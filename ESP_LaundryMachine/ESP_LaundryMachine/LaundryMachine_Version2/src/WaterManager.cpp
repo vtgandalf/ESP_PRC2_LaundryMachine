@@ -17,6 +17,10 @@ bool WaterManager::FillUpWater(WaterLevel level)
     if(iwaterPtr->GetWaterLevel() == level)
     {
         response = true;
+        if (iwaterPtr->Drain())
+        {
+            iwaterPtr->SetDrain(false);
+        }
     }
     return response;
 }
