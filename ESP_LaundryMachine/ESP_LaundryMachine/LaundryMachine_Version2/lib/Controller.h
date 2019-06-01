@@ -75,7 +75,10 @@ private:
     Program _program;
     //WashingProgram = delete;
     WashingProgram _washingProgram = WashingProgram(WARMER, FULL, HOT, 3, 2, 510);
-    /* Method that handles handles the securty checkup routine */
+    /* Method that handles handles the securty checkup routine 
+    Input: pointer the trigger bool so the current state machine
+    could be exited after 10 mins of waiting. For further explanation
+    read the comments in the .cpp file!*/
     void SecurityCheckUp(bool *);
 };
 

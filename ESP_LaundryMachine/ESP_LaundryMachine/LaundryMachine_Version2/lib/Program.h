@@ -13,16 +13,6 @@
 
 using namespace sharedNamespace;
 
-/*struct WashingProgram
-{
-    Temp preWashTemp;
-    WaterLevel mainWashWaterLevel;
-    Temp mainWashTemp;
-    int mainWashRotations;
-    int centrifugeRotations;
-    int price;
-};*/
-
 class Program
 {
 public:
@@ -31,16 +21,9 @@ public:
     /* A method that handles the stage
     prior to any washing program. It includes
     waiting for coins, soap, doorlock,
-    program selection and etc. It is meant
-    to pass on the washing program that the 
-    void ExecProgram(WashingProgram) should use */
+    program selection and etc.
+    Output: The chose washing program */
     WashingProgram PreProgram();
-    /* This method handles all the stages of 
-    a woshing program accordingly to the program
-    that has been passed on from the PreProgram() */
-    void ExecProgram(WashingProgram);
-
-    // NEW
     /* Method that is responsible for calling the objects
     that handle filling up the water tank 
     output:
@@ -84,27 +67,14 @@ public:
     /* This is a method that handles blinking the program
     led in case in save mode */
     void BlinkProgramLed();
+    /* This is a method that handles the drain through
+    the water manager */
     void StopDrain(bool);
+    /* This method handles unlocking the door through
+    the security manager */
     void UnlockDoor();
 
 private:
-    /* Method that handles the prewash stage
-    input: sharedNamespace::Temp, defines what
-        should the heating during that stage be */
-    void PreWash(Temp);
-    /* Method that handles the main wash stage
-    input: 
-        - sharedNamespace::WaterLevel, defines how
-        full the tank should be before the soap is added
-        - sharedNamespace::Temp, defines the level of 
-        heating 
-        - int, defines how many times the tank should
-        repeat a cicle of rotating clockwise and 
-        anticlockwise */
-    void MainWash(WaterLevel, Temp, int);
-    /* Method that handles the centrifuge stage */
-    void Centrifuge(int);
-    /* Method that handles reading the program button*/
     void ReadProgramButton();
     /* Method that handles reading the start button 
     output: 
