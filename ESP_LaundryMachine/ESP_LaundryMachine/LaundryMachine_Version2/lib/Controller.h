@@ -27,12 +27,16 @@ private:
     passed and the pressure hasnt came back. It handles
     sinking the water and quiting the washing program */
     void ForceQuitStateMachine();
+    /* Enum that contains the states neede for the main
+    state machine */
     enum MainStates
     {
         Start,
         PreProgram,
         ExecProgram
     };
+    /* Enum that contains the states needed for the washing
+    program state machine */
     enum ProgramStates
     {
         PreWash,
@@ -40,6 +44,10 @@ private:
         Centrifuge,
         ForceQuit
     };
+    /* Enum that contains the states needed for each of the
+    program states. Those are sub states of the previous ones.
+    Those Get executed in preWash, mainWash and Centrifuge
+    state machines */
     enum WashingStates
     {
         FillUpTank,
@@ -52,16 +60,23 @@ private:
         Sink,
         Waiting
     };
+    /* Var containing the current state of the main state machie */
     MainStates mainState = Start;
+    /* Var containing the current state of the program state machine */
     ProgramStates programState = PreWash;
+    /* Var containing the current state of the washing state machines */
     WashingStates washingState = FillUpTank;
+    /* Var containing the previous state of the washing state machines.
+    It is needed to store since if the washing machine has to stop
+    due to lack of pressure and later it comes back the machine
+    should start from the state it last stopped */
     WashingStates lastWashingState = FillUpTank;
+    /* Reference of the Program class */
     Program _program;
     //WashingProgram = delete;
     WashingProgram _washingProgram = WashingProgram(WARMER, FULL, HOT, 3, 2, 510);
+    /* Method that handles handles the securty checkup routine */
     void SecurityCheckUp(bool *);
-    bool trigProgramStateMachine = false;
-    bool trigExecProgramStateMachine = false;
 };
 
 #endif
