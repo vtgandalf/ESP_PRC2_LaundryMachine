@@ -42,6 +42,8 @@ public:
     void SetDrain(bool);
 
 private:
+    /* This pointer allows us to access the HardwareControl lib 
+    through the IWater interface */
     IWater* iwaterPtr = (IWater*)HardwareControl::GetInstance();
 };
 

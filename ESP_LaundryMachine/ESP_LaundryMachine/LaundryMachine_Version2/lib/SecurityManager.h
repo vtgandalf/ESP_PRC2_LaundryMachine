@@ -38,23 +38,13 @@ public:
 			- false - there is no pressure 
 						even after waiting*/
 	int SafeMode();
-	/* Method that handles all the essential
-        proccesses for this object that have to 
-        be ran during the main loop of the arduino
-        program 
-		output:
-			- 1 - pressure is on
-			- 0 - pressure is off and is save mode
-			- -1 - time interal has passed and the
-					that is running should force
-					exit! */
-	void Polling();
 	/* This is a method that locks the door */
 	void LockDoor();
 	/* This is a method that saves the time
 	at which the pressure dropped and the save
 	mode was activated */
 	void SaveTime();
+	// Method that unlocks the door
 	void UnlockDoor();
 
 private:
@@ -74,17 +64,9 @@ private:
         wastes cpu cycles.*/
 	bool doorHasBeenLocked = false;
 	// accessing the library through the interfaces
-	//IProgram *iprogramPtr = (IProgram *)HardwareControl::GetInstance();
-	//IO *ioPtr = (IO *)HardwareControl::GetInstance();
 	ISecurity *isecurityPtr = (ISecurity *)HardwareControl::GetInstance();
 	IWater *iwaterPtr = (IWater *)HardwareControl::GetInstance();
-	/* Checks if the door has been closed
-		disclamer: for now it just locks it */
-	void DoorClosed();
-	/* This method indicates which compartments
-		are not yet closed through the corresponding
-		leds */
-	void IndicateCompartments();
+	// Ver to contain the previous response of SafeMode()
 	int previousSafeModeResponse = 1;
 };
 

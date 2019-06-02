@@ -28,9 +28,6 @@ WashingProgram Program::PreProgram()
         // get soap
         _soapHandler.Polling();
 
-        // lock door
-        _securityManager.Polling();
-
         // get program
         ReadProgramButton();
 

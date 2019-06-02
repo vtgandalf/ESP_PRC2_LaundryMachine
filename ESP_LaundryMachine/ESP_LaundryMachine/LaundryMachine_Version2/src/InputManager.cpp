@@ -1,18 +1,19 @@
 #include "../lib/InputManager.h"
 
+// Macros for the states of the keyselect
 #define emptyBitmask 0x00
 #define keyselectBitmask 0x10
 
+// Method that handles deouncing the input
+// I will not explain that since it is fairly standart and common technique
 void InputManager::Debouncing(byte *previousByteState, byte *byteState, byte reading, unsigned long *lastDebounceTime, int x)
 {
   if (reading != *previousByteState)
   {
     *lastDebounceTime = millis();
   }
-
   if ((millis() - *lastDebounceTime) > timerTreshold)
   {
-    //if((reading != *byteState)&((*byteState | *previousByteState) != *byteState))
     if (reading != *byteState)
     {
       *byteState = reading;
@@ -20,7 +21,6 @@ void InputManager::Debouncing(byte *previousByteState, byte *byteState, byte rea
       {
         if (*byteState != emptyBitmask)
         {
-          //Serial.println(reading, BIN);
           ioPtr->SetGlobalInputByte(reading);
         }
       }
@@ -28,7 +28,6 @@ void InputManager::Debouncing(byte *previousByteState, byte *byteState, byte rea
       {
         if (*byteState != keyselectBitmask) // 0x10 is the bitmask for keyselect
         {
-          //Serial.println(reading, BIN);
           ioPtr->SetGlobalInputByte(reading);
         }
       }
@@ -37,6 +36,7 @@ void InputManager::Debouncing(byte *previousByteState, byte *byteState, byte rea
   *previousByteState = reading;
 }
 
+// Method that handles toggling the keyselect, getting the input and debouncing it
 void InputManager::GetInput()
 {
   ioPtr->SetKeyselect(true);
@@ -45,6 +45,7 @@ void InputManager::GetInput()
   Debouncing(&previousByteStateSwitches, &byteStateSwitches, ioPtr->GetRawInputByte(), &lastDebounceTimeByteSwitches, ioPtr->Keyselect());
 }
 
+// Method that handles all the methods that need to be polled
 void InputManager::Polling()
 {
   GetInput();

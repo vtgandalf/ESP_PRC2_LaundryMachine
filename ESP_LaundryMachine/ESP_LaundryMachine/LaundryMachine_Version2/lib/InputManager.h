@@ -33,7 +33,6 @@ private:
     void Debouncing(byte *previousByteState, byte *byteState, byte reading, unsigned long *lastDebounceTime, int x);
 
     // vars required for Debouncing()
-
     byte previousByteStateButtons;
     byte byteStateButtons;
     byte previousByteStateSwitches;
