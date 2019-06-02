@@ -132,34 +132,42 @@ private:
     byte for the buttons */
     byte previousByteButtons = 0x00;
     /* This method checks the debounced input byte for
-    a switch click based on the input
+    a coin button click based on the input
+    input:
+        - byte - bitmask for specific button
+        - byte - the debounced reading byte
+
+    output:
+        - true - if a switch press has been recognized */
+    bool CheckCoinGroupButtonClick(byte, byte);
+    /* This method checks the debounced input byte for
+    a soap switch click based on the input
     input:
         - byte - bitmask for specific switch
         - byte - bitmask for the keyselect 
         - byte - the debounced reading byte
-        - byte - the previousByte
 
     output:
         - true - if a switch press has been recognized */
-    bool CheckSimpleClick(byte, byte);
-    bool CheckSwitchClick(byte, byte, byte, byte);
-    bool CheckSwitchSoapClick(byte, byte, byte, byte *);
+    bool CheckSoapGroupSwitchClick(byte, byte, byte);
     /* This method checks the debounced input byte for
-    a button click based on the input
+    a program button click based on the input
     input:
         - byte - bitmask for specific switch
         - byte - the debounced reading byte
-        - byte - the previousByte
 
     output:
         - true - if a switch press has been recognized */
-    bool CheckButtonClick(byte, byte, byte);
-    bool CheckSwitchClickOld(byte, byte, byte);
-    bool CheckButtonClickOld(byte, byte);
-    // FINAL INPUT METHODS
-    bool CheckCoinGroupButtonClick(byte, byte);
-    bool CheckSoapGroupSwitchClick(byte, byte, byte);
     bool CheckProgramGroupButtonClick(byte, byte);
+    /* This method checks the raw/unfiletered input byte for
+    a door/presure switch click based on the input
+    input:
+        - byte - bitmask for specific switch
+        - byte - bitmask for the keyselect 
+        - byte - the raw/unfiltered reading byte
+
+    output:
+        - true - if a switch press has been recognized */
     bool CheckOtherGroupSwitchClick(byte, byte, byte);
 };
 

@@ -455,27 +455,6 @@ Temp HardwareControl::GetTemperature()
       break;
     }
   return response;
-  /*int temp[] = {centipede.digitalRead(IN_T2), centipede.digitalRead(IN_T1)};
-  switch (temp[0])
-  {
-  case 0:
-    if (temp[1])
-      return WARM;
-    else
-      return COLD;
-    break;
-
-  case 1:
-    if (temp[1])
-      HOT;
-    else
-      return WARMER;
-    break;
-
-  default:
-    return NULL;
-    break;
-  }*/
 }
 
 WaterLevel HardwareControl::GetWaterLevel()
@@ -575,139 +554,11 @@ bool HardwareControl::CheckOtherGroupSwitchClick(byte bitm, byte key, byte in)
   return response;
 }
 
-bool HardwareControl::CheckSwitchClickOld(byte bitm, byte key, byte in)
-{
-  bool response = false;
-  if ((in | bitm) == in)
-  {
-    if ((in | key) != in)
-    {
-      response = true;
-    }
-  }
-  return response;
-}
-
-bool HardwareControl::CheckButtonClickOld(byte bitm, byte in)
-{
-  bool response = false;
-  if ((in | bitm) == in)
-  {
-    response = true;
-  }
-  return response;
-}
-
-bool HardwareControl::CheckSwitchClick(byte bitm, byte key, byte in, byte prev)
-{
-  bool response = false;
-  if ((in | bitm) == in)
-  {
-    if ((in | key) != in)
-    {
-      response = true;
-      if (prev == bitm)
-      {
-        if (in == bitm)
-        {
-          response = true;
-        }
-      }
-      if ((prev | bitm) != prev)
-      {
-        response = true;
-      }
-    }
-  }
-  /*Serial.print(GetGlobalInputByte(), BIN);
-  Serial.print("  ");
-  Serial.println(previousByteSwitches, BIN);*/
-  return response;
-}
-
-bool HardwareControl::CheckSimpleClick(byte bitm, byte in)
-{
-  bool response = false;
-  if (bitm == in)
-  {
-    response = true;
-  }
-  return response;
-}
-
-bool HardwareControl::CheckSwitchSoapClick(byte bitm, byte key, byte in, byte *prev)
-{
-  bool response = false;
-  if ((in | bitm) == in)
-  {
-    if ((in | key) != in)
-    {
-      Serial.println(*prev, BIN);
-      //response = true;
-      if (*prev == bitm)
-      {
-        if (in == bitm)
-        {
-          response = true;
-        }
-      }
-      if ((*prev | bitm) != *prev)
-      {
-        response = true;
-      }
-      /*if ((*prev == (BitMaskSoap1 | BitMaskSoap2))&((in | *prev) != in))
-      {
-        if(bitm == BitMaskSoap1)
-        {
-          *prev = (*prev & ~BitMaskSoap2);
-        }
-        if(bitm == BitMaskSoap2)
-        {
-          *prev = (*prev & ~BitMaskSoap1);
-        }
-        //*prev = 0x00;
-        Serial.println(GetGlobalInputByte(),BIN);
-        Serial.println(*prev, BIN);
-      }*/
-    }
-  }
-
-  /*Serial.print(GetGlobalInputByte(), BIN);
-  Serial.print("  ");
-  Serial.println(previousByteSwitches, BIN);*/
-  return response;
-}
-
-bool HardwareControl::CheckButtonClick(byte bitm, byte in, byte prev)
-{
-  bool response = false;
-  if ((in | bitm) == in)
-  {
-    response = true;
-    if (prev == bitm)
-    {
-      if (in == bitm)
-      {
-        response = true;
-      }
-    }
-    if ((prev | bitm) != prev)
-    {
-      response = true;
-    }
-  }
-  return response;
-}
-
 bool HardwareControl::Soap1Action()
 {
-  //bool response = CheckSwitchSoapClick(BitMaskSoap1, BitMaskKeyselect, GetGlobalInputByte(), &previousByteSwitches);
-  //bool response = CheckSwitchClick(BitMaskSoap1, BitMaskKeyselect, GetGlobalInputByte(), previousByteSwitches);
-  //bool response = CheckSwitchClickOld(BitMaskSoap1, BitMaskKeyselect, GetGlobalInputByte());
   bool response = CheckSoapGroupSwitchClick(BitMaskSoap1, BitMaskKeyselect, GetGlobalInputByte());
   if (response)
   {
-    //previousByteSwitches = GetGlobalInputByte();
     SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
@@ -715,13 +566,9 @@ bool HardwareControl::Soap1Action()
 
 bool HardwareControl::Soap2Action()
 {
-  //bool response = CheckSwitchSoapClick(BitMaskSoap2, BitMaskKeyselect, GetGlobalInputByte(), &previousByteSwitches);
-  //bool response = CheckSwitchClick(BitMaskSoap2, BitMaskKeyselect, GetGlobalInputByte(), previousByteSwitches);
-  //bool response = CheckSwitchClickOld(BitMaskSoap2, BitMaskKeyselect, GetGlobalInputByte());
   bool response = CheckSoapGroupSwitchClick(BitMaskSoap2, BitMaskKeyselect, GetGlobalInputByte());
   if (response)
   {
-    //previousByteSwitches = GetGlobalInputByte();
     SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
@@ -729,27 +576,13 @@ bool HardwareControl::Soap2Action()
 
 bool HardwareControl::DoorAction()
 {
-  //bool response = CheckSwitchClick(BitMaskDoorlock, BitMaskKeyselect, GetGlobalInputByte(), previousByteSwitches);
-  //bool response = CheckSwitchClickOld(BitMaskDoorlock, BitMaskKeyselect, GetGlobalInputByte());
   SetKeyselect(false);
   bool response = CheckOtherGroupSwitchClick(BitMaskDoorlock, BitMaskKeyselect, GetRawInputByte());
-  /*if (response)
-  {
-    //previousByteSwitches = GetGlobalInputByte();
-    SetGlobalInputByte(BitMaskEmpty);
-  }*/
   return response;
 }
 
 bool HardwareControl::PressureAction()
 {
-  //bool response = CheckSwitchClick(BitMaskPressure, BitMaskKeyselect, GetRawInputByte(), previousByteSwitches);
-  //bool response = CheckSwitchClickOld(BitMaskPressure, BitMaskKeyselect, GetRawInputByte());
-  /*if (response)
-  {
-    previousByteSwitches = GetGlobalInputByte();
-    SetGlobalInputByte(BitMaskEmpty);
-  }*/
   SetKeyselect(false);
   bool response = CheckOtherGroupSwitchClick(BitMaskPressure, BitMaskKeyselect, GetRawInputByte());
   return response;
@@ -757,13 +590,9 @@ bool HardwareControl::PressureAction()
 
 bool HardwareControl::Coin10Action()
 {
-  //bool response = CheckButtonClick(BitMaskCoin10, GetGlobalInputByte(), previousByteButtons);
-  //bool response = CheckSimpleClick(BitMaskCoin10, GetGlobalInputByte());
-  //bool response = CheckButtonClickOld(BitMaskCoin10, GetGlobalInputByte());
   bool response = CheckCoinGroupButtonClick(BitMaskCoin10, GetGlobalInputByte());
   if (response)
   {
-    //previousByteButtons = GetGlobalInputByte();
     SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
@@ -771,13 +600,9 @@ bool HardwareControl::Coin10Action()
 
 bool HardwareControl::Coin50Action()
 {
-  //bool response = CheckButtonClick(BitMaskCoin50, GetGlobalInputByte(), previousByteButtons);
-  //bool response = CheckSimpleClick(BitMaskCoin50, GetGlobalInputByte());
-  //bool response = CheckButtonClickOld(BitMaskCoin50, GetGlobalInputByte());
   bool response = CheckCoinGroupButtonClick(BitMaskCoin50, GetGlobalInputByte());
   if (response)
   {
-    //previousByteButtons = GetGlobalInputByte();
     SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
@@ -785,13 +610,9 @@ bool HardwareControl::Coin50Action()
 
 bool HardwareControl::Coin200Action()
 {
-  //bool response = CheckButtonClick(BitMaskCoin200, GetGlobalInputByte(), previousByteButtons);
-  //bool response = CheckSimpleClick(BitMaskCoin200, GetGlobalInputByte());
-  //bool response = CheckButtonClickOld(BitMaskCoin200, GetGlobalInputByte());
   bool response = CheckCoinGroupButtonClick(BitMaskCoin200, GetGlobalInputByte());
   if (response)
   {
-    //previousByteButtons = GetGlobalInputByte();
     SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
@@ -799,13 +620,9 @@ bool HardwareControl::Coin200Action()
 
 bool HardwareControl::ClearAction()
 {
-  //bool response = CheckButtonClick(BitMaskClear, GetGlobalInputByte(), previousByteButtons);
-  //bool response = CheckSimpleClick(BitMaskClear, GetGlobalInputByte());
-  //bool response = CheckButtonClickOld(BitMaskClear, GetGlobalInputByte());
   bool response = CheckCoinGroupButtonClick(BitMaskClear, GetGlobalInputByte());  
   if (response)
   {
-    //previousByteButtons = GetGlobalInputByte();
     SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
@@ -813,12 +630,9 @@ bool HardwareControl::ClearAction()
 
 bool HardwareControl::ProgramAction()
 {
-  //bool response = CheckButtonClick(BitMaskProgram, GetGlobalInputByte(), previousByteButtons);
-  //bool response = CheckSimpleClick(BitMaskProgram, GetGlobalInputByte());
   bool response = CheckProgramGroupButtonClick(BitMaskProgram, GetGlobalInputByte());
   if (response)
   {
-    //previousByteButtons = GetGlobalInputByte();
     SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
@@ -826,12 +640,9 @@ bool HardwareControl::ProgramAction()
 
 bool HardwareControl::StartAction()
 {
-  //bool response = CheckButtonClick(BitMaskStart, GetGlobalInputByte(), previousByteButtons);
-  //bool response = CheckSimpleClick(BitMaskStart, GetGlobalInputByte());
   bool response = CheckProgramGroupButtonClick(BitMaskStart, GetGlobalInputByte());
   if (response)
   {
-    //previousByteButtons = GetGlobalInputByte();
     SetGlobalInputByte(BitMaskEmpty);
   }
   return response;
