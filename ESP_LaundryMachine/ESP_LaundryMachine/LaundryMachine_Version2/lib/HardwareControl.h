@@ -92,8 +92,8 @@ public:
     virtual bool StartAction();
 
 private:
-    // Singleton instance
-    static HardwareControl *instance;
+    // Contrstructor
+    HardwareControl(){}
     /* Arrays that contain the information
         for the leds so whenever an led is set
         the rest keep their previous state */
@@ -125,12 +125,6 @@ private:
         properly reading and debouncing the multiplexed
         buttons and switches */
     byte inputReadings = 0x00;
-    /* This variable stores the previous debounced input
-    byte for the switches */
-    byte previousByteSwitches = 0x00;
-    /* This variable stores the previous debounced input
-    byte for the buttons */
-    byte previousByteButtons = 0x00;
     /* This method checks the debounced input byte for
     a coin button click based on the input
     input:

@@ -4,7 +4,7 @@
 void Program::Setup()
 {
     // Initialize the Centipede library
-    _hardwareControl.HardwareControlSetup();
+    _hardwareControl->HardwareControlSetup();
     // Set the chosen program to the first one
     program = 0;
     // Manage the leds according to the chosen program
@@ -14,7 +14,7 @@ void Program::Setup()
 // This mehtod handles reading the coins, soap, and etc.
 WashingProgram Program::PreProgram()
 {
-    Serial.println("Waiting for coinsw, soap, program selection and etc...");
+    Serial.println("Waiting for coins, soap, program selection and etc...");
     // On this bool depends how long we are going to stay in the loop
     bool trig = false;
     while (trig != true)

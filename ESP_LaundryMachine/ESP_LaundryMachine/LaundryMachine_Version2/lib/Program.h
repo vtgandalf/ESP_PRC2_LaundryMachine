@@ -91,7 +91,7 @@ private:
     WashingProgram programs[3] = {WashingProgram(COLD, ALMOSTFULL, WARMER, 2, 1, 360), WashingProgram(WARMER, ALMOSTFULL, WARMER, 2, 1, 480), WashingProgram(WARMER, FULL, HOT, 4, 2, 510)};
     //WashingProgram programs[3] = {{COLD, ALMOSTFULL, WARMER, 1, 1, 360},{WARMER, ALMOSTFULL, WARMER, 1, 1, 480}, {WARMER, FULL, HOT, 3, 2, 510}};
     /* Vars for the managers/handlers and the library */
-    HardwareControl _hardwareControl;
+    HardwareControl *_hardwareControl = (HardwareControl *)HardwareControl::GetInstance();
     SecurityManager _securityManager;
     SoapHandler _soapHandler;
     CoinHandler _coinHandler;

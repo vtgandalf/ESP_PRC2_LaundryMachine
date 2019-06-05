@@ -4,6 +4,8 @@
 #include "HardwareControl.h"
 using namespace sharedNamespace;
 
+#define SECURITYTIMEOUT 1
+
 class SecurityManager
 {
 public:
@@ -51,7 +53,7 @@ private:
 	/* Variable containing the time which the
 	safe mode should wait the pressure to come back.
 	Please, note that it is in minutes */
-	unsigned long timeIntervalSafeMode = 1; // should be 10
+	unsigned long timeIntervalSafeMode = SECURITYTIMEOUT;
 	/* Var which is a holder for the last millis value
 	from the cpu at which the pressure dropped. It is
 	used to calculate the time passed since the beginning

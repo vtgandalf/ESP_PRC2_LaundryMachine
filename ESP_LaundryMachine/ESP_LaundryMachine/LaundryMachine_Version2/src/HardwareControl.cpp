@@ -81,15 +81,12 @@ void HardwareControl::HardwareControlSetup()
   SetCoin200Led(0);
 }
 
-HardwareControl *HardwareControl::instance = 0;
-
 HardwareControl *HardwareControl::GetInstance()
 {
-  if (instance == 0)
-  {
-    instance = new HardwareControl();
-  }
-  return instance;
+  // Guaranteed to be destroyed.
+  // Instantiated on first use. 
+  static HardwareControl instance;
+  return &instance;
 }
 
 bool HardwareControl::Buzzer()
@@ -471,7 +468,7 @@ WaterLevel HardwareControl::GetWaterLevel()
 
   case 1:
     if (level[1])
-      FULL;
+      return FULL;
     else
       return ALMOSTFULL;
     break;
