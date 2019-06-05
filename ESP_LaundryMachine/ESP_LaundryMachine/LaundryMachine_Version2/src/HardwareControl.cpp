@@ -79,6 +79,7 @@ void HardwareControl::HardwareControlSetup()
   SetCoin50Led(0);
   SetProgramLed(0);
   SetCoin200Led(0);
+  delay(200);
 }
 
 HardwareControl *HardwareControl::GetInstance()
