@@ -1,6 +1,2 @@
-﻿  MyForm.cpp
-d:\esp\esp_prc2_laundrymachine\esp_softwaresimulator\final\test\myform.h(963): warning C4305: '=': truncation from 'double' to 'float'
-d:\esp\esp_prc2_laundrymachine\esp_softwaresimulator\final\test\myform.h(964): warning C4305: '=': truncation from 'double' to 'float'
-d:\esp\esp_prc2_laundrymachine\esp_softwaresimulator\final\test\myform.h(965): warning C4305: '=': truncation from 'double' to 'float'
-  CoinHandler.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+﻿  CoinHandler.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   test.vcxproj -> D:\ESP\ESP_PRC2_LaundryMachine\ESP_SoftwareSimulator\FINAL\x64\Debug\test.exe

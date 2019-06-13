@@ -1,4 +1,5 @@
 #include "SoapHandler.h"
+#include <windows.h>
 
 // Macros for the max values that you can add for each compartment
 #define soap1max 2
@@ -12,17 +13,17 @@ void SoapHandler::IndicateMissingSoap(int soap1Required, int soap2Required)
     for (int i = 0; i < (soap1Required - soap1); i++)
     {
         isoapPtr->SetSoap1Led(true);
-        //delay(250);
+		Sleep(250);
         isoapPtr->SetSoap1Led(false);
-        //delay(250);
+		Sleep(250);
     }
     /* Blink the leds depending how much soap is missing */
     for (int i = 0; i < (soap2Required - soap2); i++)
     {
         isoapPtr->SetSoap2Led(true);
-        //delay(250);
+		Sleep(250);
         isoapPtr->SetSoap2Led(false);
-        //delay(250);
+		Sleep(250);
     }
 }
 

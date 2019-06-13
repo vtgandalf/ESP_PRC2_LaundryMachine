@@ -1,4 +1,5 @@
 #include "CoinHandler.h"
+#include <windows.h>
 
 // Macros for the max values we can input as coins
 #define coin10and50maxValue 3
@@ -25,12 +26,12 @@ void CoinHandler::IndicateMissingCoins(int value)
         icoinPtr->SetCoin10Led(coin10counter);
         icoinPtr->SetCoin50Led(coin50counter);
         icoinPtr->SetCoin200Led(coin200counter);
-        //delay(250);
-        icoinPtr->SetCoin10Led(0);
+		Sleep(250);
+		icoinPtr->SetCoin10Led(0);
         icoinPtr->SetCoin50Led(0);
         icoinPtr->SetCoin200Led(0);
-        //delay(300);
-    }
+		Sleep(250);
+	}
     // Update the leds
     coin10LedHasBeenSet = false;
     coin50LedHasBeenSet = false;
