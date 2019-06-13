@@ -1,14 +1,11 @@
-e "Program.h"
+#include "Program.h"
 #include "HardwareControl.h"
-//#include "InputManager.h"
 #include "HeaterHandler.h"
 #include "Controller.h"
 #include <windows.h>
 #include <tchar.h>
 #include <strsafe.h>
-//#include <thread>
 
-//DWORD WINAPI MyThreadFunction(LPVOID lpParam);
 
 #pragma once
 
