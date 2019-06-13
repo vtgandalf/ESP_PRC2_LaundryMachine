@@ -1,4 +1,0 @@
-﻿  Program.cpp
-d:\onedrive - fhict\school shit\esp\newest one\test\program.cpp(38): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
-  CoinHandler.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  test.vcxproj -> D:\OneDrive - FHICT\school shit\ESP\NEWEST ONE\x64\Debug\test.exe
