@@ -17,7 +17,7 @@ class MotorManager
     */
     bool Rotate(Rotation, Speed, long);
 	
-    /* This method saves the current millis() */
+    /* This method saves the current GetTickCount() */
     void SaveTime();
 
     private:

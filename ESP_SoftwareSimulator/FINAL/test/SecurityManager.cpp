@@ -1,4 +1,6 @@
 #include "SecurityManager.h"
+#include <windows.h>
+
 
 /* Checks if the door switch has been closed
 and returns its state */
@@ -55,15 +57,15 @@ int SecurityManager::SafeMode()
 			SaveTime();
 		}
 		// Check for how long the pressure is down in secconds
-		//unsigned long timePassed = ((millis() - prevMillis)/1000);
+		unsigned long timePassed = ((GetTickCount() - prevMillis)/1000);
 		// If the time passed is more than a set threshold
-		/*if (timePassed > timeIntervalSafeMode * 60)
+		if (timePassed > timeIntervalSafeMode * 60)
 		{
 			//Serial.print(timeIntervalSafeMode);
 			//Serial.println(" minutes have passed and still no pressure!");
 			// Set the response to -1
 			response = -1;
-		}*/
+		}
 	}
 	// Save the response for next execution of this method
 	previousSafeModeResponse = response;
@@ -96,5 +98,5 @@ void SecurityManager::UnlockDoor()
 /* Method that saves the current time for further checking */
 void SecurityManager::SaveTime()
 {
-	//prevMillis = millis();
+	prevMillis = GetTickCount();
 }

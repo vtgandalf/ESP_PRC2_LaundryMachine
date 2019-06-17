@@ -1,6 +1,6 @@
 #include "Controller.h"
 
-#define ROTATETIME 60
+#define ROTATETIME 5
 
 /* Method that handles the main state machine */
 void Controller::MainStateMachine()
