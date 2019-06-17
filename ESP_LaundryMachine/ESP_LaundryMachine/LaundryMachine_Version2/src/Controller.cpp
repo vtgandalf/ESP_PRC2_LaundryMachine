@@ -431,7 +431,7 @@ void Controller::CentrifugeStateMachine()
             // Keeping the sink turned on
             _program.Sink();
             /* If the tank had been rotate for long enough */
-            if (_program.Rotate(CLOCKWISE, MEDIUMSPEED, ROTATETIME))
+            if (_program.Rotate(CLOCKWISE, MEDIUMSPEED, ROTATETIME/2))
             {
                 // Set the state to RotateCounterclockwise
                 washingState = RotateCounterclockwise;
@@ -447,7 +447,7 @@ void Controller::CentrifugeStateMachine()
             // Keeping the sink turned on
             _program.Sink();
             /* If the tank had been rotate for long enough */
-            if (_program.Rotate(COUNTERCLOCKWISE, MEDIUMSPEED, ROTATETIME))
+            if (_program.Rotate(COUNTERCLOCKWISE, MEDIUMSPEED, ROTATETIME/2))
             {
                 /* Increment the counter. Its use had been explained
                 in the beginning of the state machine */
